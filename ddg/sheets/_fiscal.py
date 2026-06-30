@@ -1,31 +1,29 @@
-"""_fiscal - the single definition of the federal-fiscal-year axis (non-sheet helper).
+"""_fiscal - the single definition of the SAM federal-fiscal-year display axis.
 
-The workbook splits subaward $ into one fixed FY axis: an open-below ≤FY12 catch-all plus
-FY2013..FY2026 (FY2026 = the constant-dollar base year). That axis is used by the Deflators
-tab (row order), the per-transaction Federal-FY / constant-$ columns, the program-vendor $M
-split, and the SWBS roll-up. Defining it ONCE here keeps those in lockstep - changing the
-window or base year is a one-edit change, not four parallel edits that can drift.
+The workbook now uses a reader-facing DDG observed-SAM transaction window of
+FY2016..FY2025.  FY2025 is the latest full year in-scope; FY2026+ rows remain in
+the archived CSV pull but are filtered out by _cuts.load_table before rendering.
 
-The economic transformation (calendar date -> federal FY -> constant FY2026$) lives at the
-TRANSACTION grain: each fact sheet carries `Federal FY`, `Deflator Factor`, and
-`Subaward $ FY2026$` computed columns (tx_fy_formulas), so the program-vendor per-FY cells are
-a single SUMIFS over the constant-$ column keyed on UEI + Federal FY (pv_fy_formula), instead
-of a date-bounded SUMIFS multiplied by a deflator cell.
+The economic transformation (calendar date -> federal FY -> constant FY2026$) still
+lives at the TRANSACTION grain: each fact sheet carries `Federal FY`, `Deflator Factor`,
+and `Subaward $ FY2026$` computed columns (tx_fy_formulas), so the program-vendor
+per-FY cells are a single SUMIFS over the constant-$ column keyed on UEI + Federal FY
+(pv_fy_formula), instead of a date-bounded SUMIFS multiplied by a deflator cell.
 """
 from __future__ import annotations
 
+from ddg.lib import SAM_TX_FY_START, SAM_TX_FY_END
 from workbook_award_classification_refactor.sheets._flat import flat_header_letters
 
 FY_BASE = 2026                                  # constant-dollar base year
-FY_START = 2013
-FY_YEARS = list(range(FY_START, FY_BASE + 1))   # [2013 .. 2026]
-LE_CUTOFF = 2012                                # ≤FY12 = federal FY on/before this year
-LE_KEY = "≤FY12"
+FY_START = SAM_TX_FY_START                      # visible SAM transaction window start
+FY_END = SAM_TX_FY_END                          # visible SAM transaction window end
+FY_YEARS = list(range(FY_START, FY_END + 1))    # [2016 .. 2025]
 
-# Deflators tab FY-key column order (one row per bin) - MUST match extracted/deflators.csv.
-FY_BIN_KEYS = [LE_KEY] + [f"FY{y}" for y in FY_YEARS]
-# Program-vendor $M split headers (≤FY12 $M, FY13 $M .. FY26 $M).
-FY_HEADERS = [f"{LE_KEY} $M"] + [f"FY{y % 100} $M" for y in FY_YEARS]
+# Deflators tab FY-key order used by the visible SAM split and transaction factor lookup.
+FY_BIN_KEYS = [f"FY{y}" for y in FY_YEARS]
+# Program-vendor $M split headers (FY16 $M .. FY25 $M).
+FY_HEADERS = [f"FY{y % 100} $M" for y in FY_YEARS]
 
 # Per-transaction computed-column headers (sheet-only; passed as make_flat_sheet extra_cols).
 TX_FED_FY = "Federal FY"
@@ -54,14 +52,15 @@ def tx_fy_formulas(csv_name: str, *, date_header: str, amount_header: str,
     def fed_fy(r):
         date_cell = f"${L[date_header]}{r}"
         # A blank date must stay blank. Without this guard Excel treats the blank as serial 0,
-        # maps it to FY1900 / the <=FY12 bucket, and silently deflates an undated transaction.
+        # maps it to FY1900, and silently deflates an undated transaction.
         return f'=IF({date_cell}="","",{_federal_fy_expr(date_cell)})'
 
     def factor(r):
         fy = f"${L[TX_FED_FY]}{r}"
-        key = f'IF({fy}<={LE_CUTOFF},"{LE_KEY}","FY"&{fy})'
-        # A post-axis FY intentionally remains #N/A via MATCH, forcing the deflator table / axis
-        # to be extended rather than silently dropping or mis-binning new transactions.
+        key = f'"FY"&{fy}'
+        # The runtime input loader filters visible transactions to FY2016-FY2025. If a future
+        # or pre-window row leaks through, MATCH intentionally returns #N/A instead of silently
+        # binning it.
         return f'=IF({fy}="","",INDEX({factors},MATCH({key},{fy_keys},0)))'
 
     def real(r):
@@ -74,18 +73,15 @@ def tx_fy_formulas(csv_name: str, *, date_header: str, amount_header: str,
 
 def pv_fy_formula(real_range: str, uei_range: str, fedfy_range: str, header: str):
     """fn(r)->'=...' for a program-vendor per-FY $M cell: SUMIFS the transaction constant-
-    FY2026$ column keyed on this row's UEI and the FY bin for `header` (exact federal year,
-    or '<=2012' for the ≤FY12 catch-all), expressed in $M."""
-    if header == f"{LE_KEY} $M":
-        crit = f'{fedfy_range},"<={LE_CUTOFF}"'
-    else:
-        crit = f"{fedfy_range},{2000 + int(header[2:4])}"     # "FY13 $M" -> 2013
-    return lambda r: f"=SUMIFS({real_range},{uei_range},$B{r},{crit})/1000000"
+    FY2026$ column keyed on this row's UEI and the exact federal year for `header`, expressed
+    in $M."""
+    fy = 2000 + int(header[2:4])     # "FY16 $M" -> 2016
+    return lambda r: f"=SUMIFS({real_range},{uei_range},$B{r},{fedfy_range},{fy})/1000000"
 
 
 def pv_lifetime_formula(real_range: str, uei_range: str):
-    """fn(r)->'=...' for the lifetime Subaward $M: full constant-FY2026$ over this UEI, $M.
-    Equals the sum of the per-FY split as long as no transaction post-dates FY2026."""
+    """fn(r)->'=...' for the lifetime Subaward $M over the visible SAM transaction window, $M.
+    Equals the sum of the per-FY split because _cuts.load_table filters transactions to FY2016-FY2025."""
     return lambda r: f"=SUMIFS({real_range},{uei_range},$B{r})/1000000"
 
 
