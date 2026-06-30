@@ -8,13 +8,15 @@ naming_rules:
   audit: "build-stopping guard input, not a visible worksheet tab"
   research_worklists: "workbook-adjacent worklist retained for guard lineage"
 
+references:
+  deflators: workbook_inputs/reference/ref_procurement_deflators_fy2026.csv
+
 tam_budget:
   scn_budget: workbook_inputs/tam_budget/ddg_scn_budget.csv
   ap_lltm: workbook_inputs/tam_budget/ddg_ap_lltm.csv
   place_of_performance: workbook_inputs/tam_budget/ddg_place_of_performance.csv
   obbba: workbook_inputs/tam_budget/ddg_obbba.csv
   fydp_outyears: workbook_inputs/tam_budget/ddg_fydp_outyears.csv
-  deflators: workbook_inputs/tam_budget/ref_tam_procurement_deflators_fy2026.csv
 
 sam_awards:
   prime_awards: workbook_inputs/sam_awards/scope/ddg_prime_awards.csv
@@ -33,7 +35,6 @@ sam_awards:
   ddg_vendor_hull_swbs: workbook_inputs/sam_awards/hull/ddg_vendor_hull_swbs.csv
   ddg_cd_lifecycle_rollup: workbook_inputs/sam_awards/lifecycle/ddg_cd_lifecycle_rollup.csv
   ddg_cd_lifecycle_candidates: workbook_inputs/sam_awards/lifecycle/ddg_cd_lifecycle_candidates.csv
-  deflators: workbook_inputs/sam_awards/reference/ref_sam_procurement_deflators_fy2026.csv
 
 audit:
   duplicate_audit: audit/duplicate_audit.csv

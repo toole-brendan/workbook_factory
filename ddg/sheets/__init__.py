@@ -1,81 +1,100 @@
-"""Merged DDG-51 sheet registry.
+"""Fully flattened DDG-51 sheet registry.
 
-This registry is the display order for the consolidated DDG workbook.  The sheet
-implementation still reuses the already-DDG-sliced TAM/SAM modules, but the
-workbook is now composed as one DDG program rather than two visible halves.
+All runtime sheets now live under ``ddg.sheets``.  A small import-compatibility
+shim maps the historical source package names to this package so formula-heavy
+modules copied from the DDG-sliced TAM/SAM workbooks can continue to resolve
+producer modules while the filesystem is no longer split into ``tam/`` and
+``sam/`` halves.
 """
 from __future__ import annotations
 
-# Historical TAM implementation modules.
-from workbook_master_tam.sheets import (
-    methodology as tam_methodology,
-    assumptions,
-    ddg_tam,
-    scn_budget,
-    place_of_performance,
-    obbba,
-    fydp_outyears,
-    deflators as tam_deflators,
-    checks,
-)
+import sys
+import types
 
-# Historical SAM implementation modules.
-from workbook_award_classification_refactor.sheets import (
-    taxonomy,
-    guide_methodology as classification_method,
-    hull_mapping_methodology,
-    lifecycle_methodology,
-    naics6_archetype_map,
-    vendor_archetype_overrides,
-    hii_swbs_crosswalk,
-    ddg_piid_hull_map,
-    ddg_hull_master,
-    deflators as sam_deflators,
-    supplier_master,
-    supplier_year_activity,
-    ddg_program_vendors,
-    ddg_swbs_rollup,
-    ddg_hull_spend_summary,
-    ddg_hull_coverage,
-    ddg_hull_swbs,
-    ddg_vendor_hull,
-    ddg_vendor_hull_swbs,
-    ddg_hull_exceptions,
-    ddg_hull_lifecycle_stage,
-    ddg_cd_lifecycle_coverage,
-    ddg_cd_lifecycle_rollup,
-    ddg_cd_lifecycle_candidates,
-    domain_concentration,
-    where_to_play,
-    prime_awards,
-    ddg_subaward_transactions,
-)
+_ROOT_ALIASES = ("workbook_master_tam", "workbook_award_classification_refactor")
 
+def _install_package_aliases() -> None:
+    this = sys.modules[__name__]
+    for root in _ROOT_ALIASES:
+        pkg = sys.modules.get(root)
+        if pkg is None:
+            pkg = types.ModuleType(root)
+            sys.modules[root] = pkg
+        pkg.__path__ = []
+        setattr(pkg, "sheets", this)
+        sys.modules[f"{root}.sheets"] = this
+
+def _alias_many(*names: str) -> None:
+    for name in names:
+        mod = sys.modules[f"{__name__}.{name}"]
+        for root in _ROOT_ALIASES:
+            sys.modules[f"{root}.sheets.{name}"] = mod
+
+_install_package_aliases()
+
+# Shared helpers / references first, then aliases for historical import paths.
+from . import (_cuts, _tabs, _italic, _inputfill, _layout, _factor, _periods,
+               _widths, _text_input, _taxonomy, _structure_classes, _hulls)
+_alias_many("_cuts", "_tabs", "_italic", "_inputfill", "_layout", "_factor",
+            "_periods", "_widths", "_text_input", "_taxonomy", "_structure_classes", "_hulls")
+from . import _flat, deflators, _fiscal, _program_vendors
+_alias_many("_flat", "deflators", "_fiscal", "_program_vendors")
+
+# TAM producer sheets / helpers.
+from . import assumptions
+_alias_many("assumptions")
+from . import scn_budget, place_of_performance, obbba, fydp_outyears
+_alias_many("scn_budget", "place_of_performance", "obbba", "fydp_outyears")
+from . import _program_tam, ddg_tam, methodology, checks
+_alias_many("_program_tam", "ddg_tam", "methodology", "checks")
+
+# SAM inputs, data leaves, dimensions, models and summaries.
+from . import (taxonomy, guide_methodology, hull_mapping_methodology, lifecycle_methodology,
+               naics6_archetype_map, vendor_archetype_overrides, hii_swbs_crosswalk,
+               ddg_piid_hull_map, ddg_hull_master, prime_awards)
+_alias_many("taxonomy", "guide_methodology", "hull_mapping_methodology", "lifecycle_methodology",
+            "naics6_archetype_map", "vendor_archetype_overrides", "hii_swbs_crosswalk",
+            "ddg_piid_hull_map", "ddg_hull_master", "prime_awards")
+from . import ddg_subaward_transactions
+_alias_many("ddg_subaward_transactions")
+from . import supplier_master, supplier_year_activity, ddg_program_vendors
+_alias_many("supplier_master", "supplier_year_activity", "ddg_program_vendors")
+from . import (ddg_swbs_rollup, ddg_hull_spend_summary, ddg_hull_coverage, ddg_hull_swbs,
+               ddg_vendor_hull, ddg_vendor_hull_swbs, ddg_hull_exceptions,
+               ddg_hull_lifecycle_stage, ddg_cd_lifecycle_coverage,
+               ddg_cd_lifecycle_rollup, ddg_cd_lifecycle_candidates,
+               domain_concentration, where_to_play)
+_alias_many("ddg_swbs_rollup", "ddg_hull_spend_summary", "ddg_hull_coverage", "ddg_hull_swbs",
+            "ddg_vendor_hull", "ddg_vendor_hull_swbs", "ddg_hull_exceptions",
+            "ddg_hull_lifecycle_stage", "ddg_cd_lifecycle_coverage",
+            "ddg_cd_lifecycle_rollup", "ddg_cd_lifecycle_candidates",
+            "domain_concentration", "where_to_play")
 from . import executive_summary
+_alias_many("executive_summary")
 
 SHEETS: list = [
-    # --- Summary / answer pages ---
+    # Summary / answer pages.
     executive_summary.EXECUTIVE_SUMMARY,
     domain_concentration.DOMAIN_CONCENTRATION,
     where_to_play.WHERE_TO_PLAY,
 
-    # --- Guide / method ---
-    tam_methodology.METHODOLOGY,
+    # Guide / method.
+    methodology.METHODOLOGY,
     taxonomy.TAXONOMY,
-    classification_method.METHODOLOGY,
+    guide_methodology.METHODOLOGY,
     hull_mapping_methodology.HULL_MAPPING_METHODOLOGY,
     lifecycle_methodology.LIFECYCLE_METHODOLOGY,
 
-    # --- Inputs / editable levers ---
+    # Inputs / references.
     assumptions.ASSUMPTIONS,
+    deflators.DEFLATORS,
     naics6_archetype_map.NAICS_ARCHETYPE_MAP,
     vendor_archetype_overrides.VENDOR_ARCHETYPE_OVERRIDES,
     hii_swbs_crosswalk.HII_SWBS_CROSSWALK,
     ddg_piid_hull_map.DDG_PIID_HULL_MAP,
     ddg_hull_master.DDG_HULL_MASTER,
-    sam_deflators.DEFLATORS,
 
-    # --- Model / calculations ---
+    # Model / calculations.
     ddg_tam.DDG_TAM,
     supplier_master.SUPPLIER_MASTER,
     supplier_year_activity.SUPPLIER_YEAR_ACTIVITY,
@@ -92,15 +111,14 @@ SHEETS: list = [
     ddg_cd_lifecycle_rollup.DDG_CD_LC_ROLLUP,
     ddg_cd_lifecycle_candidates.DDG_CD_LC_CANDIDATES,
 
-    # --- Data / source evidence ---
+    # Data / source evidence.
     scn_budget.SCN_BUDGET,
     place_of_performance.PLACE_OF_PERFORMANCE,
     obbba.OBBBA,
     fydp_outyears.FYDP_OUTYEARS,
-    tam_deflators.DEFLATORS,
     prime_awards.PRIME_AWARDS,
     ddg_subaward_transactions.DDG_SUBAWARD_TX,
 
-    # --- Validation ---
+    # Validation.
     checks.CHECKS,
 ]

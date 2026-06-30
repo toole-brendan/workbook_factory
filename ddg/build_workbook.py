@@ -1,9 +1,4 @@
-"""Build the consolidated DDG-51 workbook.
-
-The source workbooks started as separate TAM and SAM pipelines.  This entrypoint
-makes DDG the runtime unit: one sheet registry, one merged Executive Summary, and
-one consolidated DDG-scoped data tree.
-"""
+"""Build the fully flattened DDG-51 workbook."""
 from __future__ import annotations
 
 import sys
@@ -11,19 +6,13 @@ from pathlib import Path
 
 _HERE = Path(__file__).resolve().parent
 _ROOT = _HERE.parent
-
-# Repository root is needed for ``import ddg`` / ``import workbook_core``.  The
-# historical implementation packages remain on sys.path while their modules are
-# folded into the consolidated DDG registry.
-for _p in (_ROOT, _HERE / "tam", _HERE / "sam"):
-    _ps = str(_p)
-    if _ps not in sys.path:
-        sys.path.insert(0, _ps)
+_root = str(_ROOT)
+if _root not in sys.path:
+    sys.path.insert(0, _root)
 
 from workbook_core.primitives import set_normalize_dashes
 
-# Several flat SAM sheets build their XML at import time, so dash normalization
-# must be enabled before importing the registry.
+# Some flat sheets build XML at import time, so normalize before importing registry modules.
 set_normalize_dashes(True)
 
 import workbook_core.groups as _groups
@@ -31,31 +20,15 @@ from workbook_core.lib import package_workbook
 
 from ddg.lib import OUT, TITLE, CREATOR, APP_NAME
 from ddg.sheets import SHEETS
-from ddg.sheets import _sam_integrity as ig
+from ddg.sheets import _integrity as ig
 
-_MERGED_ORDER = [
-    "summary",
-    "guide",
-    "inputs",
-    "model",
-    "data",
-    "validation",
-    "outputs",
-    "sources",
-    "chartdata",
-]
+_MERGED_ORDER = ["summary", "guide", "inputs", "model", "data", "validation"]
 
 def _apply_group_order() -> None:
-    """Restore the merged DDG workbook order after legacy package imports.
-
-    The old SAM build mutates ``GROUP_ORDER`` into its standalone reader order.
-    The merged DDG registry uses the shared workbook order instead.
-    """
     _groups.GROUP_ORDER.clear()
     _groups.GROUP_ORDER.update({k: i for i, k in enumerate(_MERGED_ORDER)})
 
 def _run_guards() -> None:
-    """Run the DDG-scoped SAM integrity guards against the consolidated CSV tree."""
     ig.assert_piids_in_manifest()
     ig.assert_universes_aligned()
     ig.assert_duplicate_audit_recorded()
@@ -72,14 +45,8 @@ def _run_guards() -> None:
 def build() -> int:
     _run_guards()
     _apply_group_order()
-    return package_workbook(
-        OUT,
-        SHEETS,
-        title=TITLE,
-        creator=CREATOR,
-        app_name=APP_NAME,
-        normalize_dashes=True,
-    )
+    return package_workbook(OUT, SHEETS, title=TITLE, creator=CREATOR,
+                            app_name=APP_NAME, normalize_dashes=True)
 
 if __name__ == "__main__":
     raise SystemExit(build())
