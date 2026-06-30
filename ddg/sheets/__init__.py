@@ -45,45 +45,51 @@ from . import assumptions
 _alias_many("assumptions")
 from . import scn_budget, place_of_performance, obbba, fydp_outyears
 _alias_many("scn_budget", "place_of_performance", "obbba", "fydp_outyears")
-from . import _program_tam, ddg_tam, methodology, checks
-_alias_many("_program_tam", "ddg_tam", "methodology", "checks")
+from . import _program_tam, ddg_tam, methodology
+_alias_many("_program_tam", "ddg_tam", "methodology")
 
-# SAM inputs, data leaves, dimensions, models and summaries.
+# SAM guide / reference sheets.
 from . import (taxonomy, guide_methodology, hull_mapping_methodology, lifecycle_methodology,
-               naics6_archetype_map, vendor_archetype_overrides, hii_swbs_crosswalk,
-               ddg_piid_hull_map, ddg_hull_master, prime_awards)
+               swbs_methodology, naics6_archetype_map, vendor_archetype_overrides,
+               hii_swbs_crosswalk, ddg_piid_hull_map, ddg_hull_master, prime_awards)
 _alias_many("taxonomy", "guide_methodology", "hull_mapping_methodology", "lifecycle_methodology",
-            "naics6_archetype_map", "vendor_archetype_overrides", "hii_swbs_crosswalk",
-            "ddg_piid_hull_map", "ddg_hull_master", "prime_awards")
+            "swbs_methodology", "naics6_archetype_map", "vendor_archetype_overrides",
+            "hii_swbs_crosswalk", "ddg_piid_hull_map", "ddg_hull_master", "prime_awards")
 from . import ddg_subaward_transactions
 _alias_many("ddg_subaward_transactions")
 from . import supplier_master, supplier_year_activity, ddg_program_vendors
 _alias_many("supplier_master", "supplier_year_activity", "ddg_program_vendors")
-from . import (ddg_swbs_rollup, ddg_hull_spend_summary, ddg_hull_coverage, ddg_hull_swbs,
+from . import (archetype_application_audit, ddg_swbs_rollup, swbs_coverage,
+               ddg_hull_spend_summary, ddg_hull_coverage, ddg_hull_swbs,
                ddg_vendor_hull, ddg_vendor_hull_swbs, ddg_hull_exceptions,
                ddg_hull_lifecycle_stage, ddg_cd_lifecycle_coverage,
                ddg_cd_lifecycle_rollup, ddg_cd_lifecycle_candidates,
                domain_concentration, where_to_play)
-_alias_many("ddg_swbs_rollup", "ddg_hull_spend_summary", "ddg_hull_coverage", "ddg_hull_swbs",
+_alias_many("archetype_application_audit", "ddg_swbs_rollup", "swbs_coverage",
+            "ddg_hull_spend_summary", "ddg_hull_coverage", "ddg_hull_swbs",
             "ddg_vendor_hull", "ddg_vendor_hull_swbs", "ddg_hull_exceptions",
             "ddg_hull_lifecycle_stage", "ddg_cd_lifecycle_coverage",
             "ddg_cd_lifecycle_rollup", "ddg_cd_lifecycle_candidates",
             "domain_concentration", "where_to_play")
-from . import executive_summary
-_alias_many("executive_summary")
+from . import sam_calculation_map, executive_summary
+_alias_many("sam_calculation_map", "executive_summary")
+from . import checks
+_alias_many("checks")
 
 SHEETS: list = [
     # Summary / answer pages.
     executive_summary.EXECUTIVE_SUMMARY,
+    sam_calculation_map.SAM_CALCULATION_MAP,
     domain_concentration.DOMAIN_CONCENTRATION,
     where_to_play.WHERE_TO_PLAY,
 
     # Guide / method.
     methodology.METHODOLOGY,
-    taxonomy.TAXONOMY,
     guide_methodology.METHODOLOGY,
+    taxonomy.TAXONOMY,
     hull_mapping_methodology.HULL_MAPPING_METHODOLOGY,
     lifecycle_methodology.LIFECYCLE_METHODOLOGY,
+    swbs_methodology.SWBS_METHODOLOGY,
 
     # Inputs / references.
     assumptions.ASSUMPTIONS,
@@ -99,25 +105,27 @@ SHEETS: list = [
     supplier_master.SUPPLIER_MASTER,
     supplier_year_activity.SUPPLIER_YEAR_ACTIVITY,
     ddg_program_vendors.DDG_PROGRAM_VENDORS,
+    archetype_application_audit.ARCHETYPE_APPLICATION_AUDIT,
     ddg_swbs_rollup.DDG_SWBS_ROLLUP,
-    ddg_hull_spend_summary.DDG_HULL_SPEND,
+    swbs_coverage.SWBS_COVERAGE,
     ddg_hull_coverage.DDG_HULL_COVERAGE,
+    ddg_hull_spend_summary.DDG_HULL_SPEND,
     ddg_hull_swbs.DDG_HULL_SWBS,
     ddg_vendor_hull.DDG_VENDOR_HULL,
     ddg_vendor_hull_swbs.DDG_VENDOR_HULL_SWBS,
     ddg_hull_exceptions.DDG_HULL_EXCEPTIONS,
-    ddg_hull_lifecycle_stage.DDG_HULL_LIFECYCLE,
     ddg_cd_lifecycle_coverage.DDG_CD_LC_COVERAGE,
+    ddg_hull_lifecycle_stage.DDG_HULL_LIFECYCLE,
     ddg_cd_lifecycle_rollup.DDG_CD_LC_ROLLUP,
     ddg_cd_lifecycle_candidates.DDG_CD_LC_CANDIDATES,
 
     # Data / source evidence.
+    prime_awards.PRIME_AWARDS,
+    ddg_subaward_transactions.DDG_SUBAWARD_TX,
     scn_budget.SCN_BUDGET,
     place_of_performance.PLACE_OF_PERFORMANCE,
     obbba.OBBBA,
     fydp_outyears.FYDP_OUTYEARS,
-    prime_awards.PRIME_AWARDS,
-    ddg_subaward_transactions.DDG_SUBAWARD_TX,
 
     # Validation.
     checks.CHECKS,
