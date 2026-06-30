@@ -1,0 +1,43 @@
+program: DDG-51
+workbook: "Distributed Shipbuilding - DDG-51 TAM + SAM"
+build_entrypoint: ddg/build_workbook.py
+
+naming_rules:
+  ddg_prefix: "row universe was filtered to DDG-51"
+  ref_prefix: "reference table, not a DDG row universe"
+  audit: "build-stopping guard input, not a visible worksheet tab"
+  research_worklists: "workbook-adjacent worklist retained for guard lineage"
+
+tam_budget:
+  scn_budget: workbook_inputs/tam_budget/ddg_scn_budget.csv
+  ap_lltm: workbook_inputs/tam_budget/ddg_ap_lltm.csv
+  place_of_performance: workbook_inputs/tam_budget/ddg_place_of_performance.csv
+  obbba: workbook_inputs/tam_budget/ddg_obbba.csv
+  fydp_outyears: workbook_inputs/tam_budget/ddg_fydp_outyears.csv
+  deflators: workbook_inputs/tam_budget/ref_tam_procurement_deflators_fy2026.csv
+
+sam_awards:
+  prime_awards: workbook_inputs/sam_awards/scope/ddg_prime_awards.csv
+  prime_contract_scope: workbook_inputs/sam_awards/scope/ddg_prime_contract_scope.csv
+  ddg_subaward_transactions: workbook_inputs/sam_awards/transactions/ddg_subaward_transactions.csv
+  supplier_master: workbook_inputs/sam_awards/supplier/ddg_supplier_master.csv
+  supplier_year_activity: workbook_inputs/sam_awards/supplier/ddg_supplier_year_activity.csv
+  vendor_archetype_overrides: workbook_inputs/sam_awards/classification/ddg_vendor_archetype_overrides.csv
+  naics6_archetype_map: workbook_inputs/sam_awards/classification/ddg_naics6_archetype_map.csv
+  hii_swbs_crosswalk: workbook_inputs/sam_awards/swbs/ddg_hii_swbs_crosswalk.csv
+  ddg_swbs_by_subsystem: workbook_inputs/sam_awards/swbs/ddg_swbs_by_subsystem.csv
+  ddg_piid_hull_map: workbook_inputs/sam_awards/hull/ddg_piid_hull_map.csv
+  ddg_hull_master: workbook_inputs/sam_awards/hull/ddg_hull_master.csv
+  ddg_hull_exceptions: workbook_inputs/sam_awards/hull/ddg_hull_exceptions.csv
+  ddg_vendor_hull_exposure: workbook_inputs/sam_awards/hull/ddg_vendor_hull_exposure.csv
+  ddg_vendor_hull_swbs: workbook_inputs/sam_awards/hull/ddg_vendor_hull_swbs.csv
+  ddg_cd_lifecycle_rollup: workbook_inputs/sam_awards/lifecycle/ddg_cd_lifecycle_rollup.csv
+  ddg_cd_lifecycle_candidates: workbook_inputs/sam_awards/lifecycle/ddg_cd_lifecycle_candidates.csv
+  deflators: workbook_inputs/sam_awards/reference/ref_sam_procurement_deflators_fy2026.csv
+
+audit:
+  duplicate_audit: audit/duplicate_audit.csv
+  duplicate_candidates: audit/duplicate_candidates.csv
+
+research_worklists:
+  ddg_program_vendors: research_worklists/ddg_program_vendors.csv
