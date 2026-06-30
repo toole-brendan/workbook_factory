@@ -14,9 +14,9 @@ Promoted accessor (imported by ddg_subaward_swbs):
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import make_flat_sheet
-from workbook_award_classification_refactor.sheets._tabs import TAB_SWBS_CROSSWALK
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.flat import make_flat_sheet
+from ddg.sheets.kit.tabs import TAB_SWBS_CROSSWALK
+from ddg.sheets.kit.widths import (
     W_TEXT_WIDE,
 )
 

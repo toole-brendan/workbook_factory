@@ -7,11 +7,11 @@ just binds the DDG-specific program label, transaction leaf, tab, CSV and intro.
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._program_vendors import (
+from ddg.sheets.kit.program_vendors import (
     make_program_vendor_sheet,
 )
-from workbook_award_classification_refactor.sheets._tabs import TAB_DDG_PROGRAM
-from workbook_award_classification_refactor.sheets.ddg_subaward_transactions import (
+from ddg.sheets.kit.tabs import TAB_DDG_PROGRAM
+from ddg.sheets.ddg_subaward_transactions import (
     ddg_tx_cols,
 )
 

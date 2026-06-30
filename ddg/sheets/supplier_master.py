@@ -20,14 +20,14 @@ Promoted accessor (imported by the program-vendor factory): `supplier_master_col
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import (
+from ddg.sheets.kit.flat import (
     make_flat_sheet, flat_header_letters,
     override_or_map, override_or_map_basis,
 )
-from workbook_award_classification_refactor.sheets._tabs import TAB_SUPPLIER_MASTER
-from workbook_award_classification_refactor.sheets.naics6_archetype_map import naics_map_cols
-from workbook_award_classification_refactor.sheets.vendor_archetype_overrides import overrides_cols
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.tabs import TAB_SUPPLIER_MASTER
+from ddg.sheets.naics6_archetype_map import naics_map_cols
+from ddg.sheets.vendor_archetype_overrides import overrides_cols
+from ddg.sheets.kit.widths import (
     W_VENDOR, W_PROGRAM, W_UEI, W_NAICS, W_NAICS_DESC, W_CD, W_SHORT_FLAG, W_DOMFOR,
     W_TEXT_WIDE,
 )

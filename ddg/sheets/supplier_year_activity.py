@@ -27,15 +27,15 @@ Promoted accessor (imported by Where to Play + the Executive Summary): `supplier
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import (
+from ddg.sheets.kit.flat import (
     make_flat_sheet, flat_header_letters, sm_match_row, sm_text, sm_value,
 )
-from workbook_award_classification_refactor.sheets._fiscal import TX_FED_FY, TX_REAL
-from workbook_award_classification_refactor.sheets._tabs import TAB_SUPPLIER_YEAR
-from workbook_award_classification_refactor.sheets._cuts import load_table
-from workbook_award_classification_refactor.sheets.supplier_master import supplier_master_cols
-from workbook_award_classification_refactor.sheets.ddg_subaward_transactions import ddg_tx_cols
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.fiscal import TX_FED_FY, TX_REAL
+from ddg.sheets.kit.tabs import TAB_SUPPLIER_YEAR
+from ddg.sheets.kit.cuts import load_table
+from ddg.sheets.supplier_master import supplier_master_cols
+from ddg.sheets.ddg_subaward_transactions import ddg_tx_cols
+from ddg.sheets.kit.widths import (
     W_PROGRAM, W_FY, W_UEI, W_VENDOR, W_DOLLAR, W_RANK,
 )
 

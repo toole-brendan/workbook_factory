@@ -28,19 +28,19 @@ Class". Promoted accessor: `where_to_play_cols`.
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import (
+from ddg.sheets.kit.flat import (
     make_flat_sheet, flat_header_letters,
 )
-from workbook_award_classification_refactor.sheets._tabs import TAB_WHERE_TO_PLAY
-from workbook_award_classification_refactor.sheets._taxonomy import DOMAINS, OUTPUTS
-from workbook_award_classification_refactor.sheets.supplier_year_activity import (
+from ddg.sheets.kit.tabs import TAB_WHERE_TO_PLAY
+from ddg.sheets.kit.taxonomy import DOMAINS, OUTPUTS
+from ddg.sheets.supplier_year_activity import (
     supplier_year_cols,
 )
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.widths import (
     W_RANK, W_CODE, W_TERM, W_PROGRAM, W_FY, W_DOLLAR, W_COUNT,
     W_RATIO, W_STATUS, W_METRIC, W_CLASS,
 )
-from workbook_award_classification_refactor.sheets._structure_classes import (
+from ddg.sheets.kit.structure_classes import (
     MIN_ACTIVE_SUPPLIERS,
     HIGH_PARENT_HHI,
     HIGH_INCUMBENT_DOLLAR_SHARE,

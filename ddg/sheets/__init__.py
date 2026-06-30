@@ -1,80 +1,34 @@
 """Fully flattened DDG-51 sheet registry.
 
-All runtime sheets now live under ``ddg.sheets``.  A small import-compatibility
-shim maps the historical source package names to this package so formula-heavy
-modules copied from the DDG-sliced TAM/SAM workbooks can continue to resolve
-producer modules while the filesystem is no longer split into ``tam/`` and
-``sam/`` halves.
+All runtime sheets live under ``ddg.sheets``; shared build infrastructure (CSV
+loading, the row cursor, style registration, fiscal/reference constants, the
+program-vendor/TAM factories, integrity guards) lives one level down in
+``ddg.sheets.kit`` and is not a tab itself. Every module below imports its own
+dependencies by real path, so this file just needs to import each TAB module
+(for its side-effecting sheet build + to bind it into SHEETS) - Python resolves
+the kit/ dependency graph on demand, no import-order bookkeeping required.
 """
 from __future__ import annotations
 
-import sys
-import types
-
-_ROOT_ALIASES = ("workbook_master_tam", "workbook_award_classification_refactor")
-
-def _install_package_aliases() -> None:
-    this = sys.modules[__name__]
-    for root in _ROOT_ALIASES:
-        pkg = sys.modules.get(root)
-        if pkg is None:
-            pkg = types.ModuleType(root)
-            sys.modules[root] = pkg
-        pkg.__path__ = []
-        setattr(pkg, "sheets", this)
-        sys.modules[f"{root}.sheets"] = this
-
-def _alias_many(*names: str) -> None:
-    for name in names:
-        mod = sys.modules[f"{__name__}.{name}"]
-        for root in _ROOT_ALIASES:
-            sys.modules[f"{root}.sheets.{name}"] = mod
-
-_install_package_aliases()
-
-# Shared helpers / references first, then aliases for historical import paths.
-from . import (_cuts, _tabs, _italic, _inputfill, _layout, _factor, _periods,
-               _widths, _text_input, _taxonomy, _structure_classes, _hulls)
-_alias_many("_cuts", "_tabs", "_italic", "_inputfill", "_layout", "_factor",
-            "_periods", "_widths", "_text_input", "_taxonomy", "_structure_classes", "_hulls")
-from . import _flat, deflators, _fiscal, _program_vendors
-_alias_many("_flat", "deflators", "_fiscal", "_program_vendors")
-
-# TAM producer sheets / helpers.
+# TAM producer sheets.
 from . import assumptions
-_alias_many("assumptions")
 from . import scn_budget, place_of_performance, obbba, fydp_outyears
-_alias_many("scn_budget", "place_of_performance", "obbba", "fydp_outyears")
-from . import _program_tam, ddg_tam, methodology
-_alias_many("_program_tam", "ddg_tam", "methodology")
+from . import deflators, ddg_tam, methodology
 
-# SAM references / source sheets. Guide modules remain import-compatible but are not visible tabs.
+# SAM reference / source sheets. Guide modules are import-compatible but not visible tabs.
 from . import (taxonomy, guide_methodology, hull_mapping_methodology, lifecycle_methodology,
                naics6_archetype_map, vendor_archetype_overrides, hii_swbs_crosswalk,
                ddg_piid_hull_map, ddg_hull_master, prime_awards)
-_alias_many("taxonomy", "guide_methodology", "hull_mapping_methodology", "lifecycle_methodology",
-            "naics6_archetype_map", "vendor_archetype_overrides", "hii_swbs_crosswalk",
-            "ddg_piid_hull_map", "ddg_hull_master", "prime_awards")
 from . import ddg_subaward_transactions
-_alias_many("ddg_subaward_transactions")
 from . import supplier_master, supplier_year_activity, ddg_program_vendors
-_alias_many("supplier_master", "supplier_year_activity", "ddg_program_vendors")
 from . import (archetype_application_audit, ddg_swbs_rollup, swbs_coverage,
                ddg_hull_spend_summary, ddg_hull_coverage, ddg_hull_swbs,
                ddg_vendor_hull, ddg_vendor_hull_swbs, ddg_hull_exceptions,
                ddg_hull_lifecycle_stage, ddg_cd_lifecycle_coverage,
                ddg_cd_lifecycle_rollup, ddg_cd_lifecycle_candidates,
                domain_concentration, where_to_play)
-_alias_many("archetype_application_audit", "ddg_swbs_rollup", "swbs_coverage",
-            "ddg_hull_spend_summary", "ddg_hull_coverage", "ddg_hull_swbs",
-            "ddg_vendor_hull", "ddg_vendor_hull_swbs", "ddg_hull_exceptions",
-            "ddg_hull_lifecycle_stage", "ddg_cd_lifecycle_coverage",
-            "ddg_cd_lifecycle_rollup", "ddg_cd_lifecycle_candidates",
-            "domain_concentration", "where_to_play")
 from . import executive_summary
-_alias_many("executive_summary")
 from . import checks
-_alias_many("checks")
 
 SHEETS: list = [
     # Summary / answer pages.

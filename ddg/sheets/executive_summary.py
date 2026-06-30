@@ -9,12 +9,12 @@ from workbook_core.styles import (
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
 
-from ddg.sheets._layout import RowCursor
-from ddg.sheets._italic import S_ITALIC
-from ddg.sheets._tabs import TAB_EXEC_SUMMARY
-from ddg.sheets import _periods
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.styles import S_ITALIC
+from ddg.sheets.kit.tabs import TAB_EXEC_SUMMARY
+from ddg.sheets.kit import periods as _periods
 from ddg.sheets import ddg_tam as TAM
-from ddg.sheets._taxonomy import DOMAINS
+from ddg.sheets.kit.taxonomy import DOMAINS
 from ddg.sheets.ddg_program_vendors import ddg_pv_cols
 from ddg.sheets.supplier_year_activity import supplier_year_cols
 from ddg.sheets.where_to_play import where_to_play_cols

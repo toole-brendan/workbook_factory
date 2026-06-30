@@ -29,12 +29,12 @@ from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.notes import ExcelNote
 from workbook_core.groups import group_color
 
-from workbook_master_tam.sheets._layout import RowCursor
+from ddg.sheets.kit.layout import RowCursor
 # Input cells get a pale-yellow fill (not just blue font) per the ICAEW code; the
 # filled style variants are registered per-build in _inputfill (no engine edit).
-from workbook_master_tam.sheets._inputfill import S_PCT_INPUT_FILL
-from workbook_master_tam.sheets._tabs import TAB_ASSUMPTIONS
-from workbook_master_tam.sheets._periods import FY as _FY
+from ddg.sheets.kit.styles import S_PCT_INPUT_FILL
+from ddg.sheets.kit.tabs import TAB_ASSUMPTIONS
+from ddg.sheets.kit.periods import FY as _FY
 
 _GROUP = "inputs"
 _NCOLS = 7

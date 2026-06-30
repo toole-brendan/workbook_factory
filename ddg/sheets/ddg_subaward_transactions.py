@@ -32,24 +32,24 @@ Promoted accessor (imported by the program-vendor + SWBS + hull roll-up sheets):
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import (
+from ddg.sheets.kit.flat import (
     make_flat_sheet, swbs_match_row, swbs_from_row, flat_header_letters,
 )
-from workbook_award_classification_refactor.sheets._fiscal import (
+from ddg.sheets.kit.fiscal import (
     TX_EXTRA_COLS, TX_FED_FY, TX_FACTOR, TX_REAL, tx_fy_formulas,
 )
-from workbook_award_classification_refactor.sheets._tabs import TAB_DDG_TX
-from workbook_award_classification_refactor.sheets.hii_swbs_crosswalk import (
+from ddg.sheets.kit.tabs import TAB_DDG_TX
+from ddg.sheets.hii_swbs_crosswalk import (
     swbs_xwalk_cols,
 )
-from workbook_award_classification_refactor.sheets.ddg_piid_hull_map import (
+from ddg.sheets.ddg_piid_hull_map import (
     piid_hull_map_cols,
 )
-from workbook_award_classification_refactor.sheets._hulls import (
+from ddg.sheets.kit.hulls import (
     hull_map_row, from_map, hull_in_family, assigned_hull, hull_scope, hull_basis,
     hull_confidence,
 )
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.widths import (
     W_UEI, W_VENDOR, W_REPORTID, W_UUID, W_SUBNUM, W_DATE, W_AMOUNT, W_TEXT,
     W_STREET2, W_CITY, W_CD, W_CODE, W_STATE, W_CC, W_COUNTRY, W_ZIP, W_BIZCODE,
     W_PAY, W_PIID, W_CONTRACTKEY, W_REFIDV, W_AWARDTYPE, W_TCV, W_NAICS,

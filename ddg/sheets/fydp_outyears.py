@@ -22,11 +22,11 @@ from workbook_core.styles import (
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
 
-from workbook_master_tam.sheets._cuts import load_rows, as_float
-from workbook_master_tam.sheets._layout import RowCursor
-from workbook_master_tam.sheets._factor import S_FACTOR
-from workbook_master_tam.sheets._tabs import TAB_FYDP
-from workbook_master_tam.sheets.deflators import deflator_factor_cell
+from ddg.sheets.kit.cuts import load_rows, as_float
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.styles import S_FACTOR
+from ddg.sheets.kit.tabs import TAB_FYDP
+from ddg.sheets.deflators import deflator_factor_cell
 
 _GROUP = "data"
 _FY = [2025, 2026, 2027, 2028, 2029, 2030, 2031]

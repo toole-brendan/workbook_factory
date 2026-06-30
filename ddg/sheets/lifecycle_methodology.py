@@ -12,9 +12,9 @@ from workbook_core.primitives import worksheet
 from workbook_core.styles import S_DEFAULT, S_BOLD, S_HEADER_LEFT
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
-from workbook_award_classification_refactor.sheets._layout import RowCursor
-from workbook_award_classification_refactor.sheets._italic import S_ITALIC
-from workbook_award_classification_refactor.sheets._tabs import (
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.styles import S_ITALIC
+from ddg.sheets.kit.tabs import (
     TAB_LIFECYCLE_METHOD, TAB_HULL_MASTER, TAB_DDG_TX, TAB_HULL_LIFECYCLE,
     TAB_CD_LC_COVERAGE, TAB_CD_LC_ROLLUP, TAB_CD_LC_CANDIDATES, TAB_HULL_METHODOLOGY,
 )

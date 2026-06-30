@@ -26,9 +26,9 @@ from workbook_core.styles import (
 from workbook_core.tables import WorksheetSpec, ExcelTable, SheetEntry
 from workbook_core.groups import group_color
 
-from workbook_master_tam.sheets._cuts import load_rows, as_float, as_int
-from workbook_master_tam.sheets._layout import RowCursor
-from workbook_master_tam.sheets._tabs import TAB_POP
+from ddg.sheets.kit.cuts import load_rows, as_float, as_int
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.tabs import TAB_POP
 
 _GROUP = "data"
 _HEADERS = ["Program", "Date", "PIID", "Prime", "Work Type", "Stream", "Master",

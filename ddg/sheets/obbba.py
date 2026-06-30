@@ -25,12 +25,12 @@ from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.notes import ExcelNote
 from workbook_core.groups import group_color
 
-from workbook_master_tam.sheets._cuts import load_rows, as_float
-from workbook_master_tam.sheets._layout import RowCursor
-from workbook_master_tam.sheets._tabs import TAB_OBBBA
-from workbook_master_tam.sheets.deflators import deflator_factor_cell
-from workbook_master_tam.sheets.assumptions import obbba_bc_share_cell, obbba_spillover_cell
-from workbook_master_tam.sheets._periods import FY as _FY
+from ddg.sheets.kit.cuts import load_rows, as_float
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.tabs import TAB_OBBBA
+from ddg.sheets.deflators import deflator_factor_cell
+from ddg.sheets.assumptions import obbba_bc_share_cell, obbba_spillover_cell
+from ddg.sheets.kit.periods import FY as _FY
 
 _GROUP = "data"
 _FY_COL = {fy: col_letter(2 + i) for i, fy in enumerate(_FY)}     # C..H

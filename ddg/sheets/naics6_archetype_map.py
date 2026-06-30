@@ -10,9 +10,9 @@ Promoted accessor (imported by the program-vendor sheets, Phase 2):
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import make_flat_sheet
-from workbook_award_classification_refactor.sheets._tabs import TAB_NAICS_MAP
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.flat import make_flat_sheet
+from ddg.sheets.kit.tabs import TAB_NAICS_MAP
+from ddg.sheets.kit.widths import (
     W_NAICS, W_NAICS_DESC, W_SHORT_FLAG,
 )
 

@@ -11,9 +11,9 @@ from workbook_core.primitives import worksheet
 from workbook_core.styles import S_DEFAULT, S_BOLD, S_HEADER_LEFT
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
-from workbook_award_classification_refactor.sheets._layout import RowCursor
-from workbook_award_classification_refactor.sheets._italic import S_ITALIC
-from workbook_award_classification_refactor.sheets._tabs import (
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.styles import S_ITALIC
+from ddg.sheets.kit.tabs import (
     TAB_HULL_METHODOLOGY, TAB_PIID_HULL_MAP, TAB_HULL_MASTER, TAB_DDG_TX,
     TAB_HULL_SPEND, TAB_HULL_COVERAGE, TAB_HULL_SWBS, TAB_VENDOR_HULL,
     TAB_VENDOR_HULL_SWBS, TAB_HULL_EXCEPTIONS, TAB_LIFECYCLE_METHOD,

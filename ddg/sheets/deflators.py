@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import re
 
-from ddg.sheets._flat import make_flat_sheet
-from ddg.sheets._tabs import TAB_DEFLATORS
-from ddg.sheets._widths import W_FY, W_TEXT_WIDE
+from ddg.sheets.kit.flat import make_flat_sheet
+from ddg.sheets.kit.tabs import TAB_DEFLATORS
+from ddg.sheets.kit.widths import W_FY, W_TEXT_WIDE
 
 _GROUP = "inputs"
 _WIDTHS = [W_FY, 17, 12, W_TEXT_WIDE]

@@ -12,11 +12,11 @@ Promoted accessor (imported by the program-vendor sheets, Phase 2):
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import (
+from ddg.sheets.kit.flat import (
     make_flat_sheet, flat_header_letters,
 )
-from workbook_award_classification_refactor.sheets._tabs import TAB_ARCHETYPE_OVERRIDES
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.tabs import TAB_ARCHETYPE_OVERRIDES
+from ddg.sheets.kit.widths import (
     W_PROGRAM, W_UEI, W_SHORT_FLAG, W_VENDOR,
 )
 

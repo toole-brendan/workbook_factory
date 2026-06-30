@@ -8,9 +8,9 @@ can adjudicate them rather than have them silently dropped. Pure materialized ev
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import make_flat_sheet
-from workbook_award_classification_refactor.sheets._tabs import TAB_HULL_EXCEPTIONS
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.flat import make_flat_sheet
+from ddg.sheets.kit.tabs import TAB_HULL_EXCEPTIONS
+from ddg.sheets.kit.widths import (
     W_REPORTID, W_PIID, W_VENDOR, W_CATEGORY, W_SUBNUM, W_TEXT_WIDE,
 )
 

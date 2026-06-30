@@ -12,9 +12,9 @@ the DDG-51 SAR / MSAR, and USNI. Edit this CSV by hand; it is NOT regenerated.
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import make_flat_sheet
-from workbook_award_classification_refactor.sheets._tabs import TAB_PIID_HULL_MAP
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.flat import make_flat_sheet
+from ddg.sheets.kit.tabs import TAB_PIID_HULL_MAP
+from ddg.sheets.kit.widths import (
     W_PIID, W_SUPTYPE, W_TEXT_WIDE, W_CLASS, W_TEXT,
 )
 

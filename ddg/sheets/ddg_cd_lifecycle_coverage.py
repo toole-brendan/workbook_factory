@@ -15,13 +15,13 @@ from workbook_core.primitives import worksheet
 from workbook_core.styles import S_DEFAULT, S_BOLD, S_NUM, S_INT, S_PCT
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
-from workbook_award_classification_refactor.sheets._layout import RowCursor
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.widths import (
     header_styles, W_STATUS, W_TEXT_WIDE, W_DOLLAR, W_COUNT, W_RATIO,
 )
-from workbook_award_classification_refactor.sheets._fiscal import TX_REAL
-from workbook_award_classification_refactor.sheets._tabs import TAB_CD_LC_COVERAGE
-from workbook_award_classification_refactor.sheets.ddg_subaward_transactions import (
+from ddg.sheets.kit.fiscal import TX_REAL
+from ddg.sheets.kit.tabs import TAB_CD_LC_COVERAGE
+from ddg.sheets.ddg_subaward_transactions import (
     ddg_tx_cols,
 )
 

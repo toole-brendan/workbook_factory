@@ -11,9 +11,9 @@ This is attribution, not allocation: no per-hull dollar is assigned here (the wa
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import make_flat_sheet
-from workbook_award_classification_refactor.sheets._tabs import TAB_CD_LC_CANDIDATES
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.flat import make_flat_sheet
+from ddg.sheets.kit.tabs import TAB_CD_LC_CANDIDATES
+from ddg.sheets.kit.widths import (
     W_REPORTID, W_PIID, W_CODE, W_SHORT_FLAG, W_SUPTYPE, W_DATE, W_CLASS, W_STATUS, W_TEXT_WIDE,
 )
 

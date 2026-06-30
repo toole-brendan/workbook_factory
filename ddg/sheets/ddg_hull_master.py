@@ -17,9 +17,9 @@ Promoted accessor: hull_master_cols(header) -> "'DDG Hull Master'!$X$first:$X$la
 """
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import make_flat_sheet
-from workbook_award_classification_refactor.sheets._tabs import TAB_HULL_MASTER
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.flat import make_flat_sheet
+from ddg.sheets.kit.tabs import TAB_HULL_MASTER
+from ddg.sheets.kit.widths import (
     W_SHORT_FLAG, W_SUPTYPE, W_PIID, W_STATUS, W_CLASS, W_FY, W_DATE,
 )
 

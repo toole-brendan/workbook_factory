@@ -6,7 +6,7 @@ from pathlib import Path
 PROJECT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = PROJECT_DIR.parent
 
-OUT = PROJECT_DIR / "20260630_Distributed Shipbuilding DDG51_v2.0.xlsx"
+OUT = PROJECT_DIR / "20260630_Distributed Shipbuilding DDG51_vS.xlsx"
 TITLE = "Distributed Shipbuilding - DDG-51 TAM + SAM"
 CREATOR = "workbook_factory ddg/build_workbook.py"
 APP_NAME = "workbook_factory"

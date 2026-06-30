@@ -1,14 +1,14 @@
 """ddg_hull_spend_summary - one row per hull: the subaward $ assigned to that hull."""
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import make_flat_sheet
-from workbook_award_classification_refactor.sheets._fiscal import (
+from ddg.sheets.kit.flat import make_flat_sheet
+from ddg.sheets.kit.fiscal import (
     FY_HEADERS, TX_FED_FY, TX_REAL, pv_fy_formula, pv_lifetime_formula, first_last_or_na,
 )
-from workbook_award_classification_refactor.sheets._tabs import TAB_HULL_SPEND
-from workbook_award_classification_refactor.sheets._cuts import load_table
-from workbook_award_classification_refactor.sheets.ddg_subaward_transactions import ddg_tx_cols
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.tabs import TAB_HULL_SPEND
+from ddg.sheets.kit.cuts import load_table
+from ddg.sheets.ddg_subaward_transactions import ddg_tx_cols
+from ddg.sheets.kit.widths import (
     W_SHORT_FLAG, W_SUPTYPE, W_DOLLAR, W_COUNT, W_DATE, W_FY,
 )
 

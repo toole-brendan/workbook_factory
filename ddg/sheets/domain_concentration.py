@@ -43,10 +43,10 @@ from workbook_core.styles import (
 )
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
-from workbook_award_classification_refactor.sheets._layout import RowCursor
-from workbook_award_classification_refactor.sheets._tabs import TAB_DOMAIN_CONC
-from workbook_award_classification_refactor.sheets._taxonomy import DOMAINS
-from workbook_award_classification_refactor.sheets.ddg_program_vendors import ddg_pv_cols
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.tabs import TAB_DOMAIN_CONC
+from ddg.sheets.kit.taxonomy import DOMAINS
+from ddg.sheets.ddg_program_vendors import ddg_pv_cols
 
 _GROUP = "summary"
 

@@ -6,10 +6,10 @@ from workbook_core.styles import S_DEFAULT, S_BOLD, S_HEADER_LEFT, S_HEADER_CENT
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
 
-from ddg.sheets._layout import RowCursor
-from ddg.sheets._italic import S_ITALIC
-from ddg.sheets._tabs import TAB_ARCHETYPE_AUDIT
-from ddg.sheets._taxonomy import DOMAINS, OUTPUTS
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.styles import S_ITALIC
+from ddg.sheets.kit.tabs import TAB_ARCHETYPE_AUDIT
+from ddg.sheets.kit.taxonomy import DOMAINS, OUTPUTS
 from ddg.sheets.ddg_program_vendors import ddg_pv_cols
 
 _GROUP = "model"

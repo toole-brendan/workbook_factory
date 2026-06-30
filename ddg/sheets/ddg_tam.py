@@ -7,9 +7,9 @@ MYP-corrected (FY23-27 masters folded into the corpus) for FY2023-27.
 """
 from __future__ import annotations
 
-from workbook_master_tam.sheets._program_tam import build_program_tam
-from workbook_master_tam.sheets._tabs import TAB_DDG_TAM
-from workbook_master_tam.sheets.place_of_performance import (
+from ddg.sheets.kit.program_tam import build_program_tam
+from ddg.sheets.kit.tabs import TAB_DDG_TAM
+from ddg.sheets.place_of_performance import (
     ddg_bc_coeff_cell, ddg_bc_coeff_fy22_cell,
 )
 

@@ -1,13 +1,13 @@
 """ddg_swbs_rollup - DDG SWBS by Ship-System roll-up."""
 from __future__ import annotations
 
-from workbook_award_classification_refactor.sheets._flat import make_flat_sheet
-from workbook_award_classification_refactor.sheets._fiscal import (
+from ddg.sheets.kit.flat import make_flat_sheet
+from ddg.sheets.kit.fiscal import (
     FY_HEADERS, TX_FED_FY, TX_REAL, pv_fy_formula, pv_lifetime_formula,
 )
-from workbook_award_classification_refactor.sheets._tabs import TAB_SWBS_ROLLUP
-from workbook_award_classification_refactor.sheets.ddg_subaward_transactions import ddg_tx_cols
-from workbook_award_classification_refactor.sheets._widths import (
+from ddg.sheets.kit.tabs import TAB_SWBS_ROLLUP
+from ddg.sheets.ddg_subaward_transactions import ddg_tx_cols
+from ddg.sheets.kit.widths import (
     W_CODE, W_TEXT_WIDE, W_DOLLAR, W_COUNT, W_DATE, W_FY,
 )
 

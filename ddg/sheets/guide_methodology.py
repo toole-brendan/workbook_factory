@@ -5,13 +5,13 @@ from workbook_core.primitives import worksheet
 from workbook_core.styles import S_DEFAULT, S_BOLD, S_HEADER_LEFT
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
-from ddg.sheets._layout import RowCursor
-from ddg.sheets._italic import S_ITALIC
-from ddg.sheets._tabs import (
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.styles import S_ITALIC
+from ddg.sheets.kit.tabs import (
     TAB_CLASSIFICATION_METHOD, TAB_SUPPLIER_MASTER, TAB_NAICS_MAP,
     TAB_ARCHETYPE_OVERRIDES, TAB_PRIME_AWARDS, TAB_SWBS_CROSSWALK,
 )
-from ddg.sheets._structure_classes import STRUCTURE_RULES
+from ddg.sheets.kit.structure_classes import STRUCTURE_RULES
 
 _GROUP = "guide"
 _NCOLS = 2

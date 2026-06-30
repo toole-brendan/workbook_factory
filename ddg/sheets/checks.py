@@ -29,12 +29,12 @@ from workbook_core.styles import (
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
 
-from ddg.sheets._layout import RowCursor
-from ddg.sheets._tabs import TAB_CHECKS
-from ddg.sheets._periods import OY as _OY
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.tabs import TAB_CHECKS
+from ddg.sheets.kit.periods import OY as _OY
 from ddg.sheets import ddg_tam as DD
 from ddg.sheets import assumptions as A
-from ddg.sheets._fiscal import TX_REAL
+from ddg.sheets.kit.fiscal import TX_REAL
 from ddg.sheets.ddg_subaward_transactions import ddg_tx_cols
 from ddg.sheets.ddg_program_vendors import ddg_pv_cols
 from ddg.sheets.ddg_hull_spend_summary import hull_spend_cols

@@ -20,7 +20,7 @@ from workbook_core.lib import package_workbook
 
 from ddg.lib import OUT, TITLE, CREATOR, APP_NAME
 from ddg.sheets import SHEETS
-from ddg.sheets import _integrity as ig
+from ddg.sheets.kit import integrity as ig
 
 _MERGED_ORDER = ["summary", "guide", "inputs", "model", "data", "validation"]
 

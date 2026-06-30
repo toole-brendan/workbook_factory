@@ -13,8 +13,8 @@ from workbook_core.styles import (
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
 
-from workbook_master_tam.sheets._layout import RowCursor
-from workbook_master_tam.sheets._tabs import TAB_METHODOLOGY
+from ddg.sheets.kit.layout import RowCursor
+from ddg.sheets.kit.tabs import TAB_METHODOLOGY
 
 _GROUP = "guide"
 _NCOLS = 2
