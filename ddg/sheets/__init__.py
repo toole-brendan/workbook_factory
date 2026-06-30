@@ -48,13 +48,13 @@ _alias_many("scn_budget", "place_of_performance", "obbba", "fydp_outyears")
 from . import _program_tam, ddg_tam, methodology
 _alias_many("_program_tam", "ddg_tam", "methodology")
 
-# SAM guide / reference sheets.
+# SAM references / source sheets. Guide modules remain import-compatible but are not visible tabs.
 from . import (taxonomy, guide_methodology, hull_mapping_methodology, lifecycle_methodology,
-               swbs_methodology, naics6_archetype_map, vendor_archetype_overrides,
-               hii_swbs_crosswalk, ddg_piid_hull_map, ddg_hull_master, prime_awards)
+               naics6_archetype_map, vendor_archetype_overrides, hii_swbs_crosswalk,
+               ddg_piid_hull_map, ddg_hull_master, prime_awards)
 _alias_many("taxonomy", "guide_methodology", "hull_mapping_methodology", "lifecycle_methodology",
-            "swbs_methodology", "naics6_archetype_map", "vendor_archetype_overrides",
-            "hii_swbs_crosswalk", "ddg_piid_hull_map", "ddg_hull_master", "prime_awards")
+            "naics6_archetype_map", "vendor_archetype_overrides", "hii_swbs_crosswalk",
+            "ddg_piid_hull_map", "ddg_hull_master", "prime_awards")
 from . import ddg_subaward_transactions
 _alias_many("ddg_subaward_transactions")
 from . import supplier_master, supplier_year_activity, ddg_program_vendors
@@ -71,25 +71,16 @@ _alias_many("archetype_application_audit", "ddg_swbs_rollup", "swbs_coverage",
             "ddg_hull_lifecycle_stage", "ddg_cd_lifecycle_coverage",
             "ddg_cd_lifecycle_rollup", "ddg_cd_lifecycle_candidates",
             "domain_concentration", "where_to_play")
-from . import sam_calculation_map, executive_summary
-_alias_many("sam_calculation_map", "executive_summary")
+from . import executive_summary
+_alias_many("executive_summary")
 from . import checks
 _alias_many("checks")
 
 SHEETS: list = [
     # Summary / answer pages.
     executive_summary.EXECUTIVE_SUMMARY,
-    sam_calculation_map.SAM_CALCULATION_MAP,
     domain_concentration.DOMAIN_CONCENTRATION,
     where_to_play.WHERE_TO_PLAY,
-
-    # Guide / method.
-    methodology.METHODOLOGY,
-    guide_methodology.METHODOLOGY,
-    taxonomy.TAXONOMY,
-    hull_mapping_methodology.HULL_MAPPING_METHODOLOGY,
-    lifecycle_methodology.LIFECYCLE_METHODOLOGY,
-    swbs_methodology.SWBS_METHODOLOGY,
 
     # Inputs / references.
     assumptions.ASSUMPTIONS,
