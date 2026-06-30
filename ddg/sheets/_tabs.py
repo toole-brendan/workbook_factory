@@ -2,10 +2,8 @@
 from __future__ import annotations
 
 TAB_EXEC_SUMMARY = "Executive Summary"
-TAB_SAM_CALC_MAP = "SAM Calculation Map"
 TAB_METHODOLOGY = "TAM Methodology"
 TAB_CLASSIFICATION_METHOD = "Classification Method"
-TAB_SWBS_METHOD = "SWBS Methodology"
 TAB_ASSUMPTIONS = "Assumptions"
 TAB_DDG_TAM = "DDG-51 TAM"
 TAB_SCN_BUDGET = "SCN Budget"
