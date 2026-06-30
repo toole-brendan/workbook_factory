@@ -35,7 +35,7 @@ def _write_basis(c: RowCursor, axis: str, basis_range: str) -> None:
         c.write([axis, basis, note,
                  f'=COUNTIFS({basis_range},"{basis}")',
                  f'=SUMIFS({_AMT},{basis_range},"{basis}")',
-                 lambda rr: f'=IFERROR(E{rr}/{_TOTAL},"")'],
+                 lambda rr: f'=IFERROR(F{rr}/{_TOTAL},"")'],
                 styles=[S_DEFAULT, S_DEFAULT, S_DEFAULT, S_INT, S_NUM, S_PCT])
 
 
@@ -44,7 +44,7 @@ def _write_code_rows(c: RowCursor, axis_label: str, code_range: str, taxonomy) -
         c.write([axis_label, code, name,
                  f'=COUNTIFS({code_range},"{code}")',
                  f'=SUMIFS({_AMT},{code_range},"{code}")',
-                 lambda rr: f'=IFERROR(E{rr}/{_TOTAL},"")'],
+                 lambda rr: f'=IFERROR(F{rr}/{_TOTAL},"")'],
                 styles=[S_DEFAULT, S_BOLD, S_DEFAULT, S_INT, S_NUM, S_PCT])
 
 
