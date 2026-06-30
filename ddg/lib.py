@@ -11,6 +11,12 @@ TITLE = "Distributed Shipbuilding - DDG-51 TAM + SAM"
 CREATOR = "workbook_factory ddg/build_workbook.py"
 APP_NAME = "workbook_factory"
 
+# Reader-facing SAM transaction window: enough lookback to capture early Flight III
+# award / AP-LLTM / construction activity while excluding incomplete FY2026+ data.
+SAM_TX_FY_START = 2016
+SAM_TX_FY_END = 2025
+SAM_TX_WINDOW_LABEL = f"FY{SAM_TX_FY_START}-FY{SAM_TX_FY_END}"
+
 DATA_DIR = PROJECT_DIR / "data"
 WORKBOOK_INPUTS = DATA_DIR / "workbook_inputs"
 REFERENCE_DATA = WORKBOOK_INPUTS / "reference"
