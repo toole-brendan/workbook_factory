@@ -41,6 +41,7 @@ from ddg.sheets.ddg_hull_spend_summary import hull_spend_cols
 from ddg.sheets.ddg_swbs_rollup import swbs_rollup_cols
 from ddg.sheets.ddg_cd_lifecycle_rollup import cd_lc_rollup_cols
 from ddg.sheets.ddg_vendor_hull_lifecycle import vendor_hull_lifecycle_cols
+from ddg.sheets.ddg_archetype_lifecycle import archetype_lifecycle_cols
 
 _GROUP = "validation"
 _NCOLS = 3   # content columns (gutter mode): B = Check, C = Value, D = Status
@@ -66,6 +67,8 @@ _HULL_ASSIGNED = hull_spend_cols("Assigned Subaward $M")
 _SWBS_AMT = swbs_rollup_cols("Subaward $M")
 _CD_ROLLUP_RID = cd_lc_rollup_cols("Subaward Report ID")
 _VHL_TOTAL = vendor_hull_lifecycle_cols("Total $M")
+_AL_AXIS = archetype_lifecycle_cols("Axis")
+_AL_TOTAL = archetype_lifecycle_cols("Total $M")
 
 
 def _make():
@@ -156,6 +159,10 @@ def _make():
     _zero("Vendor-hull lifecycle reconciles to A/B confidence",
           f'=SUM({_VHL_TOTAL})-(SUMIFS({_TX_AMT},{_TX_CONF},"A")+'
           f'SUMIFS({_TX_AMT},{_TX_CONF},"B"))/1000000')
+    _zero("Archetype lifecycle D-axis reconciles to vendor-hull lifecycle",
+          f'=SUMIFS({_AL_TOTAL},{_AL_AXIS},"D")-SUM({_VHL_TOTAL})')
+    _zero("Archetype lifecycle P-axis reconciles to vendor-hull lifecycle",
+          f'=SUMIFS({_AL_TOTAL},{_AL_AXIS},"P")-SUM({_VHL_TOTAL})')
     _zero("SWBS rollup reconciles to HII universe",
           f'=SUM({_SWBS_AMT})-SUMIFS({_TX_AMT},{_TX_BUILDER},"HII-Ingalls")/1000000')
     _zero("C/D lifecycle rollup row count reconciles to transactions",
