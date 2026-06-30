@@ -23,18 +23,19 @@ from . import ddg_subaward_transactions
 from . import supplier_master, supplier_year_activity, ddg_program_vendors
 from . import (archetype_application_audit, ddg_swbs_rollup, swbs_coverage,
                ddg_hull_spend_summary, ddg_hull_coverage, ddg_hull_swbs,
-               ddg_vendor_hull, ddg_vendor_hull_swbs, ddg_hull_exceptions,
-               ddg_hull_lifecycle_stage, ddg_cd_lifecycle_coverage,
+               ddg_vendor_hull, ddg_vendor_hull_swbs, ddg_vendor_hull_lifecycle,
+               ddg_hull_exceptions, ddg_hull_lifecycle_stage, ddg_cd_lifecycle_coverage,
                ddg_cd_lifecycle_rollup, ddg_cd_lifecycle_candidates,
-               domain_concentration, where_to_play)
+               market_bridge, domain_concentration, where_to_play)
 from . import executive_summary
 from . import checks
 
 SHEETS: list = [
     # Summary / answer pages.
     executive_summary.EXECUTIVE_SUMMARY,
-    domain_concentration.DOMAIN_CONCENTRATION,
+    market_bridge.MARKET_BRIDGE,
     where_to_play.WHERE_TO_PLAY,
+    domain_concentration.DOMAIN_CONCENTRATION,
 
     # Inputs / references.
     assumptions.ASSUMPTIONS,
@@ -58,6 +59,7 @@ SHEETS: list = [
     ddg_hull_swbs.DDG_HULL_SWBS,
     ddg_vendor_hull.DDG_VENDOR_HULL,
     ddg_vendor_hull_swbs.DDG_VENDOR_HULL_SWBS,
+    ddg_vendor_hull_lifecycle.DDG_VENDOR_HULL_LIFECYCLE,
     ddg_hull_exceptions.DDG_HULL_EXCEPTIONS,
     ddg_cd_lifecycle_coverage.DDG_CD_LC_COVERAGE,
     ddg_hull_lifecycle_stage.DDG_HULL_LIFECYCLE,
