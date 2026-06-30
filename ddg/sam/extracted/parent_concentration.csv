@@ -1,0 +1,37 @@
+Program,Domain,Domain Name,UEI Top-1 %,UEI HHI,UEI Eff Firms,UEI Suppliers,Parent Top-1 %,Parent HHI,Parent Eff Firms,Parent Firms
+Virginia,D1,"Hull, Structures & Marine Fabrication",21.3,0.127,7.85,20,21.3,0.127,7.85,20
+Virginia,D2,Propulsion & Power-Transmission Machinery,71.3,0.545,1.84,17,71.3,0.545,1.84,17
+Virginia,D3,"Electrical Power - Generation, Conversion & Distribution",35.6,0.178,5.63,29,36.8,0.186,5.37,27
+Virginia,D4,"Fluid, Pressure & Piping Systems",24.8,0.102,9.81,63,24.9,0.119,8.42,57
+Virginia,D5,"Thermal, HVAC & Life-Support",71.9,0.572,1.75,20,71.9,0.573,1.75,18
+Virginia,D6,"Mission, Combat & Communications Systems",34.6,0.176,5.67,22,34.6,0.204,4.91,19
+Virginia,D7,"Electronic Components, Interconnect & Cable",32.6,0.157,6.37,66,32.6,0.157,6.36,64
+Virginia,D8,Mechanical Handling & Deck Machinery,71.3,0.552,1.81,4,71.3,0.552,1.81,4
+Virginia,D9,Specialty Materials & Precision Processes,39.2,0.192,5.21,76,39.4,0.194,5.16,73
+Virginia,D10,"Interiors, Habitability & Outfitting",50.0,0.307,3.25,15,50.0,0.308,3.24,14
+Virginia,D11,Services & Non-Material Support,12.5,0.057,17.55,43,12.5,0.057,17.55,43
+Virginia,D0,Unresolved / Insufficient Evidence,21.7,0.068,14.79,249,23.6,0.078,12.84,236
+Columbia,D1,"Hull, Structures & Marine Fabrication",23.7,0.134,7.47,20,23.7,0.134,7.47,20
+Columbia,D2,Propulsion & Power-Transmission Machinery,58.8,0.427,2.34,17,64.0,0.488,2.05,16
+Columbia,D3,"Electrical Power - Generation, Conversion & Distribution",67.0,0.475,2.11,22,67.0,0.475,2.11,20
+Columbia,D4,"Fluid, Pressure & Piping Systems",18.4,0.075,13.33,47,18.4,0.077,13.04,46
+Columbia,D5,"Thermal, HVAC & Life-Support",38.2,0.238,4.21,17,38.7,0.241,4.14,16
+Columbia,D6,"Mission, Combat & Communications Systems",61.8,0.450,2.22,22,61.8,0.451,2.22,18
+Columbia,D7,"Electronic Components, Interconnect & Cable",11.8,0.054,18.56,68,11.8,0.056,17.72,65
+Columbia,D8,Mechanical Handling & Deck Machinery,70.7,0.543,1.84,7,70.7,0.543,1.84,7
+Columbia,D9,Specialty Materials & Precision Processes,16.2,0.069,14.39,72,16.2,0.070,14.32,71
+Columbia,D10,"Interiors, Habitability & Outfitting",57.9,0.407,2.46,4,57.9,0.407,2.46,4
+Columbia,D11,Services & Non-Material Support,10.4,0.056,17.73,55,10.4,0.057,17.68,54
+Columbia,D0,Unresolved / Insufficient Evidence,10.4,0.042,23.87,172,10.4,0.042,23.63,169
+DDG,D1,"Hull, Structures & Marine Fabrication",37.6,0.241,4.14,14,37.6,0.241,4.14,14
+DDG,D2,Propulsion & Power-Transmission Machinery,45.8,0.320,3.12,12,45.8,0.321,3.12,10
+DDG,D3,"Electrical Power - Generation, Conversion & Distribution",22.1,0.131,7.63,29,22.1,0.134,7.45,27
+DDG,D4,"Fluid, Pressure & Piping Systems",8.6,0.044,22.52,55,10.5,0.050,20.14,52
+DDG,D5,"Thermal, HVAC & Life-Support",37.8,0.251,3.99,19,37.8,0.251,3.98,18
+DDG,D6,"Mission, Combat & Communications Systems",74.5,0.574,1.74,16,74.5,0.574,1.74,14
+DDG,D7,"Electronic Components, Interconnect & Cable",24.7,0.132,7.59,22,24.7,0.133,7.53,21
+DDG,D8,Mechanical Handling & Deck Machinery,22.0,0.168,5.97,7,22.0,0.168,5.97,7
+DDG,D9,Specialty Materials & Precision Processes,61.6,0.392,2.55,33,64.4,0.426,2.35,32
+DDG,D10,"Interiors, Habitability & Outfitting",44.5,0.261,3.84,13,44.5,0.261,3.84,13
+DDG,D11,Services & Non-Material Support,38.1,0.187,5.34,19,38.1,0.187,5.34,19
+DDG,D0,Unresolved / Insufficient Evidence,60.8,0.377,2.65,159,60.8,0.377,2.65,154

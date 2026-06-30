@@ -1,0 +1,40 @@
+"ENTITY-LEVEL CLASSIFICATION LEGEND — Each vendor is classified per UEI × program; the same UEI may receive different values across DDG-51 / Virginia / Columbia. Every UEI × program receives exactly one Capability Domain, one Operating Role, and one Primary Output Archetype. Capability Domain and Primary Output are the published dimensions; Operating Role is an internal layer that informs and validates the Primary Output assignment.",,
+,,
+"CAPABILITY DOMAIN ARCHETYPES — the technical / material area in which the entity is competent, inferred from work descriptions and NAICS analysis (entity-level; published dimension).",,
+ID,Capability Domain,Definition
+01,"Electrical power — generation, conversion & distribution","Generates, converts, switches, protects, or distributes ship electrical power — generator sets, switchboards, load centers, transformers, power electronics, switchgear, and motor controls."
+02,Propulsion & power-transmission machinery,"Prime movers and mechanical or electric drive that propel the ship or transmit propulsive power — gas turbines, diesels, electric propulsion motors and drives, reduction gears, propulsors, shafting, couplings, and bearings."
+03,"Fluid & pressure systems — valves, pumps, piping & air","Moves, controls, or stores fluids and gases — valves, pumps, actuators, manifolds, compressors, high-pressure air, piping and fittings, seals, and filtration."
+04,"Thermal, HVAC, refrigeration & atmosphere/life-support","Transfers heat and conditions the shipboard environment — chillers, HVAC and refrigeration, heat exchangers, condensers, ventilation, and atmosphere/life-support equipment."
+05,"Hull, structures & marine fabrication","Hull, superstructure, and structural construction — ship modules, structural assemblies, pressure-hull and pressure-vessel structures, weldments, decks, and fabricated metal structures."
+06,Primary metals & metal-form production,"Melts, forges, casts, rolls, or processes metal into mill forms and near-net shapes — forgings, castings, rolled rings, plate/bar/tube stock, and processed metal inputs."
+07,"Polymers, elastomers, composites & signature materials","Nonmetallic engineered materials and parts — composite structures, elastomeric and rubber parts, acoustic tiles/panels, gaskets, isolation mounts, and signature-management treatments."
+08,"Sensors, electronics, communications & combat/control systems","System-level sensing, communications, and control — sonar/acoustic arrays, radar, communications, electronic warfare, mission and fire-control systems, imaging masts, instrumentation, and test systems."
+09,"Ordnance, launchers & weapon systems","Weapons and weapon-handling hardware — naval guns, missile launch systems and tubes, and associated mission-weapon equipment."
+10,"Mechanical handling, deck machinery & access systems","Shipboard handling and access machinery — davits, cranes, hoists, winches, elevators, boat-handling gear, and specialty/hangar doors."
+11,"Interiors, habitability & general manufactured products","Shipboard interiors and miscellaneous finished products — furniture/joinery, habitability outfit, safety gear, and other manufactured goods not captured above."
+99,Cross-domain / unresolved,Spans no single technical domain (a multi-domain firm with no defensible primary) or lacks sufficient evidence to assign one; still gives every UEI × program exactly one domain label.
+,,
+"OPERATING ROLE ARCHETYPES — the function the entity performs in the supply chain; informs and validates the primary-output assignment (entity-level; internal validation layer, not a published dimension).",,
+Code,Operating Role,Definition
+EM,Equipment & system manufacturer (OEM),Designs and manufactures its own finished functional equipment or integrated systems that operate as a unit once installed. Validates output IS / EU.
+PM,"Component, parts & materials manufacturer","Manufactures its own discrete parts, components, or material/metal forms that install into, or are fabricated into, larger equipment or structure. Validates output PT / AS / NN / SF / CM."
+CF,Contract fabricator / machinist & module builder (build-to-print),"Fabricates, welds, machines, assembles, or outfits structures, modules, or parts to the customer's design and specification; supplies capacity and tradecraft rather than a product line. Validates output VB / AS / PT."
+DS,"Distributor, processor & supplier","Sources, processes (e.g., cuts/forms), and resells material or products made by others; a supply-chain pass-through rather than an originator."
+SVC,"Engineering, test, repair & sustainment services","Delivers design, engineering, R&D, qualification/test, installation, repair, overhaul, or maintenance as its output; no new physical article (output not applicable)."
+HP,Holding / non-operating parent,"A holding, private-equity, or parent entity with no direct production; the actual deliverable is attributable to a portfolio operating company."
+UR,Unresolved role,Insufficient evidence to assign an operating role without invention; still gives every UEI × program exactly one role label.
+,,
+PRIMARY OUTPUT ARCHETYPES — the physical form and integration level of the entity's primary delivered article (entity-level; published dimension).,,
+Code,Physical Form,Definition and Boundary Test
+VB,Vessel block / zone module,"A major three-dimensional hull, superstructure, compartment, or vessel-zone construction unit intended to be erected or mated into the vessel as a unit. May be bare, partially outfitted, or fully outfitted. Excludes skids or products merely named “modules.”"
+IS,Integrated system / plant,"Multiple interdependent equipment units, assemblies, controls, software, or distribution elements for which the supplier has system-level integration and performance responsibility. May be delivered assembled or in coordinated pieces."
+EU,Equipment / packaged functional unit,"A complete end item or package accepted to a unit-level specification or test and performing a defined local function once connected to required ship interfaces. Size, price, criticality, and lead time do not determine this category."
+AS,Assembly / subassembly / fabrication,"Two or more permanently joined or interconnected parts—or a structural fabrication—that is not itself accepted as a complete equipment unit or system. Includes weldments, pipe spools, cable harnesses, foundations, brackets, structural panels, and machinery subassemblies."
+PT,Finished part / discrete item,"An installation-ready finished item accepted principally to drawing, dimensional, material, or catalog requirements, with no substantive manufacturing remaining. Includes machined parts, fittings, seals, bearings, fasteners, finished castings, and finished forgings."
+NN,Near-net / semi-finished workpiece,"A ship- or equipment-specific workpiece with recognizable future-part geometry but requiring substantive machining, heat treatment, finishing, joining, or other processing before installation. Includes rough forgings, rough castings, additive preforms, blanks, and rough-machined shapes."
+SF,Standard stock / mill form,"Non-installation-ready material in a standardized, generally non-unique form that will subsequently be cut, formed, machined, or fabricated. Includes plate, sheet, bar, billet, structural shapes, pipe, tube, wire, cable, hose, board, and rolled material."
+CM,Bulk/process material or consumable,"Flowable, amorphous, expendable, or process material that is consumed, chemically transformed, dispersed, or loses its individual identity during construction. Includes coatings, adhesives, sealants, resins, welding consumables, gases, lubricants, solvents, and process chemicals."
+,,
+"SWBS CODE MAPPINGS — ship subsystem worked on, from observed SWBS codes (transaction-level; HII-DDG only).",,
+TBD,,

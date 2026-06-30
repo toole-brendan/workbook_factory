@@ -1,0 +1,38 @@
+# ─── Secrets — never commit ───
+.env
+.env.*
+*.env
+
+# ─── Python bytecode / build junk ───
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ─── OS / editor cruft ───
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Microsoft Office lock/owner temp files (created while a doc is open) ───
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# ─── Virtualenvs & tool caches ───
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ─── Built workbook deliverables — regenerable, not committed ───
+# Every .xlsx in this tree is emitted by a build_*.py run (the combined DDG-51
+# deliverable, the standalone TAM/SAM QA builds, and the SAM master reconstruction).
+# The pipeline source + the extracted/*.csv inputs ARE tracked, so any output
+# rebuilds from a clean clone. The factory reads only CSVs — no .xlsx is a build
+# input — so ignoring them all is safe. Mirrors ooxml_build_pipelines_light's
+# convention of tracking the reproducible pipeline; here we additionally drop the
+# large binary it emits.
+*.xlsx
