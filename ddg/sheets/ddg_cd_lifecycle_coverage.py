@@ -79,8 +79,8 @@ def _bucket_table(c: RowCursor, hdrs, rows_def, key_range, banner):
 def _render() -> WorksheetSpec:
     c = RowCursor(2)
     c.title(TAB_CD_LC_COVERAGE, _NCOLS)
-    c.caption("How far purchase-date timing narrows the $2.75B family-level (C/D) subawards toward "
-              "individual hulls. Narrowing the candidate SET only - never a per-hull dollar split.")
+    c.caption("How far purchase-date timing narrows family-level C/D subawards toward individual "
+              "hull candidates. Narrowing the candidate SET only - never a per-hull dollar split.")
     c.blank(2)
     _bucket_table(c, _HDRS, _BUCKETS, _NARROW, "§1 - By timing-narrowing result")
     c.blank(2)
