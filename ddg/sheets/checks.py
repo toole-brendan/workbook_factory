@@ -40,6 +40,7 @@ from ddg.sheets.ddg_program_vendors import ddg_pv_cols
 from ddg.sheets.ddg_hull_spend_summary import hull_spend_cols
 from ddg.sheets.ddg_swbs_rollup import swbs_rollup_cols
 from ddg.sheets.ddg_cd_lifecycle_rollup import cd_lc_rollup_cols
+from ddg.sheets.ddg_vendor_hull_lifecycle import vendor_hull_lifecycle_cols
 
 _GROUP = "validation"
 _NCOLS = 3   # content columns (gutter mode): B = Check, C = Value, D = Status
@@ -64,6 +65,7 @@ _PV_AMT = ddg_pv_cols("Subaward $M")
 _HULL_ASSIGNED = hull_spend_cols("Assigned Subaward $M")
 _SWBS_AMT = swbs_rollup_cols("Subaward $M")
 _CD_ROLLUP_RID = cd_lc_rollup_cols("Subaward Report ID")
+_VHL_TOTAL = vendor_hull_lifecycle_cols("Total $M")
 
 
 def _make():
@@ -150,6 +152,9 @@ def _make():
           f'SUMIFS({_TX_AMT},{_TX_CONF},"X"))/1000000-SUM({_TX_AMT})/1000000')
     _zero("Exact-hull rollup reconciles to A/B confidence",
           f'=SUM({_HULL_ASSIGNED})-(SUMIFS({_TX_AMT},{_TX_CONF},"A")+'
+          f'SUMIFS({_TX_AMT},{_TX_CONF},"B"))/1000000')
+    _zero("Vendor-hull lifecycle reconciles to A/B confidence",
+          f'=SUM({_VHL_TOTAL})-(SUMIFS({_TX_AMT},{_TX_CONF},"A")+'
           f'SUMIFS({_TX_AMT},{_TX_CONF},"B"))/1000000')
     _zero("SWBS rollup reconciles to HII universe",
           f'=SUM({_SWBS_AMT})-SUMIFS({_TX_AMT},{_TX_BUILDER},"HII-Ingalls")/1000000')
