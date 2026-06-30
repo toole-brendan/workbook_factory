@@ -23,7 +23,7 @@ from __future__ import annotations
 
 # ===== TAM front matter + model + data =====
 TAB_EXEC_SUMMARY = "Executive Summary"
-TAB_METHODOLOGY  = "Methodology"
+TAB_METHODOLOGY  = "TAM Methodology"   # SAM's method tab is "Classification Method"
 TAB_ASSUMPTIONS  = "Assumptions"
 TAB_VIRGINIA_TAM = "Virginia TAM"     # unused in the DDG slice (kept for reference)
 TAB_COLUMBIA_TAM = "Columbia TAM"     # unused in the DDG slice (kept for reference)

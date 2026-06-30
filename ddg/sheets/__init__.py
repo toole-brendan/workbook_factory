@@ -35,7 +35,6 @@ from . import (
     tam_deflators,
     checks,
     # --- SAM block (answer pages + classification model + evidence) ---
-    sam_executive_summary,
     domain_concentration,
     where_to_play,
     taxonomy,
@@ -69,8 +68,7 @@ from . import (
 
 SHEETS: list = [
     # --- Summary (the answer pages) ---
-    executive_summary.EXECUTIVE_SUMMARY,            # TAM
-    sam_executive_summary.EXECUTIVE_SUMMARY,        # SAM
+    executive_summary.EXECUTIVE_SUMMARY,            # merged TAM + SAM front door
     domain_concentration.DOMAIN_CONCENTRATION,
     where_to_play.WHERE_TO_PLAY,
     # --- Guide (scope & method) ---

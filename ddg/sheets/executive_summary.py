@@ -1,114 +1,175 @@
-"""executive_summary - the master TAM answer page (summary group).
+"""Merged DDG-51 Executive Summary - the one front door.
 
-The one cross-program page: programs down the side, fiscal years across the top.
-Nothing is hardcoded - every cell links into the three per-program TAM tabs; the
-Total row sums the three programs within each fiscal year. Outsourced new-construction
-TAM is the supplier-addressable share of Basic Construction (BC base x place-of-
-performance coefficient), plus the OBBBA mandatory overlay. §2 shows it by fiscal year
-FY2022-2027 (no cumulative roll-up; FY2026-27 are budget-request estimates, E). §3
-carries the FY2028-31 outyear projection as an explicit low/high band (no single central
-case): low = status-quo BC coefficient, high = the coefficient compound-ramped to the
-full HII outsourcing-hours uplift by FY2031 (Assumptions §4; DDG-51 HII-Ingalls 55% share).
+Replaces the separate TAM and SAM executive summaries with a single answer page:
+addressable TAM, observed first-tier reported SAM, a TAM-to-SAM bridge, and the
+highest-value where-to-play / hull-visibility callouts. Every value is a live
+formula into the model sheets (nothing is hardcoded here).
 """
 from __future__ import annotations
 
-from workbook_core.primitives import worksheet, col_letter
+from workbook_core.primitives import worksheet
 from workbook_core.styles import (
-    S_DEFAULT, S_BOLD, S_HEADER_LEFT, S_HEADER_CENTER, S_LINK_NUM, S_LINK_PCT,
-    S_NUM,
+    S_DEFAULT, S_BOLD, S_HEADER_LEFT, S_HEADER_CENTER,
+    S_NUM, S_PCT, S_INT, S_LINK_NUM, S_LINK_PCT,
 )
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
 
 from sheets._tam_layout import RowCursor
 from sheets._tam_italic import S_ITALIC
-from sheets._tabs import TAB_EXEC_SUMMARY
 from sheets import _tam_periods as _periods
-from sheets import ddg_tam as DD
+from sheets import ddg_tam as TAM
+from sheets._tabs import TAB_EXEC_SUMMARY
+
+from sheets._sam_taxonomy import DOMAINS
+from sheets.ddg_program_vendors import ddg_pv_cols
+from sheets.supplier_year_activity import supplier_year_cols
+from sheets.where_to_play import where_to_play_cols
+from sheets.ddg_swbs_rollup import swbs_rollup_cols
+from sheets.ddg_hull_spend_summary import hull_spend_cols
 
 _GROUP = "summary"
-# §2 firm per-year grid (transposed: programs down, fiscal years across; no
-# cumulative roll-up) for FY2022-2027: FY2022-25 firm, FY2026-27 budget request
-# (E; FY26 incl. OBBBA). §3 carries the FY2028-31 outyear projection as an explicit
-# low/high band (no single central case): low = status-quo BC coefficient, high =
-# the coefficient compound-ramped to the full outsourcing-hours uplift by FY2031.
-_FIRM_FY = _periods.FY               # FY2022-2027 in the firm/budget grid
-_OY = _periods.OY                    # FY2028-2031 FYDP outyear band
-_LAST_FIRM_FY = 2025                 # <= this: firm; > this: "E" suffix
-_PROGRAMS = [("DDG-51", DD)]
-_NCOLS_2 = 1 + len(_FIRM_FY) + 1     # program label + 6 FY columns + BC coeff column
-_NCOLS_3 = 1 + len(_OY)              # program label + 4 outyear columns
+_FIRM_FY = _periods.FY           # FY2022-2027
+_BRIDGE_FY = (2022, 2023, 2024, 2025)
+_OY = _periods.OY                # FY2028-2031
+_NCOLS = 8
+
+_SY_PROG = supplier_year_cols("Program")
+_SY_FY = supplier_year_cols("Federal FY")
+_SY_POS = supplier_year_cols("Positive Supplier $M")
+
+_W_AXIS = where_to_play_cols("Axis")
+_W_CODE = where_to_play_cols("Archetype Code")
+_W_PROGRAM = where_to_play_cols("Program")
+_W_FY = where_to_play_cols("Federal FY")
 
 
 def _fy_label(fy: int) -> str:
-    return f"FY{fy}" + ("E" if fy > _LAST_FIRM_FY else "")
+    return f"FY{fy}" + ("E" if fy > 2025 else "")
+
+
+def _sam_fy_total(fy: int) -> str:
+    return f"=SUM({ddg_pv_cols(f'FY{str(fy)[-2:]} $M')})"
+
+
+def _wtp(metric: str, code: str) -> str:
+    """Live INDEX/MATCH into Where to Play for the FY2025 DDG row of one D-domain."""
+    vals = where_to_play_cols(metric)
+    match = (
+        f'MATCH(1,INDEX(({_W_AXIS}="D")*({_W_PROGRAM}="DDG-51")'
+        f'*({_W_FY}=2025)*({_W_CODE}="{code}"),0),0)'
+    )
+    return f'=IFERROR(INDEX({vals},{match}),"")'
 
 
 def _render() -> WorksheetSpec:
     c = RowCursor(2)
-    c.title(TAB_EXEC_SUMMARY, _NCOLS_2)                                # row 2
-    c.caption("DDG-51 outsourced TAM, FY2022-31, constant FY2026 $M")  # row 3
+    c.title(TAB_EXEC_SUMMARY, _NCOLS)
+    c.caption("DDG-51 addressable TAM + observed first-tier SAM, constant FY2026 $M")
     c.blank(2)
 
-    # §1 Scope
-    c.section("§1 - Scope", _NCOLS_2)
+    c.section("§1 - Scope and denominator", _NCOLS)
     c.blank()
-    c.write(["Question", "DDG-51 outsourced new-construction TAM"],
-            styles=[S_DEFAULT, S_DEFAULT])
-    c.write(["Definition", "BC base x supplier coefficient, plus applicable overlays"],
-            styles=[S_DEFAULT, S_DEFAULT])
-    c.write(["Program", "DDG-51 (Arleigh Burke, LI 2122)"],
-            styles=[S_DEFAULT, S_DEFAULT])
-    c.write(["Window", "FY2022-31, constant FY2026 $M"],
-            styles=[S_DEFAULT, S_DEFAULT])
+    c.write(["Program", "DDG-51 / Arleigh Burke (LI 2122)"], styles=[S_BOLD, S_DEFAULT])
+    c.write(["TAM", "Supplier-addressable outsourced new-construction opportunity"],
+            styles=[S_BOLD, S_DEFAULT])
+    c.write(["SAM", "Observed reported first-tier hull-builder subawards"],
+            styles=[S_BOLD, S_DEFAULT])
+    c.write(["Bridge caveat",
+             "Observed SAM / TAM is a reporting-and-reach bridge, not full market penetration."],
+            styles=[S_BOLD, S_DEFAULT])
     c.blank(2)
 
-    # §2 Outsourced TAM by fiscal year, firm/budget years (transposed: programs down)
-    c.section("§2 - FY2022-27 outsourced TAM ($M)", _NCOLS_2)
+    c.section("§2 - Addressable DDG-51 TAM", _NCOLS)
     c.blank()
-    c.write(["Program"] + [_fy_label(fy) for fy in _FIRM_FY] + ["BC coeff"],
-            styles=[S_HEADER_LEFT] + [S_HEADER_CENTER] * (len(_FIRM_FY) + 1))
-    prog_rows = []
-    for nm, mod in _PROGRAMS:
-        vals = ([nm] + [f"={mod.tam_cell(fy)}" for fy in _FIRM_FY]
-                + [f"={mod.applied_coeff_cell()}"])
-        styles = [S_DEFAULT] + [S_LINK_NUM] * len(_FIRM_FY) + [S_LINK_PCT]
-        prog_rows.append(c.write(vals, styles=styles))
-    r0, r1 = prog_rows[0], prog_rows[-1]
-    total_vals = (["Total"]
-                  + [f"=SUM({col_letter(2 + i)}{r0}:{col_letter(2 + i)}{r1})"
-                     for i in range(len(_FIRM_FY))]
-                  + [None])
-    c.total(total_vals, styles=[S_BOLD] + [S_NUM] * len(_FIRM_FY) + [S_DEFAULT],
-            n_cols=_NCOLS_2)
-    c.write(["E = estimate: FY2026-27 budget request (FY2026 incl. OBBBA)."],
-            styles=[S_ITALIC])
-    c.blank(2)
-
-    # §3 FY2028-31 outyear outlook band: low (status-quo coeff) and high (compound-ramped)
-    c.section("§3 - FY2028-31 outlook ($M)", _NCOLS_3)
+    c.write(["Metric"] + [_fy_label(fy) for fy in _FIRM_FY] + ["Memo"],
+            styles=[S_HEADER_LEFT] + [S_HEADER_CENTER] * len(_FIRM_FY) + [S_HEADER_LEFT])
+    c.write(["TAM $M"] + [f"={TAM.tam_cell(fy)}" for fy in _FIRM_FY] + [""],
+            styles=[S_DEFAULT] + [S_LINK_NUM] * len(_FIRM_FY) + [S_DEFAULT])
+    c.write(["Cumulative TAM, FY2022-27 $M", f"={TAM.cum_tam_cell()}"],
+            styles=[S_BOLD, S_LINK_NUM])
+    c.write(["BC coefficient"] + [""] * len(_FIRM_FY) + [f"={TAM.applied_coeff_cell()}"],
+            styles=[S_DEFAULT] + [S_DEFAULT] * len(_FIRM_FY) + [S_LINK_PCT])
+    c.write(["OBBBA overlay"] + [""] * len(_FIRM_FY) + [f"={TAM.obbba_tam_cell()}"],
+            styles=[S_DEFAULT] + [S_DEFAULT] * len(_FIRM_FY) + [S_LINK_NUM])
     c.blank()
-    c.write(["Outyear ($M)"] + [_fy_label(fy) for fy in _OY],
+    c.write(["Outyear outlook"] + [_fy_label(fy) for fy in _OY],
             styles=[S_HEADER_LEFT] + [S_HEADER_CENTER] * len(_OY))
-    cl = [col_letter(2 + i) for i in range(len(_OY))]
-    lo_rows = [c.write([f"{nm} low"] + [f"={mod.outyear_low_cell(fy)}" for fy in _OY],
-                       styles=[S_DEFAULT] + [S_LINK_NUM] * len(_OY))
-               for nm, mod in _PROGRAMS]
-    c.total(["Total low"] + [f"=SUM({cl[i]}{lo_rows[0]}:{cl[i]}{lo_rows[-1]})"
-                             for i in range(len(_OY))],
-            styles=[S_BOLD] + [S_NUM] * len(_OY), n_cols=_NCOLS_3)
-    hi_rows = [c.write([f"{nm} high"] + [f"={mod.outyear_high_cell(fy)}" for fy in _OY],
-                       styles=[S_DEFAULT] + [S_LINK_NUM] * len(_OY))
-               for nm, mod in _PROGRAMS]
-    c.total(["Total high"] + [f"=SUM({cl[i]}{hi_rows[0]}:{cl[i]}{hi_rows[-1]})"
-                              for i in range(len(_OY))],
-            styles=[S_BOLD] + [S_NUM] * len(_OY), n_cols=_NCOLS_3)
-    c.write(["Low holds coefficients flat; high compound-ramps Assumptions §4 growth to FY2031."],
-            styles=[S_ITALIC])
+    c.write(["Low"] + [f"={TAM.outyear_low_cell(fy)}" for fy in _OY],
+            styles=[S_DEFAULT] + [S_LINK_NUM] * len(_OY))
+    c.write(["High"] + [f"={TAM.outyear_high_cell(fy)}" for fy in _OY],
+            styles=[S_DEFAULT] + [S_LINK_NUM] * len(_OY))
+    c.blank(2)
 
-    ws = worksheet(c.rows, cols=[22] + [11] * len(_FIRM_FY) + [11],
-                   tab_color=group_color(_GROUP), with_gutter=True,
-                   show_outline_symbols=False)
+    c.section("§3 - Observed SAM / reported supplier activity", _NCOLS)
+    c.blank()
+    c.write(["Metric"] + [f"FY{fy}" for fy in _BRIDGE_FY] + ["Lifetime", "FY25 active UEIs"],
+            styles=[S_HEADER_LEFT] + [S_HEADER_CENTER] * len(_BRIDGE_FY) + [S_HEADER_LEFT, S_HEADER_LEFT])
+    c.write(
+        ["Reported subaward $M"]
+        + [_sam_fy_total(fy) for fy in _BRIDGE_FY]
+        + [f"=SUM({ddg_pv_cols('Subaward $M')})",
+           f'=COUNTIFS({_SY_PROG},"DDG",{_SY_FY},2025,{_SY_POS},">0")'],
+        styles=[S_DEFAULT] + [S_LINK_NUM] * len(_BRIDGE_FY) + [S_LINK_NUM, S_INT],
+    )
+    c.blank(2)
+
+    c.section("§4 - TAM-to-SAM bridge", _NCOLS)
+    c.blank()
+    c.write(["FY", "TAM $M", "Observed SAM $M", "Observed SAM / TAM"], styles=[S_HEADER_LEFT] * 4)
+    for fy in _BRIDGE_FY:
+        c.write([fy, f"={TAM.tam_cell(fy)}", _sam_fy_total(fy),
+                 lambda r: f'=IFERROR(D{r}/C{r},"")'],
+                styles=[S_INT, S_LINK_NUM, S_LINK_NUM, S_PCT])
+    c.write(["Bridge uses reported first-tier subawards only; exclusions and retained "
+             "in-house scope remain outside observed SAM."], styles=[S_ITALIC])
+    c.blank(2)
+
+    c.section("§5 - FY2025 where-to-play by capability domain", _NCOLS)
+    c.blank()
+    c.write(["Domain", "FY25 $M", "Program Share", "Active UEIs", "Parent Top-1",
+             "Parent HHI", "Incumbent $", "Class"], styles=[S_HEADER_LEFT] * 8)
+    for code, name, _defn in DOMAINS:
+        c.write([f"{code}  {name}",
+                 _wtp("Net Subaward $M", code),
+                 _wtp("Program Share", code),
+                 _wtp("Active Suppliers", code),
+                 _wtp("Parent Top-1", code),
+                 _wtp("Parent HHI", code),
+                 _wtp("Incumbent $ %", code),
+                 _wtp("Observed Structure", code)],
+                styles=[S_DEFAULT, S_LINK_NUM, S_PCT, S_INT, S_PCT, S_NUM, S_PCT, S_DEFAULT])
+    c.blank(2)
+
+    c.section("§6 - Hull / SWBS visibility", _NCOLS)
+    c.blank()
+    swbs_total = f"SUM({swbs_rollup_cols('Subaward $M')})"
+    swbs_grp = swbs_rollup_cols("SWBS Major Group")
+    swbs_amt = swbs_rollup_cols("Subaward $M")
+    assigned = f"SUM({hull_spend_cols('Assigned Subaward $M')})"
+    lifetime = f"SUM({ddg_pv_cols('Subaward $M')})"
+    c.write(["Measure", "Value", "Interpretation"], styles=[S_HEADER_LEFT] * 3)
+    c.write(["HII SWBS-classified $M", f"={swbs_total}",
+             "SWBS is HII-Ingalls DDG only; GD-BIW rows carry no SWBS."],
+            styles=[S_DEFAULT, S_LINK_NUM, S_DEFAULT])
+    c.write(["SWBS mapped share",
+             f'=IFERROR(1-SUMIFS({swbs_amt},{swbs_grp},"U00")/{swbs_total},"")',
+             "Share of HII SWBS dollars outside the unmapped U00 bucket."],
+            styles=[S_DEFAULT, S_PCT, S_DEFAULT])
+    c.write(["Exact-hull assigned $M", f"={assigned}",
+             "A/B rows assigned to a single hull; C/D family-level dollars are not allocated."],
+            styles=[S_DEFAULT, S_LINK_NUM, S_DEFAULT])
+    c.write(["Exact-hull share of observed SAM", f'=IFERROR({assigned}/{lifetime},"")',
+             "Share of total DDG observed SAM that is exact-hull attributable."],
+            styles=[S_DEFAULT, S_PCT, S_DEFAULT])
+
+    ws = worksheet(
+        c.rows,
+        cols=[34, 13, 13, 13, 13, 13, 13, 22],
+        tab_color=group_color(_GROUP),
+        with_gutter=True,
+        show_outline_symbols=False,
+    )
     return WorksheetSpec(ws)
 
 
