@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 TAB_EXEC_SUMMARY = "Executive Summary"
+TAB_SAM_CALC_MAP = "SAM Calculation Map"
 TAB_METHODOLOGY = "TAM Methodology"
 TAB_CLASSIFICATION_METHOD = "Classification Method"
+TAB_SWBS_METHOD = "SWBS Methodology"
 TAB_ASSUMPTIONS = "Assumptions"
 TAB_DDG_TAM = "DDG-51 TAM"
 TAB_SCN_BUDGET = "SCN Budget"
@@ -17,7 +19,9 @@ TAB_TAXONOMY = "Taxonomy"
 TAB_NAICS_MAP = "Mapping - NAICS Defaults"
 TAB_SWBS_CROSSWALK = "Mapping - HII Code to SWBS"
 TAB_DDG_PROGRAM = "DDG Program Vendors"
+TAB_ARCHETYPE_AUDIT = "Archetype Application Audit"
 TAB_SWBS_ROLLUP = "DDG SWBS by Ship-System"
+TAB_SWBS_COVERAGE = "SWBS Coverage"
 TAB_DOMAIN_CONC = "Domain Concentration"
 TAB_WHERE_TO_PLAY = "Where to Play"
 TAB_MARKET_BRIDGE = "Market Bridge"
@@ -42,4 +46,5 @@ TAB_CD_LC_ROLLUP = "DDG C-D Lifecycle Rollup"
 TAB_CD_LC_CANDIDATES = "DDG C-D Lifecycle Candidates"
 TAB_LIFECYCLE_METHOD = "Lifecycle Methodology"
 
-assert all(len(n) <= 31 for n in globals().values() if isinstance(n, str))
+assert all(len(n) <= 31 for k, n in globals().items()
+           if k.startswith("TAB_") and isinstance(n, str))
