@@ -41,3 +41,11 @@ env/
 # Sea-web MIRS extract) are cited by the hull-milestone provenance and are NOT
 # build outputs, so they are tracked as source-of-record evidence.
 !ddg/data/workbook_inputs/reference/*.xlsx
+
+# Exception: the built DDG-51 workbook deliverable at the ddg/ root IS tracked
+# (shared as a ready-to-open artifact, not only rebuilt from the CSVs).
+!ddg/*.xlsx
+
+# Local prime-contract obligation analysis (raw award-mod pulls + rollups) —
+# working scratch, not part of the CSV-driven workbook build.
+ddg/prime_obligations/

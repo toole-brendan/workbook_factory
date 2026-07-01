@@ -66,6 +66,7 @@ _HULL_ASSIGNED = hull_spend_cols("Assigned Subaward $M")
 _SWBS_AMT = swbs_rollup_cols("Subaward $M")
 _PROC_TIMING_AMT = proc_timing_cols("Subaward $M")
 _FS_LONGLEAD = full_span_cols("Long-lead $M")
+_FS_FAB = full_span_cols("Fabrication $M")
 _FS_CONSTR = full_span_cols("Construction $M")
 _FS_OUTFIT = full_span_cols("Outfit / test $M")
 _FS_POST = full_span_cols("Post-delivery $M")
@@ -163,7 +164,7 @@ def _make():
     _zero("Procurement timing phases reconcile to observed subaward $",
           f'=SUM({_PROC_TIMING_AMT})-SUM({_TX_AMT})/1000000')
     _zero("Full-span drill-down stages partition each hull's total",
-          f'=SUM({_FS_LONGLEAD})+SUM({_FS_CONSTR})+SUM({_FS_OUTFIT})+SUM({_FS_POST})'
+          f'=SUM({_FS_LONGLEAD})+SUM({_FS_FAB})+SUM({_FS_CONSTR})+SUM({_FS_OUTFIT})+SUM({_FS_POST})'
           f'+SUM({_FS_UNDATED})-SUM({_FS_TOTAL})')
     c.blank(2)
 

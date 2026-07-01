@@ -198,11 +198,14 @@ def _ym(s: str):
 
 def assert_hull_milestones_monotonic() -> None:
     headers, rows = load_table("ddg_hull_master")
-    jh, js, jl, jd = headers.index("Hull"), headers.index("Start Fabrication"), headers.index("Launch"), headers.index("Delivery")
+    jh = headers.index("Hull")
+    chain = [("award", "MYP Base Award"), ("start fab", "Start Fabrication"), ("keel", "Keel Laid"),
+             ("launch", "Launch"), ("delivery", "Delivery"), ("commissioned", "Commissioned")]
+    jx = [(n, headers.index(c)) for n, c in chain]
     bad = []
     for r in rows:
         hull = (r[jh] if jh < len(r) else "").strip()
-        seq = [(n, _ym(r[j] if j < len(r) else "")) for n, j in (("start", js), ("launch", jl), ("delivery", jd))]
+        seq = [(n, _ym(r[j] if j < len(r) else "")) for n, j in jx]
         present = [(n, v) for n, v in seq if v]
         for (n1, v1), (n2, v2) in zip(present, present[1:]):
             if v1 > v2:
