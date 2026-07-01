@@ -1,0 +1,14 @@
+# Verification: are the large "missing" registry vendors actually DDG suppliers? — NO.
+# Built 2026-06-30 via SAM Contract Awards API (awardeeUniqueEntityId), per Federal_Awards_API_HowTo.md recipe A.
+# These 7 vendors carry large ddg_signed_$M in supplier_bucketing/vendor_evidence_registry.csv but are ABSENT from ddg_supplier_master.csv.
+# Finding: registry ddg_signed_$M is a NAICS-"tail pass" CEILING artifact (wrong dollar field, §7). Real NAVSEA-shipbuilding (N00024) obligation = $0.00M for ALL seven.
+# top100_permod_$M = sum of per-mod actionObligation over the top-100 records (SAM CA caps search at 100; top-100 = largest by sort). naics336611/612 counts are over the FULL footprint (not capped).
+# Conclusion: the "~$1.4B of DDG-signed work invisible to the workbook" supplier-coverage gap is NOT REAL. Do NOT ingest these into supplier_master as DDG suppliers. See ddg/docs/ddg_sam_research_findings.md "Cross-cutting finding".
+uei,vendor,registry_ddg_signed_$M,registry_basis,sam_total_records,top100_permod_$M,navy_any_$M,navsea_N00024_$M,naics_336611_recs,naics_336612_recs,top_contracting_office,actual_primary_customer,verdict
+YHJESY2TDP23,Major Tool & Machine,986.9,SAM NAICS + records (VLS-cell machining),201,109.9,1.9,0.00,2,0,FA8213 AFLCMC EBHK,Air Force (AFLCMC),NOT DDG — Air Force machining; N00024=$0; $986.9M is a ceiling artifact (top-100 ceiling sum = $50.7B)
+E582KXT4RVH6,Superior Electromechanical,146.3,records (VLS machining),48,4.7,3.6,0.00,0,0,Naval Surface Warfare Center,Navy warfare centers (R&D/spares),NOT DDG — NSWC machining; 0 shipbuilding-NAICS; N00024=$0
+ZRS3MA6VK271,Merrill Technologies,93.1,name,52,1.3,3.2,0.00,0,0,NSWC Crane,Navy warfare centers,NOT DDG — NSWC Crane/Dahlgren; 0 shipbuilding-NAICS; N00024=$0
+GU4MZLMEJN94,Seyer Industries,63.1,SAM 332710 (tail pass),2768,6.4,3.8,0.00,0,0,NAVAIR Warfare Ctr Aircraft Div,NAVAIR (aviation),NOT DDG — aviation machining; 0 shipbuilding-NAICS; N00024=$0
+M1LQD44NEJ56,Applied Composite Structures,50.2,SAM 336413 (tail pass),455,11.3,1.1,0.00,0,0,DLA Aviation,DLA / aviation,NOT DDG — aircraft composites; 0 shipbuilding-NAICS; N00024=$0
+L2WVLS5L4WS3,Futuramic Tool & Eng,41.8,SAM 332710 (tail pass),38,2.9,0.0,0.00,0,0,W4GG HQ US Army TACOM,Army TACOM,NOT DDG — Army ground-vehicle tooling; 0 shipbuilding-NAICS; N00024=$0
+S3GFGJ1QGAE6,M.S.M. Industries,41.8,SAM 326291 (tail pass),174,5.6,0.4,0.00,2,0,DLA Troop Support,DLA,NOT DDG — DLA rubber/mechanical goods; N00024=$0

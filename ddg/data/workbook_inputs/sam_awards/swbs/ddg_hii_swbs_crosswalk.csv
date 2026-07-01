@@ -134,3 +134,58 @@ HII Work-Item Code,SWBS Subsystem,SWBS,SWBS basis,Evidence
 05055-01,561,500 Auxiliary Systems › 561 Steering and diving control systems,C · curated inference,"Component text ""SEAL ASSY, RUDDER STK"" (rudder-stock seal) -> 561 Steering and Diving Control Systems."
 09108-01,631,600 Outfit & Furnishings › 631 Painting,C · curated inference,"Component text ""BLAST & PAINT"" (surface prep + coating) -> 631 Painting."
 80029-00,561,500 Auxiliary Systems › 561 Steering and diving control systems,X · code crosswalk (observed),STEERING SYSTEM
+07012-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE BUTTERFLY
+03078-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),CONTROL VALVE
+07003-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE GLOBE CLOSE
+07000-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE GATE
+07056-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE GLOBE
+02004-02,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE SOLENOID
+03217-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE CONTROL
+07057-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE GLOBE
+07022-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE SWING CHECK / BID CONTROL
+07094-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),STRAINER / STRAINER WYE / STRAINER ABOM
+07009-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE RELIEF
+07014-02,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVES
+07014-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE PLUG
+07000-02,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE GLOBE
+07058-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE GLOBE
+07094-02,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),STRAINER
+07075-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE BALL
+07008-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE CONTROL
+07000-03,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE SWING
+07005-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE GLOBE
+07065-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE RELIEF
+07021-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE SCUPPER
+07002-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE PILOT / VALVE SOLENOID
+03215-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),RELIEF VALVE
+03137-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE GAGE
+02533-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),CONNECTOR / CONNECTOR FLEXIBLE
+07006-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE PRESS REG
+07105-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE VENT
+07095-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),TRAP CONDENSATE
+02021-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE BALANCING / BALANCING VALVES
+07053-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE FOOT
+07085-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),CONNECTOR FLEXIBLE
+07067-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),STRAINER SIMPLEX
+07154-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE SOUNDING
+07079-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),STRAINER WYE ABOM / STRAINER WYE
+07273-01,505,500 Auxiliary Systems › 505 General piping requirements,X · code crosswalk (observed),VALVE ASSY
+09137-01,631,600 Outfit & Furnishings › 631 Painting,X · code crosswalk (observed),HIGH SOLIDS PAINT / SOW POTABLE WATER MIST TANKS
+03106-01,504,500 Auxiliary Systems › 504 Instruments and instrument boards,X · code crosswalk (observed),GAGES PRESSURE / GAUGES PRESS / GAUGES PRESSURE
+04041-01,504,500 Auxiliary Systems › 504 Instruments and instrument boards,X · code crosswalk (observed),INDICATOR
+04022-01,314,300 Electric Plant › 314 Power conversion equipment,X · code crosswalk (observed),TRANSFORMERS
+05013-01,561,500 Auxiliary Systems › 561 Steering and diving control systems,X · code crosswalk (observed),RUDDER BEARINGS
+05006-01,561,500 Auxiliary Systems › 561 Steering and diving control systems,X · code crosswalk (observed),RUDDER BEARING SLEEVE / RUDDER SLEEVES / RUDDER SLEEVES B&H
+07042-01,561,500 Auxiliary Systems › 561 Steering and diving control systems,X · code crosswalk (observed),SEAL ASSY RUDDER STK
+05007-01,561,500 Auxiliary Systems › 561 Steering and diving control systems,X · code crosswalk (observed),RUDDER HUB CASTINGS
+07338-01,503,500 Auxiliary Systems › 503 Pumps,X · code crosswalk (observed),PUMP ROTARY VINE / PUMP ROTARY VANE
+02000-02,516,500 Auxiliary Systems › 516 Refrigeration system,X · code crosswalk (observed),REFRIGERATION COOLERS
+07012-02,505,500 Auxiliary Systems › 505 General piping requirements,C · curated inference,"Same base 07012 (""VALVE, BUTTERFLY"") -> 505 General piping."
+03202-01,505,500 Auxiliary Systems › 505 General piping requirements,C · curated inference,Same base 03202 (03202-02 already -> 505) -> 505 General piping.
+07012-03,505,500 Auxiliary Systems › 505 General piping requirements,C · curated inference,Same base 07012 (butterfly valve) -> 505 General piping.
+01006-01,572,500 Auxiliary Systems › 572 Ship stores and equipment handling systems,C · curated inference,"Component text ""PACKAGE CONVEYOR"" -> 572 Ship stores & equipment handling."
+01019-01,583,"500 Auxiliary Systems › 583 Boats, boat handling and stowage systems",C · curated inference,"Component text ""LIFE RAFTS"" -> 583 Boats, boat handling & stowage."
+01039-05,651,600 Outfit & Furnishings › 651 Commissary spaces,C · curated inference,Same base 01039 (01039-01/-02/-03 all -> 651) -> 651 Commissary spaces.
+07046-01,529,500 Auxiliary Systems › 529 Drainage and ballasting system,C · curated inference,"Component text ""EDUCTOR"" (bilge/drainage) -> 529 Drainage & ballasting."
+07214-01,521,500 Auxiliary Systems › 521 Firemain and flushing  (sea water) system,C · curated inference,"Component text ""NOZZLE, FIRE HOSE"" -> 521 Firemain & flushing."
+07317-01,512,500 Auxiliary Systems › 512 Ventilation system,C · curated inference,"Component text ""FILTER, CARBON AIR"" / ""FILTER, AIR"" -> 512 Ventilation."

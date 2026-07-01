@@ -1,0 +1,39 @@
+# DDG-51 hull <-> ship-name <-> MIRS schedule crosswalk (STAGED research aid - NOT wired into the build)
+# Built 2026-06-30. Name<->hull: workbook hull_master URLs (113-136) + Wikipedia List_of_Arleigh_Burke-class_destroyers (137-149), cross-validated by MIRS builder + ddg_piid_hull_map builder split.
+# MIRS schedule: S&P Global / IHS Sea-web 'MIRS_US Built_Destroyers.xlsx' (30 Jun 2026), monthly granularity. Dates normalized YYYY-MM. See ddg/docs/ddg_sam_research_findings.md sec P2-5.
+Hull,Ship Name,IMO/IHS No,Builder,Builder Sources Agree,MIRS Status,MIRS Order,MIRS Keel,MIRS Launch,MIRS Delivery,MIRS Est Comp,Master Start Fab,Master Launch,Master Delivery,Master Sched Conf,Launch Agreement,Name-Hull Source,Name-Hull Confidence,Notes
+DDG 113,John Finn,4677411,Huntington Ingalls Pascagoula,yes,In Service/Commission,2011-06,2013-11,2015-03,2017-07,,2013-11,2015-03,2016-12,Actual,match,hull_master URL,High,
+DDG 114,Ralph Johnson,4675621,Huntington Ingalls Pascagoula,yes,In Service/Commission,2011-09,2014-09,2015-12,2018-03,,2014-09,2015-12,2017-11,Actual,match,hull_master URL,High,
+DDG 117,Paul Ignatius,4667210,Huntington Ingalls Pascagoula,yes,In Service/Commission,2013-06,2015-10,2016-11,2019-07,,2015-10,2016-11,2019-02,Actual,match,hull_master URL,High,
+DDG 118,Daniel Inouye,4667222,Bath General Dynamics,yes,In Service/Commission,2013-06,2018-05,2019-10,2021-03,,2018-05,2019-10,2021-03,Actual,match,hull_master URL,High,
+DDG 119,Delbert D. Black,4667234,Huntington Ingalls Pascagoula,yes,In Service/Commission,2014-03,2016-06,2017-09,2020-09,,2016-06,2017-09,2020-04,Actual,match,hull_master URL,High,
+DDG 121,Frank E. Petersen Jr.,4667258,Huntington Ingalls Pascagoula,yes,In Service/Commission,2015-03,2017-02,2018-07,2021-11,,2016-04,2018-07,2021-11,Actual,match,hull_master URL,High,
+DDG 122,John Basilone,4667260,Bath General Dynamics,yes,In Service/Commission,2015-03,2020-01,2022-06,2024-07,,2020-01,2022-06,2024-07,Actual,match,hull_master URL,High,
+DDG 123,Lenah Sutcliffe Higbee,4732948,Huntington Ingalls Pascagoula,yes,In Service/Commission,2016-03,2017-11,2020-01,2022-11,,2017-01,2020-01,2022-11,Actual,match,hull_master URL,High,
+DDG 124,Harvey C. Barnum Jr.,4758681,Bath General Dynamics,yes,In Service/Commission,2016-03,2021-04,2023-09,2025-11,,2021-04,2023-09,2025-11,Actual,match,hull_master URL,High,
+DDG 125,Jack H. Lucas,4730354,Huntington Ingalls Pascagoula,yes,In Service/Commission,2017-09,2019-11,2021-06,2023-06,,2019-11,2021-06,2023-06,Actual,match,hull_master URL,High,
+DDG 126,Louis H. Wilson Jr.,4730366,Bath General Dynamics,yes,Keel Laid,2017-09,2023-05,,,2027-06,2020-03,2025-09,2027-09,Projected,ours-only (MIRS blank = pre-launch),hull_master URL,High,"Master launch Sep 2025 = christening; MIRS still 'Keel Laid', no float-off -> christening != launch (BIW)."
+DDG 127,Patrick Gallagher,4730342,Bath General Dynamics,yes,In Service/Commission,2017-09,2022-03,2024-07,2026-05,,2019-04,2024-10,2026-05,Actual,DIFF 2024-10 vs 2024-07,hull_master URL,High,Launch discrepancy master Oct 2024 vs MIRS Jul 2024 -- reconcile.
+DDG 128,Ted Stevens,4767345,Huntington Ingalls Pascagoula,yes,In Service/Commission,2018-09,2022-03,2023-08,2025-12,,2022-03,2023-08,2025-12,Actual,match,hull_master URL + Wikipedia list,High,
+DDG 129,Jeremiah Denton,4767357,Huntington Ingalls Pascagoula,yes,Launched,2018-09,2022-08,2025-03,,2028-06,2021-01,2025-03,2027-08,Projected,match,hull_master URL + Wikipedia list,High,
+DDG 130,William Charette,4767369,Bath General Dynamics,yes,Keel Laid,2018-09,2024-08,,,2028-06,2021-05,,2028-11,Projected,,hull_master URL + Wikipedia list,High,
+DDG 131,George M. Neal,4767371,Huntington Ingalls Pascagoula,yes,Launched,2018-09,2023-12,2026-04,,2029-06,2021-11,2026-04,2028-11,Projected,match,hull_master URL + Wikipedia list,High,
+DDG 132,Quentin Walsh,4767383,Bath General Dynamics,yes,Keel Laid,2018-09,2025-05,,,2029-06,2022-02,,2029-09,Projected,,hull_master URL + Wikipedia list,High,
+DDG 133,Sam Nunn,4767395,Huntington Ingalls Pascagoula,yes,Keel Laid,2018-09,2024-11,,,2029-06,2022-12,,2030-02,Projected,,hull_master URL + Wikipedia list,High,
+DDG 134,John E. Kilmer,4767400,Bath General Dynamics,yes,On Order/Not Commenced,2018-09,,,,2030-12,2023-11,,2030-10,Projected,,hull_master URL + Wikipedia list,High,"MIRS 'On Order/Not Commenced', no keel as of 2026-06 -> master Start Fab (Inferred) likely too early."
+DDG 135,Thad Cochran,4767412,Huntington Ingalls Pascagoula,yes,Keel Laid,2018-09,2025-03,,,2031-12,2023-11,,2031-02,Projected,,hull_master URL + Wikipedia list,High,
+DDG 136,Richard G. Lugar,4767424,Bath General Dynamics,yes,On Order/Not Commenced,2018-09,,,,2030-12,2024-04,,2031-06,Projected,,hull_master URL + Wikipedia list,High,"MIRS 'On Order/Not Commenced', no keel as of 2026-06 -> master Start Fab (Inferred) likely too early."
+DDG 137,John F. Lehman,4767436,Huntington Ingalls Pascagoula,yes,On Order/Not Commenced,2018-09,,,,2030-12,2026-03,,2032-02,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 138,J. William Middendorf,4767448,Bath General Dynamics,yes,Under Construction,2018-09,,,,2032-12,2025-03,,2032-10,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 139,Telesforo Trinidad,4767450,Huntington Ingalls Pascagoula,yes,On Order/Not Commenced,2018-09,,,,2032-12,2027-09,,2033-08,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 140,Thomas G. Kelley,4775653,Bath General Dynamics,yes,Projected,2024-03,,,,2033-12,2026-07,,2033-12,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 141,Ernest E. Evans,4775665,Huntington Ingalls Pascagoula,yes,Projected,2024-03,,,,2033-12,2028-09,,2034-08,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 142,Charles J. French,4775677,Huntington Ingalls Pascagoula,yes,Projected,2024-03,,,,2033-12,2029-09,,2035-08,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 143,Richard J. Danzig,4776009,Huntington Ingalls Pascagoula,yes,Projected,2024-05,,,,2033-12,2030-09,,2036-08,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 144,Michael G. Mullen,4776011,Bath General Dynamics,yes,Projected,2024-05,,,,2034-12,2027-08,,2035-01,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 145,Intrepid,4777481,Huntington Ingalls Pascagoula,yes,Projected,,,,,,2031-09,,2037-08,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 146,Robert Kerrey,4777493,Huntington Ingalls Pascagoula,yes,Projected,,,,,,2032-09,,2038-08,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 147,Ray Mabus,4777508,Huntington Ingalls Pascagoula,yes,Projected,,,,,,2033-09,,2039-08,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 148,Kyle Carpenter,4777510,Bath General Dynamics,yes,Projected,,,,,,2028-08,,2035-11,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 149,Robert R. Ingram,4777522,Huntington Ingalls Pascagoula,yes,Projected,,,,,,2029-08,,2036-09,Projected,,Wikipedia list x MIRS builder x piid_hull_map,High,
+DDG 150,(unnamed),,,,,,,,,,,,,,,subaward 29918038 only (Espey); unnamed on Wikipedia,Low,FY23-27 MYP = DDG 140-149 (10 ships); DDG 150 is the next block. Espey subaward 'DDG 150' under HII PIID N0002423C2307 = likely long-lead for a future hull. Do NOT add 150 to the FY23-27 family; keep transaction X (or flag long-lead).

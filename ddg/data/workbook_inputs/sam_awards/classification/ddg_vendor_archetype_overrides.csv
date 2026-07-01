@@ -1,12 +1,8 @@
 Program,Subawardee UEI,Capability Domain (D),Primary Output (P),Capability Domain Note,Primary Output Note
-DDG,C12YPM9YKQA5,D7,P0,"Flowmeters, dew-point indicators and gas analyzers are process-instrumentation components.
+DDG,C12YPM9YKQA5,D7,P3,"Flowmeters, dew-point indicators and gas analyzers are process-instrumentation components.
 
 https://www.panametrics.com/
-https://www.bakerhughes.com/panametrics","No public source ties a particular Panametrics measurement instrument to DDG-51 construction.
-
-https://www.panametrics.com/
-https://www.bakerhughes.com/panametrics/flow-meters
-https://www.bakerhughes.com/panametrics/flowmeters/process-flowmeters/ultrasonic-inline-flowmeters"
+https://www.bakerhughes.com/panametrics","Flowmeters/dew-point indicators/gas analyzers are measurement equipment, bounded functional (P3). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-2."
 DDG,C7QHHMJEALN1,D7,P2,"Shipboard wire and cable are component-level power/signal interconnect.
 
 https://monroecableusa.com/
@@ -89,19 +85,14 @@ https://www.marinelogbuyersguide.com/company/847333/pacific-ship-repair-fabricat
 https://www.usaspending.gov/award/CONT_AWD_N0002412C4400_9700_-NONE-_-NONE-
 https://govtribe.com/vendors/pacific-ship-repair-fabrication-inc-dot-6q476
 https://www.marinelink.com/news/modification-contract372221"
-DDG,EVZMB1757DW5,D1,P0,"Structural-steel fabrication is hull/structural marine fabrication.
+DDG,EVZMB1757DW5,D1,P2,"Structural-steel fabrication is hull/structural marine fabrication.
 
 https://www.steelfab-inc.com/
-https://www.northernedgeadvisors.com/deal/steelfab-inc/","A DDG subcontract is recorded but no delivered item or work package is identified.
-
-https://www.steelfab-inc.com/
-https://app.g2xchange.com/companies/EVZMB1757DW5"
-DDG,F42BKS7EHCL8,D3,P0,"Naval power-conversion electronics, transformers and power supplies are electrical power hardware.
+https://www.northernedgeadvisors.com/deal/steelfab-inc/",Fabricated structural steel is a finished component (P2). vendor_class_matrix work_type=structural; NAICS 332312. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-2.
+DDG,F42BKS7EHCL8,D3,P2,"Naval power-conversion electronics, transformers and power supplies are electrical power hardware.
 
 https://govtribe.com/vendors/ems-development-corporation-51435
-https://www.actpower.com/blog/naval-power-supplies-advanced-conversion-technology/","The DDG line item is not expanded and no specific EMS product-to-subaward match is confirmed.
-
-https://www.highergov.com/subcontract/N0002418C2307-11155-0/"
+https://www.actpower.com/blog/naval-power-supplies-advanced-conversion-technology/",Transformers/power supplies are finished components (P2). NAICS 334416 (capacitor/transformer). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-2.
 DDG,FCK2D4PSV1L2,D4,P3,"Blackmer pumps and related relief-valve kits are fluid-system hardware.
 
 https://www.blackmerpumps.com/products/451415-relief-valve
@@ -139,14 +130,10 @@ https://listerchain.com/products-services/","Finished anchor chain, connecting l
 https://www.highergov.com/awardee/lister-chain-and-forge-inc-10005895/
 https://magazines.marinelink.com/Magazines/MaritimeReporter/198902/content/long-outlook-shipbuilding-200910
 https://magazines.marinelink.com/magazines/MaritimeReporter/199205/pdf/"
-DDG,FRJQGQHDX4J3,D6,P0,"Secure tactical communications electronics are system-level communications equipment.
+DDG,FRJQGQHDX4J3,D6,P3,"Secure tactical communications electronics are system-level communications equipment.
 
 https://www.l3harris.com/all-capabilities/integrated-tactical-communication-systems
-https://www.l3harris.com/all-capabilities/family-maritime-shipboard-terminals-mst","No public evidence identifies a distinct DDG-51 construction item for this communications-electronics UEI.
-
-https://www.l3harris.com/all-capabilities/tactical-communications
-https://www.l3harris.com/
-https://www.sec.gov/Archives/edgar/data/202058/000162828018012767/0001628280-18-012767.txt"
+https://www.l3harris.com/all-capabilities/family-maritime-shipboard-terminals-mst",Secure tactical comms electronics are bounded functional equipment (P3). NAICS 334220. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-2.
 DDG,FZPYZ11SFNA6,D2,P3,"Philadelphia Gear main reduction gears transmit DDG-51 propulsive power.
 
 https://news.timken.com/2023-02-21-Timken-to-Continue-to-Provide-Main-Reduction-Gears-for-U-S-Navy-Arleigh-Burke-DDG-51-Class-Ships
@@ -239,13 +226,10 @@ https://www.appletonmarine.com/","Slewing-arm davits/deck machinery are bounded 
 https://www.appletonmarine.com/products/build-to-print/
 https://govtribe.com/opportunity/federal-contract-opportunity/navy-standard-slewing-arm-davits-slads-supply-and-service-n6449819r4076
 https://www.highergov.com/contract-opportunity/sources-sought-request-for-information-rfi-navy-n64498-24-rfpreq-pd-43-0205-r-fb00d/"
-DDG,HYGLK2BNFKB3,D2,P0,"The entity’s differentiating competence is diesel-engine prime movers.
+DDG,HYGLK2BNFKB3,D2,P3,"The entity’s differentiating competence is diesel-engine prime movers.
 
 https://www.mtu-solutions.com/na/en/applications/power-generation/power-generation-products/diesel-generator-sets.html
-https://www.mtu-solutions.com/na/en/applications/commercial-marine/system-solutions/marine-gensets.html","No public evidence assigns this UEI a distinct DDG-51 new-construction component.
-
-https://govtribe.com/award/federal-idv-award/indefinite-delivery-contract-n6449816d0013
-https://www.mtu-solutions.com/na/en.html"
+https://www.mtu-solutions.com/na/en/applications/commercial-marine/system-solutions/marine-gensets.html",Diesel-engine prime movers are bounded functional equipment (P3). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-2.
 DDG,J1T1FEN3PWX6,D2,P3,"LM2500 gas turbines are DDG-51 main-propulsion engines.
 
 https://www.geaerospace.com/news/press-releases/ge-aerospace-secures-orders-lm2500-marine-gas-turbines-power-next-generation-arleigh
@@ -253,14 +237,10 @@ https://www.surflant.usff.navy.mil/Organization/Operational-Forces/Destroyers/De
 
 https://www.geaerospace.com/news/press-releases/marine-industrial-engines/ge-delivers-lm2500-gas-turbines-us-navys-ddg-80-arleigh
 https://www.surflant.usff.navy.mil/Organization/Operational-Forces/Destroyers/Destroyer-Ship-Class-DDG-Info-Page/"
-DDG,J3AFGKXWYK73,D5,P0,"York operation is tied to shipboard HVAC/refrigeration equipment.
+DDG,J3AFGKXWYK73,D5,P3,"York operation is tied to shipboard HVAC/refrigeration equipment.
 
 https://www.johnsoncontrols.com/marine-and-navy/hvac-solutions
-https://www.calnetix.com/newsroom/press-release/calnetix-technologies-supplies-key-components-for-new-u-s-navy-chiller-system/","The DDG-51 handoff cannot be separated from the affiliated Johnson Controls Navy Systems entity, so no defensible UEI-specific article is assignable.
-
-https://www.calnetix.com/newsroom/press-release/calnetix-technologies-present-paper-new-generation-high-efficiency-super
-https://www.calnetix.com/newsroom/press-release/calnetix-technologies-supplies-key-components-new-us-navy-chiller-system
-https://www.johnsoncontrols.com/"
+https://www.calnetix.com/newsroom/press-release/calnetix-technologies-supplies-key-components-for-new-u-s-navy-chiller-system/",HVAC/refrigeration chiller plants are bounded functional equipment (P3). Registry bucket=hvac; NAICS 333415. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
 DDG,J645RTMFWMW1,D5,P3,"Heat-recovery evaporators/fresh-water generators are desalination/life-support equipment.
 
 https://www.fairbanksmorsedefense.com/solutions/water-treatment-systems/
@@ -419,13 +399,10 @@ https://www.milwaukeevalve.com/product-category/marine-valves/navy-mil-standard-
 https://www.highergov.com/awardee/milwaukee-valve-co-inc-10108548/
 https://www.asapsemi.com/nsn/rfq/milwaukee-valve-company-inc/4820014799588/1281-006-3-41n/
 https://www.lqlite.com/NSN/4820-01-479-9583"
-DDG,MD21J51WM123,D4,P0,"Legacy Tyco role is fire-protection equipment, i.e., suppression fluid/agent hardware.
+DDG,MD21J51WM123,D4,P3,"Legacy Tyco role is fire-protection equipment, i.e., suppression fluid/agent hardware.
 
 https://www.tyco-fire.com/
-https://www.tyco-fire.com/products-and-solutions/valves-devices-and-components","The legacy Tyco UEI’s operating site and exact DDG-51 fire-protection component cannot be confirmed.
-
-https://www.tyco-fire.com/
-https://www.perimeter-solutions.com/wp-content/uploads/2022/01/PERI1135_Foam_Design_Manual_v5.pdf"
+https://www.tyco-fire.com/products-and-solutions/valves-devices-and-components",Fire-suppression equipment is bounded functional equipment (P3); matches sibling JCI/Tyco UEI H1PAVTLJBJ88 (D4/P3). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-2.
 DDG,MDH6KH9D4SG7,D3,P3,"Automatic bus-transfer switches, transformers and switch components distribute electrical power.
 
 https://www.se.com/us/en/product-subcategory/89175-automatic-transfer-switches/
@@ -604,14 +581,10 @@ https://hillerfire.com/applications/marine-fire-protection/gaseous-agent-fire-su
 
 https://www.highergov.com/nsn/4820014492993/
 https://hillerfire.com/"
-DDG,T2VFE1NGR3G5,D6,P0,"Military training, control, communications and wireless electronics are system-level control/comms.
+DDG,T2VFE1NGR3G5,D6,P3,"Military training, control, communications and wireless electronics are system-level control/comms.
 
 https://govtribe.com/vendors/drs-training-control-systems-llc-drs-technologies-12339
-https://www.leonardodrs.com/who-we-are/our-segments/airborne-intelligence-systems/","No public evidence identifies a discrete DDG-51 construction component for this UEI.
-
-https://www.highergov.com/awardee/drs-training-control-systems-llc-10107268/
-https://govtribe.com/vendors/drs-training-control-systems-llc-drs-technologies-12339
-https://www.govcon.com/doc/drs-technologies-awarded-132m-contract-to-pro-0001"
+https://www.leonardodrs.com/who-we-are/our-segments/airborne-intelligence-systems/","Mission/control electronics are bounded functional equipment (P3). NAICS 334220. NOTE: registry flags a VLS launch-control sensitivity boundary; if P0 was a deliberate sensitivity hold, revert. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-2."
 DDG,TPN7LAC6HGW3,D2,P6,"Shaft-line, propeller and seal installation/overhaul support is propulsion-system service.
 
 https://www.wartsila.com/marine/products/shaft-line-solutions
@@ -619,14 +592,11 @@ https://www.wartsila.com/latinamer/media/03-09-2020-matthew-zirkle-joins-wartsil
 
 https://www.wartsila.com/marine/services
 https://www.wartsila.com/usa/media/local-news/27-04-2012-w%C3%A4rtsil%C3%A4-donates-controllable-pitch-propulsion-system-to-the-united-states-merchant-marine-academy"
-DDG,TSCZLHCGNQ53,D4,P0,"Fuel filtration, water-separation and coalescer equipment are fluid-treatment hardware.
+DDG,TSCZLHCGNQ53,D4,P3,"Fuel filtration, water-separation and coalescer equipment are fluid-treatment hardware.
 
 https://www.facetfiltration.com/
 https://www.facetfiltration.com/about-us/history/
-https://core-es.com/wp-content/uploads/F12423-Manual.pdf","The DDG rebuy item is unidentified and no reliable Facet model/component match is confirmed.
-
-https://www.highergov.com/subcontract/N0002418C2307-16098-0/
-https://www.highergov.com/awardee/filtration-group-corporation-10007841/"
+https://core-es.com/wp-content/uploads/F12423-Manual.pdf",Fuel-filtration/coalescer equipment is bounded functional equipment (P3). vendor_class_matrix work_type=piping. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-2.
 DDG,U23DM4ULNLS3,D1,P5,"BAE Systems Jacksonville Ship Repair LLC is a Jacksonville, FL shipyard (NAICS 336611 Ship Building and Repairing). Its DDG work under prime N0002418C2307 is hull grand-block fabrication ('DDG 137 SOW UNIT OUTSOURCING (GB B15)') = marine structural fabrication. The prior Mk 45 naval-gun rationale belongs to a different BAE Systems UEI (the naval-gun business), not this ship-repair entity. [reclassified D6->D1 2026-06-24]","Delivers an erectable DDG hull grand block (DDG 137 GB B15) outsourced by HII-Ingalls as a defined shipbuilding unit -> outfitted structure / ship module, the same work as Gulf Copper and Eastern Shipbuilding on this hull. Prior 'integrated gun system (P4)' was a BAE brand mismatch to another UEI. [reclassified P4->P5 2026-06-24]"
 DDG,XJTAAHL58NB6,D1,P5,"Eastern Shipbuilding Group, Inc. (UEI XJTAAHL58NB6; Panama City, FL; NAICS 336611) builds hull units/grand blocks. DDG subawards under prime N0002418C2307 are 'DDG 135/137/139 SOW UNIT OUTSOURCING' incl. 'C15GB' = marine structural fabrication. Sept 2025 HII/Ingalls-ESG agreement formalized ESG production of outfitted structural units for Flight III DDG-51s.
 
@@ -725,10 +695,7 @@ https://govtribe.com/vendors/surface-technologies-corporation-1dz42","Interior d
 
 https://www.highergov.com/subcontract/N0002413C2307-1074530-4/
 https://www.arl.psu.edu/wp-content/uploads/filr/2456/IMAST%202017-2018%20Annual%20Report.pdf"
-DDG,ZLM5NQE8LSR8,D0,P3,"The described HVAC/electrical/machinery integration and motor/brake clue do not support one domain.
-
-https://govtribe.com/vendors/imeco-inc-dot-0v369
-https://www.prnewswire.com/news-releases/jf-lehman--company-acquires-imeco-inc-185666282.html","The identified motor-and-brake assembly is a bounded functional electromechanical unit, not a full integrated package.
+DDG,ZLM5NQE8LSR8,D5,P3,"IMECO (J.F. Lehman) is a marine HVAC/electrical/machinery integrator, HVAC-dominant -> D5. NAICS 333415. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-2.","The identified motor-and-brake assembly is a bounded functional electromechanical unit, not a full integrated package.
 
 https://govtribe.com/opportunity/federal-contract-opportunity/slew-motor-and-brake-n0040621r0018
 https://www.jflco.com/portfolio-details/5/lake-shore-systems
@@ -742,5 +709,16 @@ https://govtribe.com/vendors/l-3-communications-westwood-corporation-l-3-westwoo
 https://www.l3harris.com/all-capabilities/military-specification-switchboards-and-load-centers
 https://www.l3harris.com/all-capabilities/power-distribution-panels-control-console-workstation-and-panel-boards
 https://govtribe.com/vendors/l-3-communications-westwood-corporation-l-3-westwood-3feq2"
-DDG,N1PJDANWUJ61,D2,,"[MECE 2026-06-20: D9->D2 firm-level reclassification, ship application determinable] (was map-resolved D9 via NAICS)",
-DDG,CBMZJ3Z5SC89,D1,,"[MECE 2026-06-20: D9->D1 firm-level reclassification, ship application determinable] (was map-resolved D9 via NAICS)",
+DDG,N1PJDANWUJ61,D2,P1,"[MECE 2026-06-20: D9->D2 firm-level reclassification, ship application determinable] (was map-resolved D9 via NAICS)",Iron/steel forgings are raw/semi-finished stock (P1). Registry castings/forgings (high); NAICS 332111. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,CBMZJ3Z5SC89,D1,P2,"[MECE 2026-06-20: D9->D1 firm-level reclassification, ship application determinable] (was map-resolved D9 via NAICS)",Goodrich/Collins Engineered Polymer Products acoustic/coating parts are finished components (P2). Registry coatings. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,S3GFGJ1QGAE6,D9,P2,M.S.M. Industries: rubber/mechanical-use products -> D9 material process. Registry coatings (high); NAICS 326291. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Finished mechanical-use components (P2). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,NYGUEDY27AM8,D4,P3,Curtiss-Wright Flow Control: industrial valves -> D4 fluid/piping. Registry piping (high); NAICS 332911. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Valves are bounded functional equipment (P3). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,GV6WMAJUK1R9,D1,P2,Sioux Manufacturing: structural fabrication -> D1 structural. Registry structural (high); name/registry basis (no SAM NAICS). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Fabricated structural component (P2). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,MSYWUDGYPKF5,D4,P3,Everest Kanto Cylinder: high-pressure gas cylinders -> D4 fluid/piping (alt D1). Registry structural (high); NAICS 332420 heavy-gauge tank. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,High-pressure cylinders are bounded functional equipment (P3). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,HUYTR5ZGSSN6,D4,P3,W. & O. Supply: marine pipe/valve/fittings distributor -> D4 fluid/piping. Registry piping (high). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Pipe/valve/fittings are bounded functional equipment (P3). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,LGVPVLMRHH51,D4,P3,W. & O. Supply (UEI variant): marine pipe/valve/fittings distributor -> D4 fluid/piping. Registry piping (high). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Pipe/valve/fittings are bounded functional equipment (P3). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,RLXQHCXFT513,D4,P2,Citadel Capital pipe-fab portfolio: fabricated pipe/fittings -> D4 fluid/piping. Registry piping (high); NAICS 332996. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Fabricated pipe/fittings are finished components (P2). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,DJG7NEG7QRK5,D4,P3,Arcline valve portfolio: industrial valves -> D4 fluid/piping. Registry piping (high); NAICS 332911. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Valves are bounded functional equipment (P3). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,WVW5FMYALEL6,D3,P3,Plainville Electrical Products: switchgear -> D3 electrical power. Registry electrical (high); NAICS 335313. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Switchgear is bounded functional equipment (P3). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,NTREK31GP8N3,D7,P2,Ksaria Corporation: fiber-optic interconnect -> D7 instruments/electronic. Registry electrical (high); NAICS 334417. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Electronic connectors are finished components (P2). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
+DDG,FWF8QBPCGLG3,D9,P2,General Tool Company: machining -> D9 material process. Registry machining (med); NAICS 336419. [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.,Machined finished components (P2). [Promoted 2026-06-30 from ddg_sam_research_findings] §P4-3.
