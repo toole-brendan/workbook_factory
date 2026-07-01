@@ -36,16 +36,10 @@ TAB_HULL_COVERAGE = "DDG Hull Coverage"
 TAB_HULL_SWBS = "DDG Hull x SWBS"
 TAB_VENDOR_HULL = "DDG Vendor x Hull Exposure"
 TAB_VENDOR_HULL_SWBS = "DDG Vendor x Hull x SWBS"
-TAB_VENDOR_HULL_LIFECYCLE = "DDG Vendor x Hull Lifecycle"
-TAB_ARCHETYPE_LIFECYCLE = "DDG Archetype x Lifecycle"
 TAB_HULL_EXCEPTIONS = "DDG Hull Exceptions"
 TAB_HULL_METHODOLOGY = "Hull Mapping Methodology"
-TAB_HULL_LIFECYCLE = "DDG Hull x Lifecycle Stage"
-TAB_CD_LC_COVERAGE = "DDG C-D Lifecycle Coverage"
-TAB_CD_LC_ROLLUP = "DDG C-D Lifecycle Rollup"
-TAB_CD_LC_CANDIDATES = "DDG C-D Lifecycle Candidates"
 TAB_PROC_TIMING = "DDG Procurement Timing"
-TAB_LIFECYCLE_METHOD = "Lifecycle Methodology"
+TAB_FULL_SPAN = "DDG 125 & 128 Full-Span"
 
 assert all(len(n) <= 31 for k, n in globals().items()
            if k.startswith("TAB_") and isinstance(n, str))

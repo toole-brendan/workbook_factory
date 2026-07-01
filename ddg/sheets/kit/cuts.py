@@ -132,7 +132,7 @@ def _filter_sam_window(name: str, headers: list[str], rows: list[list[str]]) -> 
         ueis = {uei for program, uei in _window_tx_keys() if program == "DDG"}
         return [r for r in rows if (r[ju] if ju < len(r) else "").strip() in ueis]
 
-    if name in {"ddg_hull_exceptions", "ddg_cd_lifecycle_rollup", "ddg_cd_lifecycle_candidates"}:
+    if name in {"ddg_hull_exceptions"}:
         rid_header = "Subaward Report ID"
         if rid_header in headers:
             jr = headers.index(rid_header)

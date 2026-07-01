@@ -40,9 +40,7 @@ from ddg.sheets.ddg_program_vendors import ddg_pv_cols
 from ddg.sheets.ddg_hull_spend_summary import hull_spend_cols
 from ddg.sheets.ddg_swbs_rollup import swbs_rollup_cols
 from ddg.sheets.ddg_procurement_timing import proc_timing_cols
-from ddg.sheets.ddg_cd_lifecycle_rollup import cd_lc_rollup_cols
-from ddg.sheets.ddg_vendor_hull_lifecycle import vendor_hull_lifecycle_cols
-from ddg.sheets.ddg_archetype_lifecycle import archetype_lifecycle_cols
+from ddg.sheets.ddg_full_span_drilldown import full_span_cols
 
 _GROUP = "validation"
 _NCOLS = 3   # content columns (gutter mode): B = Check, C = Value, D = Status
@@ -67,10 +65,12 @@ _PV_AMT = ddg_pv_cols("Subaward $M")
 _HULL_ASSIGNED = hull_spend_cols("Assigned Subaward $M")
 _SWBS_AMT = swbs_rollup_cols("Subaward $M")
 _PROC_TIMING_AMT = proc_timing_cols("Subaward $M")
-_CD_ROLLUP_RID = cd_lc_rollup_cols("Subaward Report ID")
-_VHL_TOTAL = vendor_hull_lifecycle_cols("Total $M")
-_AL_AXIS = archetype_lifecycle_cols("Axis")
-_AL_TOTAL = archetype_lifecycle_cols("Total $M")
+_FS_LONGLEAD = full_span_cols("Long-lead $M")
+_FS_CONSTR = full_span_cols("Construction $M")
+_FS_OUTFIT = full_span_cols("Outfit / test $M")
+_FS_POST = full_span_cols("Post-delivery $M")
+_FS_UNDATED = full_span_cols("Undated $M")
+_FS_TOTAL = full_span_cols("Total $M")
 
 
 def _make():
@@ -158,20 +158,13 @@ def _make():
     _zero("Exact-hull rollup reconciles to A/B confidence",
           f'=SUM({_HULL_ASSIGNED})-(SUMIFS({_TX_AMT},{_TX_CONF},"A")+'
           f'SUMIFS({_TX_AMT},{_TX_CONF},"B"))/1000000')
-    _zero("Vendor-hull lifecycle reconciles to A/B confidence",
-          f'=SUM({_VHL_TOTAL})-(SUMIFS({_TX_AMT},{_TX_CONF},"A")+'
-          f'SUMIFS({_TX_AMT},{_TX_CONF},"B"))/1000000')
-    _zero("Archetype lifecycle D-axis reconciles to vendor-hull lifecycle",
-          f'=SUMIFS({_AL_TOTAL},{_AL_AXIS},"D")-SUM({_VHL_TOTAL})')
-    _zero("Archetype lifecycle P-axis reconciles to vendor-hull lifecycle",
-          f'=SUMIFS({_AL_TOTAL},{_AL_AXIS},"P")-SUM({_VHL_TOTAL})')
     _zero("SWBS rollup reconciles to HII universe",
           f'=SUM({_SWBS_AMT})-SUMIFS({_TX_AMT},{_TX_BUILDER},"HII-Ingalls")/1000000')
     _zero("Procurement timing phases reconcile to observed subaward $",
           f'=SUM({_PROC_TIMING_AMT})-SUM({_TX_AMT})/1000000')
-    _zero("C/D lifecycle rollup row count reconciles to transactions",
-          f'=ROWS({_CD_ROLLUP_RID})-COUNTIFS({_TX_CONF},"C")-COUNTIFS({_TX_CONF},"D")',
-          tol=0, style=S_INT)
+    _zero("Full-span drill-down stages partition each hull's total",
+          f'=SUM({_FS_LONGLEAD})+SUM({_FS_CONSTR})+SUM({_FS_OUTFIT})+SUM({_FS_POST})'
+          f'+SUM({_FS_UNDATED})-SUM({_FS_TOTAL})')
     c.blank(2)
 
     # §5 Master check ---------------------------------------------------------------

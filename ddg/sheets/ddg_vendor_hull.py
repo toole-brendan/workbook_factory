@@ -8,8 +8,8 @@ two-criteria SUMIFS / COUNTIFS / MINIFS / MAXIFS over the DDG Subaward Transacti
 this row's Subawardee UEI AND Assigned Hull. Only exact-hull (grade A/B) rows enter the spine, so a
 conflict / family-only row never appears here.
 
-(The lifecycle-keyed vendor-hull timeline - vendor activity by hull lifecycle stage - is a deferred
-later phase that needs per-hull milestone dates.)
+(A vendor x hull x build-stage timeline is not built program-wide; per-hull build-stage detail is
+shown only for the two full-span hulls on DDG 125 & 128 Full-Span.)
 """
 from __future__ import annotations
 

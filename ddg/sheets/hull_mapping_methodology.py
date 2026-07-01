@@ -16,7 +16,7 @@ from ddg.sheets.kit.styles import S_ITALIC
 from ddg.sheets.kit.tabs import (
     TAB_HULL_METHODOLOGY, TAB_PIID_HULL_MAP, TAB_HULL_MASTER, TAB_DDG_TX,
     TAB_HULL_SPEND, TAB_HULL_COVERAGE, TAB_HULL_SWBS, TAB_VENDOR_HULL,
-    TAB_VENDOR_HULL_SWBS, TAB_HULL_EXCEPTIONS, TAB_LIFECYCLE_METHOD,
+    TAB_VENDOR_HULL_SWBS, TAB_HULL_EXCEPTIONS, TAB_PROC_TIMING,
 )
 
 _GROUP = "guide"
@@ -122,9 +122,12 @@ def _render() -> WorksheetSpec:
                                      "(C / D), not an exact hull - see Hull Coverage.")
     _kv(c, "Multi-hull material", "A multi-hull buy, class-standard equipment, spares, or repair "
                                   "parts may legitimately span hulls; it is not forced onto one.")
-    _kv(c, "Lifecycle layer", f"Purchase timing vs each hull's build schedule now stage-tags every "
-                              f"exact-hull subaward and narrows the family-level (C/D) candidates - "
-                              f"see '{TAB_LIFECYCLE_METHOD}'.")
+    _kv(c, "Timing, not narrowing", f"Purchase timing vs the PIID family's construction envelope phases "
+                                    f"every row (advance / long-lead, in-build, post-delivery) on "
+                                    f"'{TAB_PROC_TIMING}' - grain-safe, 100% coverage. Narrowing the "
+                                    f"family-level (C/D) bulk to a single hull by build timing was "
+                                    f"tested and rarely resolves below 4+ candidates, so no per-hull "
+                                    f"dollar is ever allocated.")
     _kv(c, "No physical module", "Subaward text supports hull / SWBS / vendor / timing, not the HII "
                                  "physical module / grand block / structural unit.")
 

@@ -16,17 +16,15 @@ from . import scn_budget, place_of_performance, obbba, fydp_outyears
 from . import deflators, ddg_tam, methodology
 
 # SAM reference / source sheets. Guide modules are import-compatible but not visible tabs.
-from . import (taxonomy, guide_methodology, hull_mapping_methodology, lifecycle_methodology,
+from . import (taxonomy, guide_methodology, hull_mapping_methodology,
                naics6_archetype_map, vendor_archetype_overrides, hii_swbs_crosswalk,
                ddg_piid_hull_map, ddg_hull_master, prime_awards)
 from . import ddg_subaward_transactions
 from . import supplier_master, supplier_year_activity, ddg_program_vendors
 from . import (archetype_application_audit, ddg_swbs_rollup, swbs_coverage,
                ddg_hull_spend_summary, ddg_hull_coverage, ddg_hull_swbs,
-               ddg_vendor_hull, ddg_vendor_hull_swbs, ddg_vendor_hull_lifecycle,
-               ddg_archetype_lifecycle, ddg_hull_exceptions, ddg_hull_lifecycle_stage,
-               ddg_cd_lifecycle_coverage, ddg_cd_lifecycle_rollup, ddg_cd_lifecycle_candidates,
-               ddg_procurement_timing,
+               ddg_vendor_hull, ddg_vendor_hull_swbs, ddg_hull_exceptions,
+               ddg_procurement_timing, ddg_full_span_drilldown,
                market_bridge, domain_concentration, where_to_play)
 from . import executive_summary
 from . import checks
@@ -60,14 +58,9 @@ SHEETS: list = [
     ddg_hull_swbs.DDG_HULL_SWBS,
     ddg_vendor_hull.DDG_VENDOR_HULL,
     ddg_vendor_hull_swbs.DDG_VENDOR_HULL_SWBS,
-    ddg_vendor_hull_lifecycle.DDG_VENDOR_HULL_LIFECYCLE,
-    ddg_archetype_lifecycle.DDG_ARCHETYPE_LIFECYCLE,
     ddg_hull_exceptions.DDG_HULL_EXCEPTIONS,
-    ddg_cd_lifecycle_coverage.DDG_CD_LC_COVERAGE,
-    ddg_hull_lifecycle_stage.DDG_HULL_LIFECYCLE,
-    ddg_cd_lifecycle_rollup.DDG_CD_LC_ROLLUP,
-    ddg_cd_lifecycle_candidates.DDG_CD_LC_CANDIDATES,
     ddg_procurement_timing.DDG_PROC_TIMING,
+    ddg_full_span_drilldown.DDG_FULL_SPAN,
 
     # Data / source evidence.
     prime_awards.PRIME_AWARDS,

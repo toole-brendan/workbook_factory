@@ -39,8 +39,7 @@ _W_FY = where_to_play_cols("Federal FY")
 
 _TX_REAL = ddg_tx_cols(TX_REAL)
 _TX_CONF = ddg_tx_cols("Hull Confidence")
-_TX_NARROW = ddg_tx_cols("Narrowing Result")
-_TX_LCONF = ddg_tx_cols("Lifecycle Confidence")
+_TX_TIMING = ddg_tx_cols("Procurement Timing")
 
 
 def _fy_label(fy: int) -> str:
@@ -60,14 +59,6 @@ def _wtp(metric: str, code: str) -> str:
 
 def _sum_conf(*grades: str) -> str:
     return "+".join(f'SUMIFS({_TX_REAL},{_TX_CONF},"{g}")' for g in grades)
-
-
-def _sum_narrow(*buckets: str) -> str:
-    return "+".join(f'SUMIFS({_TX_REAL},{_TX_NARROW},"{b}")' for b in buckets)
-
-
-def _sum_lconf(*grades: str) -> str:
-    return "+".join(f'SUMIFS({_TX_REAL},{_TX_LCONF},"{g}")' for g in grades)
 
 
 def _render() -> WorksheetSpec:
@@ -142,18 +133,15 @@ def _render() -> WorksheetSpec:
     ab_raw = f"({_sum_conf('A', 'B')})"
     cd_raw = f"({_sum_conf('C', 'D')})"
     x_raw = f"({_sum_conf('X')})"
-    narrowed_raw = f"({_sum_narrow('Single candidate', '2-3 candidates')})"
-    high_med_raw = f"({_sum_lconf('High', 'Medium')})"
     c.write(["Measure", "Value", "Interpretation"], styles=[S_HEADER_LEFT] * 3)
     c.write(["Observed SAM total $M", f"={lifetime}", "Reported DDG first-tier subawards; evidence layer, not full outsourced market."], styles=[S_DEFAULT, S_LINK_NUM, S_DEFAULT])
     c.write(["HII SWBS-classified $M", f"={swbs_total}", "SWBS is HII-Ingalls DDG only; GD-BIW rows carry no SWBS."], styles=[S_DEFAULT, S_LINK_NUM, S_DEFAULT])
     c.write(["SWBS mapped share", f'=IFERROR(1-SUMIFS({swbs_amt},{swbs_grp},"U00")/{swbs_total},"")', "Share of HII SWBS dollars outside the unmapped U00 bucket."], styles=[S_DEFAULT, S_PCT, S_DEFAULT])
     c.write(["Exact-hull A/B $M", f"={assigned}", "A/B rows assigned to a single hull."], styles=[S_DEFAULT, S_LINK_NUM, S_DEFAULT])
-    c.write(["Exact-hull A/B share", f'=IFERROR({assigned}/{lifetime},"")', "Share of observed SAM that can support hull x lifecycle rollups."], styles=[S_DEFAULT, S_PCT, S_DEFAULT])
+    c.write(["Exact-hull A/B share", f'=IFERROR({assigned}/{lifetime},"")', "Share of observed SAM assigned to a single hull (A/B); supports the per-hull rollups and drill-down."], styles=[S_DEFAULT, S_PCT, S_DEFAULT])
     c.write(["Family-level C/D share", f'=IFERROR({cd_raw}/1000000/{lifetime},"")', "PIID-family rows: candidate narrowing only, no per-hull allocation."], styles=[S_DEFAULT, S_PCT, S_DEFAULT])
     c.write(["Conflict / X share", f'=IFERROR({x_raw}/1000000/{lifetime},"")', "Conflict, multi-hull, or review rows."], styles=[S_DEFAULT, S_PCT, S_DEFAULT])
-    c.write(["C/D narrowed to 1-3 candidates", f'=IFERROR({narrowed_raw}/{cd_raw},"")', "Share of family-level C/D $ where timing narrows to single or 2-3 candidates."], styles=[S_DEFAULT, S_PCT, S_DEFAULT])
-    c.write(["C/D high/medium lifecycle confidence", f'=IFERROR({high_med_raw}/{cd_raw},"")', "Timing-readiness screen; separate from hull confidence."], styles=[S_DEFAULT, S_PCT, S_DEFAULT])
+    c.write(["Advance / long-lead share", f'=IFERROR(SUMIFS({_TX_REAL},{_TX_TIMING},"Advance / LLTM")/SUM({_TX_REAL}),"")', "Observed subaward $ placed before the block's earliest keel (whole-program; see Procurement Timing)."], styles=[S_DEFAULT, S_PCT, S_DEFAULT])
 
     ws = worksheet(c.rows, cols=[34, 13, 13, 13, 13, 13, 13, 22], tab_color=group_color(_GROUP),
                    with_gutter=True, show_outline_symbols=False)

@@ -25,8 +25,6 @@ _TX_REAL = ddg_tx_cols(TX_REAL)
 _TX_CONF = ddg_tx_cols("Hull Confidence")
 _TX_BUILDER = ddg_tx_cols("Builder")
 _TX_SWBS = ddg_tx_cols("SWBS")
-_TX_NARROW = ddg_tx_cols("Narrowing Result")
-_TX_LCONF = ddg_tx_cols("Lifecycle Confidence")
 
 _PV_AMT = ddg_pv_cols("Subaward $M")
 _PV_D = ddg_pv_cols("Capability Domain Archetype (D)")
@@ -39,14 +37,6 @@ def _sam_fy_total(fy: int) -> str:
 
 def _conf_raw(*grades: str) -> str:
     return "+".join(f'SUMIFS({_TX_REAL},{_TX_CONF},"{g}")' for g in grades)
-
-
-def _narrow_raw(*buckets: str) -> str:
-    return "+".join(f'SUMIFS({_TX_REAL},{_TX_NARROW},"{b}")' for b in buckets)
-
-
-def _lconf_raw(*grades: str) -> str:
-    return "+".join(f'SUMIFS({_TX_REAL},{_TX_LCONF},"{g}")' for g in grades)
 
 
 def _render() -> WorksheetSpec:
@@ -76,8 +66,6 @@ def _render() -> WorksheetSpec:
     ab_raw = f"({_conf_raw('A', 'B')})"
     cd_raw = f"({_conf_raw('C', 'D')})"
     x_raw = f"({_conf_raw('X')})"
-    narrowed_raw = f"({_narrow_raw('Single candidate', '2-3 candidates')})"
-    high_med_raw = f"({_lconf_raw('High', 'Medium')})"
     dp_classified = f'SUMIFS({_PV_AMT},{_PV_D},"<>D0",{_PV_P},"<>P0")'
 
     c.section("§2 - Observed-SAM denominator ladder", _NCOLS)
@@ -106,15 +94,7 @@ def _render() -> WorksheetSpec:
             styles=[S_DEFAULT, S_DEFAULT, S_LINK_NUM, S_PCT, S_DEFAULT, S_DEFAULT])
     c.write(["Family-level hull", "Hull confidence C/D", f"={cd_raw}/1000000",
              f'=IFERROR({cd_raw}/{total_raw},"")',
-             "Candidate-family and timing-narrowing views", "No single-hull dollar assignment"],
-            styles=[S_DEFAULT, S_DEFAULT, S_LINK_NUM, S_PCT, S_DEFAULT, S_DEFAULT])
-    c.write(["C/D narrowed", "Single or 2-3 timing candidates", f"={narrowed_raw}/1000000",
-             f'=IFERROR({narrowed_raw}/{cd_raw},"")',
-             "Higher-confidence family-level timing", "Candidate set only"],
-            styles=[S_DEFAULT, S_DEFAULT, S_LINK_NUM, S_PCT, S_DEFAULT, S_DEFAULT])
-    c.write(["C/D lifecycle confidence", "High or Medium", f"={high_med_raw}/1000000",
-             f'=IFERROR({high_med_raw}/{cd_raw},"")',
-             "Timing-readiness screen", "Separate from hull confidence"],
+             "Candidate-family views; procurement-timing phase", "No single-hull dollar assignment"],
             styles=[S_DEFAULT, S_DEFAULT, S_LINK_NUM, S_PCT, S_DEFAULT, S_DEFAULT])
     c.write(["Conflict / review", "Hull confidence X", f"={x_raw}/1000000",
              f'=IFERROR({x_raw}/{total_raw},"")',
@@ -130,8 +110,8 @@ def _render() -> WorksheetSpec:
         ("Observed SAM", "Reported supplier structure, continuity and concentration", "Full outsourced-market penetration"),
         ("D/P archetypes", "Entity-level capability and output-market screens", "Transaction-level ship-system assignment"),
         ("SWBS", "HII ship-system application", "GD-BIW ship-system mix without a separate assumption"),
-        ("Exact hull A/B", "Hull x supplier x lifecycle rollups", "Whole-market hull allocation"),
-        ("Family-level C/D", "Candidate narrowing and lifecycle confidence", "Per-hull dollar split"),
+        ("Exact hull A/B", "Hull x supplier rollups; per-hull build-stage drill-down", "Whole-market hull allocation"),
+        ("Family-level C/D", "Candidate-family membership and procurement-timing phase", "Per-hull dollar split"),
     ]:
         c.write([cut, good, boundary], styles=[S_DEFAULT, S_DEFAULT, S_DEFAULT])
 

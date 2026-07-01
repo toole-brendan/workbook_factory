@@ -6,10 +6,11 @@ Note. It supplies the row spine + builder label for the hull roll-ups (DDG Hull 
 DDG Hull x SWBS) the way the Supplier Master supplies the program-vendor sheets.
 
 Construction milestone dates - Start Fabrication / Launch / Delivery, with a per-hull Schedule
-Confidence (Actual / Projected / Estimated) - drive the lifecycle layer (DDG Hull x Lifecycle Stage,
-DDG C-D Lifecycle Candidates / Rollup / Coverage; the engine is scripts/_lifecycle.py). Start
-Fabrication is the published fabrication-start, else keel-laying as the proxy; Launch is blank for
-hulls not yet launched (their in-build spend reads as Construction). Built by hand (HII supplier PDFs,
+Confidence (Actual / Projected / Estimated). The min Start Fabrication / max Delivery over a PIID's
+hulls feed the construction envelope on Mapping - PIID to Hull (which the DDG Procurement Timing
+phase reads); each hull's own milestones bound the build-stage bands on DDG 125 & 128 Full-Span.
+Start Fabrication is the published fabrication-start, else keel-laying as the proxy; Launch is blank
+for hulls not yet launched (their in-build spend reads as Construction). Built by hand (HII supplier PDFs,
 SAR / MSAR, USNI, NVR, shipyard releases); NOT regenerated. Award FY is approximate for the MYP hulls
 (the row Confidence grades the hull->builder identity, not the exact procurement year).
 

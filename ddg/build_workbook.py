@@ -40,7 +40,6 @@ def _run_guards() -> None:
     ig.assert_hull_piids_mapped()
     ig.assert_hull_map_master_consistent()
     ig.assert_hull_milestones_monotonic()
-    ig.assert_lifecycle_columns_consistent()
 
 def build() -> int:
     _run_guards()
