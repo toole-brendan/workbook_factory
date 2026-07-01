@@ -39,7 +39,7 @@ TAB_VENDOR_HULL_SWBS = "DDG Vendor x Hull x SWBS"
 TAB_HULL_EXCEPTIONS = "DDG Hull Exceptions"
 TAB_HULL_METHODOLOGY = "Hull Mapping Methodology"
 TAB_PROC_TIMING = "DDG Procurement Timing"
-TAB_FULL_SPAN = "DDG 125 & 128 Full-Span"
+TAB_FULL_SPAN = "DDG Hull Full-Span"
 
 assert all(len(n) <= 31 for k, n in globals().items()
            if k.startswith("TAB_") and isinstance(n, str))
