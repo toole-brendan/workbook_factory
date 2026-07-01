@@ -60,6 +60,7 @@ CSV_ALIASES = {
     "ddg_vendor_hull_swbs": SAM_HULL_DATA / "ddg_vendor_hull_swbs.csv",
     "ddg_cd_lifecycle_rollup": SAM_LIFECYCLE_DATA / "ddg_cd_lifecycle_rollup.csv",
     "ddg_cd_lifecycle_candidates": SAM_LIFECYCLE_DATA / "ddg_cd_lifecycle_candidates.csv",
+    "ddg_procurement_timing": SAM_LIFECYCLE_DATA / "ddg_procurement_timing.csv",
 
     # Guard / worklist inputs.
     "duplicate_audit": AUDIT_DATA / "duplicate_audit.csv",

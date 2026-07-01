@@ -39,6 +39,7 @@ from ddg.sheets.ddg_subaward_transactions import ddg_tx_cols
 from ddg.sheets.ddg_program_vendors import ddg_pv_cols
 from ddg.sheets.ddg_hull_spend_summary import hull_spend_cols
 from ddg.sheets.ddg_swbs_rollup import swbs_rollup_cols
+from ddg.sheets.ddg_procurement_timing import proc_timing_cols
 from ddg.sheets.ddg_cd_lifecycle_rollup import cd_lc_rollup_cols
 from ddg.sheets.ddg_vendor_hull_lifecycle import vendor_hull_lifecycle_cols
 from ddg.sheets.ddg_archetype_lifecycle import archetype_lifecycle_cols
@@ -65,6 +66,7 @@ _TX_BUILDER = ddg_tx_cols("Builder")
 _PV_AMT = ddg_pv_cols("Subaward $M")
 _HULL_ASSIGNED = hull_spend_cols("Assigned Subaward $M")
 _SWBS_AMT = swbs_rollup_cols("Subaward $M")
+_PROC_TIMING_AMT = proc_timing_cols("Subaward $M")
 _CD_ROLLUP_RID = cd_lc_rollup_cols("Subaward Report ID")
 _VHL_TOTAL = vendor_hull_lifecycle_cols("Total $M")
 _AL_AXIS = archetype_lifecycle_cols("Axis")
@@ -165,6 +167,8 @@ def _make():
           f'=SUMIFS({_AL_TOTAL},{_AL_AXIS},"P")-SUM({_VHL_TOTAL})')
     _zero("SWBS rollup reconciles to HII universe",
           f'=SUM({_SWBS_AMT})-SUMIFS({_TX_AMT},{_TX_BUILDER},"HII-Ingalls")/1000000')
+    _zero("Procurement timing phases reconcile to observed subaward $",
+          f'=SUM({_PROC_TIMING_AMT})-SUM({_TX_AMT})/1000000')
     _zero("C/D lifecycle rollup row count reconciles to transactions",
           f'=ROWS({_CD_ROLLUP_RID})-COUNTIFS({_TX_CONF},"C")-COUNTIFS({_TX_CONF},"D")',
           tol=0, style=S_INT)

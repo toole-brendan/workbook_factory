@@ -47,7 +47,7 @@ from ddg.sheets.ddg_piid_hull_map import (
 )
 from ddg.sheets.kit.hulls import (
     hull_map_row, from_map, hull_in_family, assigned_hull, hull_scope, hull_basis,
-    hull_confidence,
+    hull_confidence, procurement_timing,
 )
 from ddg.sheets.kit.widths import (
     W_UEI, W_VENDOR, W_REPORTID, W_UUID, W_SUBNUM, W_DATE, W_AMOUNT, W_TEXT,
@@ -57,10 +57,11 @@ from ddg.sheets.kit.widths import (
     W_RANK, W_SHORT_FLAG, W_CLASS, W_CATEGORY,
 )
 
-# 76 columns = 50 raw (build_program_transactions.COLUMNS order, UEI = column B) + 5 SWBS
+# 77 columns = 50 raw (build_program_transactions.COLUMNS order, UEI = column B) + 5 SWBS
 # + 4 hull regex evidence (materialized by scripts/tag_ddg_transactions_hulls.py)
 # + 5 construction-lifecycle (materialized by scripts/tag_ddg_transactions_lifecycle.py)
-# + 12 sheet-only formula columns (3 SWBS/hull helpers below + the hull classification + fiscal).
+# + 13 sheet-only formula columns (3 SWBS/hull helpers below + the hull classification +
+#   Procurement Timing + fiscal).
 _WIDTHS = [
     W_UEI, W_VENDOR, W_VENDOR, W_UEI, W_VENDOR,                 # subawardee entity
     W_REPORTID, W_UUID, W_SUBNUM, W_DATE, W_DATE, W_AMOUNT, W_TEXT,   # the subaward
@@ -79,13 +80,14 @@ _WIDTHS = [
     # sheet-only formula columns (extra_cols order): SWBS match-row helper |
     #   PIID map row | PIID map kind | hull-in-family (3 hidden helpers) |
     #   PIID candidate hulls | assigned hull | scope | basis | confidence |
-    #   Federal FY | Deflator Factor | Subaward $ FY2026$
+    #   Procurement Timing | Federal FY | Deflator Factor | Subaward $ FY2026$
     W_CD,
     W_CD, W_CLASS, W_CD,
     W_TEXT_WIDE, W_SHORT_FLAG, W_CLASS, W_CATEGORY, W_CODE,
+    W_SUPTYPE,
     W_CD, W_CD, W_AMOUNT,
 ]
-assert len(_WIDTHS) == 76, len(_WIDTHS)
+assert len(_WIDTHS) == 77, len(_WIDTHS)
 
 _DATE_COLS = ["Subaward Date", "Submitted Date", "Base Award Date Signed"]
 _FLOAT_COLS = ["Subaward Amount $", "Total Contract Value $"]
@@ -107,8 +109,12 @@ _SWBS_EXTRA = ["SWBS Match Row"]
 _HULL_HELPERS = ["PIID Map Row", "PIID Map Kind", "Hull In Family"]
 _HULL_CLASS = ["PIID Candidate Hulls", "Assigned Hull", "Hull Assignment Scope",
                "Hull Assignment Basis", "Hull Confidence"]
+# Procurement-timing phase (advance/LLTM vs in-build vs post-delivery): live off the PIID->Hull
+# map's derived construction envelope, reusing the same PIID Map Row match. Grain-safe (a family
+# schedule property, not a hull assignment), so it covers the C/D majority the hull grade leaves blank.
+_PROC_TIMING = ["Procurement Timing"]
 _HIDDEN = _SWBS_EXTRA + _HULL_HELPERS
-_EXTRA = _SWBS_EXTRA + _HULL_HELPERS + _HULL_CLASS + TX_EXTRA_COLS
+_EXTRA = _SWBS_EXTRA + _HULL_HELPERS + _HULL_CLASS + _PROC_TIMING + TX_EXTRA_COLS
 _L = flat_header_letters("ddg_subaward_transactions", extra_cols=_EXTRA)
 _XW_CODE = swbs_xwalk_cols("HII Work-Item Code")
 _XW_SUBSYS = swbs_xwalk_cols("SWBS Subsystem")
@@ -119,6 +125,9 @@ _XW_BASIS = swbs_xwalk_cols("SWBS basis")
 _MAP_PIID = piid_hull_map_cols("Prime PIID")
 _MAP_CAND = piid_hull_map_cols("Candidate Hulls")
 _MAP_KIND = piid_hull_map_cols("Exact or Family")
+# derived construction envelope on the same map (for the Procurement Timing phase).
+_MAP_KEEL = piid_hull_map_cols("Earliest Keel")
+_MAP_DELIV = piid_hull_map_cols("Latest Delivery")
 
 
 def _bld(r):  return f"${_L['Builder']}{r}"
@@ -132,6 +141,7 @@ def _maprow(r): return f"${_L['PIID Map Row']}{r}"
 def _kind(r):   return f"${_L['PIID Map Kind']}{r}"
 def _infam(r):  return f"${_L['Hull In Family']}{r}"
 def _cand(r):   return f"${_L['PIID Candidate Hulls']}{r}"
+def _date(r):   return f"${_L['Subaward Date']}{r}"
 
 
 _FORMULAS = {
@@ -155,6 +165,8 @@ _FORMULAS = {
                                                        _prc(r)),
     "Hull Confidence":            lambda r: hull_confidence(_maprow(r), _kind(r), _dhc(r),
                                                             _infam(r), _prc(r)),
+    # procurement-timing phase off the PIID family's construction envelope (reuses PIID Map Row).
+    "Procurement Timing": lambda r: procurement_timing(_date(r), _maprow(r), _MAP_KEEL, _MAP_DELIV),
 }
 _FORMULAS.update(tx_fy_formulas(
     "ddg_subaward_transactions", date_header="Subaward Date",

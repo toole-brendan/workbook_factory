@@ -1,0 +1,106 @@
+================================================================================
+DDG-51 SAM ANALYSIS — METHODOLOGY ADVICE
+Which frame should anchor the analysis: procurement-timing or lifecycle-stage?
+================================================================================
+Written: 2026-07-01
+
+RECOMMENDATION
+--------------
+Anchor on the PROCUREMENT-TIMING (group-keel, all-rows) frame, and demote the
+lifecycle-stage view to a SCOPED DRILL-DOWN. The two are not really competitors
+- they are different rungs of the same denominator ladder: one is a headline,
+one is a footnote.
+
+  - Procurement Timing = subaward date vs the PIID group's EARLIEST keel /
+    LATEST delivery. Covers all rows. Phases: Advance/LLTM ~63%, In-build ~36%,
+    Post-delivery ~1%.
+  - Lifecycle Stage = subaward date vs the ASSIGNED hull's OWN keel/launch/
+    delivery. Exact-hull (A/B) rows only (~35% of $). Stages: Long-lead 87%,
+    Construction 5%, Outfit/test 5%, Post-delivery 3% (of the A/B subset).
+
+
+WHY PROCUREMENT-TIMING IS THE RIGHT ANCHOR
+------------------------------------------
+1. COVERAGE - it describes 100% of the evidence; lifecycle describes 35%.
+   The timing phase is defined for all 5,006 rows and reconciles to the whole
+   observed universe (a Checks invariant). The lifecycle stage is BLANK for
+   ~65% of the money (the C/D family-level bulk) - it only exists where you
+   already have exact-hull evidence. Anchor on lifecycle and you are silently
+   analyzing a third of the corpus; every headline is really "...of the
+   exact-hull slice."
+
+2. GRAIN DISCIPLINE - timing respects it; lifecycle cannot scale without
+   breaking it. The timing phase is a property of the BLOCK's schedule, never a
+   hull assignment, so it extends cleanly to the family-level majority. The
+   lifecycle stage is welded to a single assigned hull; there is no honest way
+   to push it onto C/D rows. The whole model is built on "don't force family
+   dollars onto one hull" - timing is the frame that obeys that at 100%
+   coverage.
+
+3. ROBUST / CONSERVATIVE. Group-earliest-keel calls a subaward "advance" only
+   if it predates the ENTIRE block - so it can't be gamed by which ceremonial
+   keel-date you pick, and it handles the grand-block edge case correctly
+   (In-build, not Long-lead). The own-keel lifecycle measure over-counts: it
+   inflates "long-lead" with future-hull spend and mislabels outsourced
+   construction. For a number you defend in front of a skeptical audience, take
+   the conservative one.
+
+4. IT CARRIES THE LOAD-BEARING STORY. "~2/3 of supplier evidence is advance
+   procurement -> that's why hull attribution caps at ~35%, why observed SAM is
+   a supplier-and-timing map, ~10% of the construction contract, ~50% of TAM."
+   That entire narrative rides on the broad timing frame. The lifecycle "87%"
+   invites exactly the pushback already encountered (grand blocks, own-keel
+   ambiguity, only-A/B).
+
+
+BUT KEEP LIFECYCLE - AS A DRILL-DOWN, CLEARLY SCOPED
+---------------------------------------------------
+The lifecycle stage is genuinely more informative WHERE IT APPLIES: it is the
+only thing that tells you where in a specific ship's build a dollar lands, and
+it is where the vendor stories live - fuel at outfit/test (Martin Energy),
+trial-card / warranty fixes post-delivery (Southcoast Welding, Naval Engineering
+Support), panels/coatings during construction. Use it for the "here's how spend
+flows across a hull's life, and who supplies each stage" exhibit - ALWAYS
+labeled "of the exact-hull (A/B) subset."
+
+
+THE DIVISION OF LABOR
+---------------------
+  Use PROCUREMENT TIMING (anchor) for:
+    - coverage / denominator claims
+    - the "front-loaded / advance-procurement" headline
+    - timing by builder / SWBS
+    - anything spanning the whole corpus
+
+  Use LIFECYCLE STAGE (drill-down) for:
+    - the exact-hull build-sequence narrative
+    - stage-level vendor / work stories
+    - scoped to the ~35% you can trace to a hull
+
+
+THE ONE TRAP TO AVOID
+---------------------
+Never quote 87% as a program-level figure. It is 87% OF THE 35% exact-hull
+slice; the whole-program advance share is 63%. Mixing those is the single
+easiest way to get a number wrong by ~1/3.
+
+
+ONE UPGRADE WORTH MAKING
+------------------------
+If you want the anchor even cleaner, add a MATERIAL-vs-CONSTRUCTION split to the
+procurement-timing frame - separate advance MATERIAL (turbines, gears,
+switchgear) from EARLY CONSTRUCTION (the ~$55M grand blocks + structural
+pre-fab), which are separable by vendor type and SWBS. That fixes the only real
+conceptual seam in the anchor and lets you say "advance material is X, outsourced
+construction is Y" instead of lumping them.
+
+
+BOTTOM LINE
+-----------
+Lead every whole-program claim with procurement-timing; bring in lifecycle only
+when you have explicitly narrowed to the exact-hull ships and want the finer
+build-stage / vendor texture. Broad frame anchors; fine frame colors.
+
+================================================================================
+END
+================================================================================

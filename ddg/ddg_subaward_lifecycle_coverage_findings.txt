@@ -1,0 +1,153 @@
+================================================================================
+DDG-51 SUBAWARD DATA COVERAGE vs. CONSTRUCTION LIFECYCLE
+Which hulls do we have a full AP/LLTM-to-delivery subaward history for?
+================================================================================
+Prepared: 2026-07-01
+Scope:    workbook_factory/ddg
+Source:   data/workbook_inputs/sam_awards/transactions/ddg_subaward_transactions.csv
+          data/workbook_inputs/sam_awards/hull/ddg_hull_master.csv
+Companion export: ddg_full_coverage_hulls_subawards.csv (the 358 transaction rows
+          for the two full-coverage hulls, all 64 fields)
+
+--------------------------------------------------------------------------------
+THE QUESTION
+--------------------------------------------------------------------------------
+For how many DDG-51 hulls do we hold the *full* subaward data history relative to
+the construction lifecycle -- i.e. from the AP / long-lead-time-material (LLTM)
+phase, through construction and outfit/test, to delivery? Asked first for Flight
+III, then for any flight.
+
+--------------------------------------------------------------------------------
+METHOD -- A HULL MUST CLEAR THREE GATES
+--------------------------------------------------------------------------------
+1. COMPLETE LIFECYCLE
+   The hull must have actually DELIVERED (Actual delivery date in the past).
+   If it has not delivered, the back half of the span has not happened yet.
+
+2. HULL-RESOLVABLE SUBAWARDS
+   The subawards must be attributable to that specific hull. In practice only
+   HII-Ingalls hulls qualify: General Dynamics / Bath Iron Works (BIW) reports
+   subawards at "family" (multi-hull MYP) level, so they cannot be pinned to a
+   single hull.
+
+3. UNCLIPPED FRONT (the binding constraint)
+   The subaward record only begins Oct 2015 (the FSRS/USASpending pull floor).
+   The long-lead (AP/LLTM) phase runs ~2-3 years before start-of-fabrication.
+   A hull only has a "full" span if its long-lead phase BEGAN after Oct 2015 --
+   otherwise the earliest long-lead subawards predate the data and are missing.
+
+DATA WINDOW ...... Oct 2015  ->  May 2026   (5,006 transaction rows)
+LIFECYCLE STAGES . Long-lead (= AP/LLTM, "before fabrication start"),
+                   Construction, Outfit / test, Post-delivery
+BUILDER SPLIT .... HII-Ingalls: 4,878 rows, 2,007 resolve to a single hull
+                   GD-BIW:        128 rows,     5 resolve to a single hull
+                   -> BIW hulls are effectively invisible at the hull level.
+
+--------------------------------------------------------------------------------
+HEADLINE FINDING
+--------------------------------------------------------------------------------
+Across ALL flights, exactly TWO hulls have a full AP/LLTM-to-delivery subaward
+history that we can resolve to the hull:
+
+        DDG 125  (Flight III, HII-Ingalls)
+        DDG 128  (Flight III, HII-Ingalls)
+
+Both are Flight III. No Flight IIA hull qualifies as strictly full, because the
+Oct-2015 data floor clips the front (long-lead / early construction) of every
+delivered Flight IIA hull.
+
+This answer is the SAME whether or not the post-delivery bucket is required
+(see "POST-DELIVERY SENSITIVITY" below). Post-delivery was never the limiter --
+the front (long-lead) is.
+
+--------------------------------------------------------------------------------
+DELIVERED HII HULLS, RANKED BY SPAN COMPLETENESS
+--------------------------------------------------------------------------------
+Front verdict = is the long-lead phase captured from its start, or clipped by
+the Oct-2015 data floor? "1st LL" = date of earliest captured long-lead subaward.
+
+  Hull     Flt  StartFab  Delivery  1st LL       vs floor  Front verdict
+  -------  ---  --------  --------  ----------   --------  -----------------------
+  DDG 125  III  Nov 2019  Jun 2023  2017-03-02   +17 mo    CLEAN  (full span)
+  DDG 128  III  Mar 2022  Dec 2025  2018-11-08   +37 mo    CLEAN  (full span)
+  DDG 123  IIA  Jan 2017  Nov 2022  2015-12-18   +3 mo     clipped (near-full)
+  DDG 119  IIA  Jun 2016  Apr 2020  2015-10-14    0 mo     clipped (partial front)
+  DDG 121  IIA  Apr 2016  Nov 2021  2015-10-02    0 mo     clipped (partial front)
+  DDG 117  IIA  Oct 2015  Feb 2019  (none)        --       no long-lead captured
+  DDG 114  IIA  Sep 2014  Nov 2017  (none)        --       no long-lead captured
+  DDG 113  IIA  Nov 2013  Dec 2016  (none)        --       no long-lead captured
+
+  (BIW delivered hulls DDG 118 / 122 / 124 / 127 are excluded at Gate 2 --
+   each has <= 1 subaward resolvable to the hull.)
+
+Reading the tiers:
+  * DDG 125, 128  -- FULL. Long-lead begins 17 / 37 months clear of the data
+                     floor, and coverage runs through construction, outfit/test
+                     and (if wanted) post-delivery.
+  * DDG 123       -- NEAR-FULL. Full stage arc and 44 long-lead subawards, but
+                     its long-lead window opened ~2014, so the earliest ~1 year
+                     is clipped. Strongest candidate for a "third" if a lightly
+                     clipped front is acceptable.
+  * DDG 119, 121  -- PARTIAL. Construction-through-delivery is solid; long-lead
+                     is only partially captured (first LL subaward sits on the
+                     Oct-2015 floor).
+  * DDG 113/114/117 -- HEAVILY CLIPPED. No long-lead at all; for 113/114 even
+                     early construction is missing. Only outfit/test and
+                     post-delivery survive.
+
+--------------------------------------------------------------------------------
+POST-DELIVERY SENSITIVITY ("what if I don't care about the post-delivery bucket?")
+--------------------------------------------------------------------------------
+Still TWO hulls (DDG 125, DDG 128). Removing the post-delivery requirement
+relaxes the TAIL of the span, but DDG 119/121/123 fall short at the HEAD (their
+long-lead is clipped by the data floor). Dropping the tail requirement cannot
+recover missing early long-lead subawards, so the full-span set is unchanged.
+
+--------------------------------------------------------------------------------
+DOLLARS -- SUBAWARD $ WE HOLD FOR THE FULL & PARTIAL HULLS
+--------------------------------------------------------------------------------
+Direct single-hull attribution only (Subaward Amount $ summed; family/shared
+subawards NOT included). Stage columns in $M.
+
+  FULL SPAN
+    Hull      Total($M)  Subawards  Long-lead  Constr  Outfit  Post-deliv  (unstaged)
+    DDG 125     25.71       182        7.96      2.07    3.91     10.15        1.62
+    DDG 128     21.17       176        6.28      0.55   10.70      3.64        0.00
+    Subtotal    46.88       358
+
+  PARTIAL / NEAR-FULL
+    Hull      Total($M)  Subawards  Long-lead  Constr  Outfit  Post-deliv  (unstaged)
+    DDG 123     21.97       178        4.68      4.90    4.65      6.66        1.07
+    DDG 119      8.79        87        2.71      1.59    2.51      0.98        1.00
+    DDG 121      9.30        95        2.06      4.00    2.31      0.52        0.41
+    Subtotal    40.05       360
+
+  COMBINED (full + partial): $86.93M across 718 subawards.
+
+  (Context -- heavily clipped hulls DDG 113/114/117 add $21.67M / 177 subawards,
+   almost all in outfit/test + post-delivery; excluded from the totals above.)
+
+--------------------------------------------------------------------------------
+WHY THE NUMBER DOES NOT GROW BEYOND TWO
+--------------------------------------------------------------------------------
+1. BIW blind spot  -- every GD/BIW hull (incl. delivered 118/122/124/127) reports
+                      subawards at family level; <=1 resolves to a specific hull.
+2. Oct-2015 floor  -- clips the long-lead (and sometimes early construction) off
+                      every delivered Flight IIA HII hull.
+3. Not yet delivered -- everything newer than DDG 128 (129, 131, 133, 135, ...)
+                      has long-lead + construction captured but no delivery yet.
+
+--------------------------------------------------------------------------------
+CAVEATS
+--------------------------------------------------------------------------------
+* "$ we have" = hull-resolved DIRECT single-hull attribution. It is the amount we
+  can confidently tie to the hull, NOT the hull's total subcontract spend.
+* Family-level (shared MYP) subawards that merely name a hull among several
+  candidates are excluded; they are an additional, non-hull-specific pool.
+* "Long-lead" is the model's AP/LLTM proxy: subawards tagged "before fabrication
+  start". Start-fab / launch / delivery dates are from ddg_hull_master.csv.
+* DDG 125 is an FY16 ship; a small sliver of its FY14-15 advance procurement
+  could in theory predate the Oct-2015 floor, but empirically its first captured
+  long-lead subaward is Mar 2017 (17 months clear of the floor), so long-lead is
+  well represented and the floor is not clipping it in practice.
+================================================================================

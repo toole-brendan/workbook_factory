@@ -70,3 +70,24 @@ def hull_confidence(maprow_cell: str, kind_cell: str, dhc_cell: str, infam_cell:
              f'IF({dhc_cell}=1,IF({infam_cell},"B","X"),'
              f'IF({prc_cell}>=1,"C","D")))')
     return f'=IF({maprow_cell}=0,"",IF({kind_cell}="single-ship",{single},{multi}))'
+
+
+def procurement_timing(date_cell: str, maprow_cell: str, keel_range: str, deliv_range: str,
+                       advance: str = "Advance / LLTM", inbuild: str = "In-build window",
+                       post: str = "Post-delivery", na: str = "n/a") -> str:
+    """The subaward's procurement-timing phase vs its PIID family's construction envelope, resolved
+    LIVE off the PIID->Hull map's Earliest Keel / Latest Delivery (a family-schedule property, NOT a
+    per-hull assignment - so it stays grain-safe for the C/D majority the hull grade leaves blank).
+    Reuses the per-row PIID Map Row MATCH: `na` for a PIID absent from the map, a dateless row, or a
+    family with no keel date; `advance` when the subaward predates the family's earliest keel
+    (advance procurement / long-lead / EOQ, dated before any candidate hull exists as steel); `post`
+    when it postdates the latest delivery; else `inbuild`. INDEX is row-guarded with MAX(.,1) so the
+    non-taken branch never evaluates INDEX(range,0) (array -> #VALUE! on recalc); a blank envelope
+    date INDEXes to 0, caught by the keel=0 guard and the delivery>0 gate."""
+    keel = f"INDEX({keel_range},MAX({maprow_cell},1))"
+    deliv = f"INDEX({deliv_range},MAX({maprow_cell},1))"
+    return (f'=IF({maprow_cell}=0,"{na}",'
+            f'IF({date_cell}="","{na}",'
+            f'IF({keel}=0,"{na}",'
+            f'IF({date_cell}<{keel},"{advance}",'
+            f'IF(AND({deliv}>0,{date_cell}>{deliv}),"{post}","{inbuild}")))))')

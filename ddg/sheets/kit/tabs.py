@@ -44,6 +44,7 @@ TAB_HULL_LIFECYCLE = "DDG Hull x Lifecycle Stage"
 TAB_CD_LC_COVERAGE = "DDG C-D Lifecycle Coverage"
 TAB_CD_LC_ROLLUP = "DDG C-D Lifecycle Rollup"
 TAB_CD_LC_CANDIDATES = "DDG C-D Lifecycle Candidates"
+TAB_PROC_TIMING = "DDG Procurement Timing"
 TAB_LIFECYCLE_METHOD = "Lifecycle Methodology"
 
 assert all(len(n) <= 31 for k, n in globals().items()

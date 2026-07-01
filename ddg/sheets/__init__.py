@@ -26,6 +26,7 @@ from . import (archetype_application_audit, ddg_swbs_rollup, swbs_coverage,
                ddg_vendor_hull, ddg_vendor_hull_swbs, ddg_vendor_hull_lifecycle,
                ddg_archetype_lifecycle, ddg_hull_exceptions, ddg_hull_lifecycle_stage,
                ddg_cd_lifecycle_coverage, ddg_cd_lifecycle_rollup, ddg_cd_lifecycle_candidates,
+               ddg_procurement_timing,
                market_bridge, domain_concentration, where_to_play)
 from . import executive_summary
 from . import checks
@@ -66,6 +67,7 @@ SHEETS: list = [
     ddg_hull_lifecycle_stage.DDG_HULL_LIFECYCLE,
     ddg_cd_lifecycle_rollup.DDG_CD_LC_ROLLUP,
     ddg_cd_lifecycle_candidates.DDG_CD_LC_CANDIDATES,
+    ddg_procurement_timing.DDG_PROC_TIMING,
 
     # Data / source evidence.
     prime_awards.PRIME_AWARDS,

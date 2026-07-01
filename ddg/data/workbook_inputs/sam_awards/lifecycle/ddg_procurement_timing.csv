@@ -1,0 +1,5 @@
+Procurement Timing Phase,Phase Detail
+Advance / LLTM,Subaward dated before the PIID family's earliest keel - advance procurement / long-lead / EOQ.
+In-build window,Dated between the family's earliest keel and latest delivery.
+Post-delivery,Dated after the family's latest delivery - rework / spares.
+n/a,PIID not in the hull map (non-construction or out of scope).

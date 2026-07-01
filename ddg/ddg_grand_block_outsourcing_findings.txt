@@ -1,0 +1,185 @@
+================================================================================
+DDG-51 GRAND-BLOCK / HULL-UNIT OUTSOURCING — FINDINGS
+================================================================================
+Written:   2026-07-01
+Companion: ddg_grand_block_subawards.csv  (this directory) — the 22 grand-block
+           subawards with all 64 FFATA transaction fields + full descriptions.
+Source:    workbook_factory DDG-51 SAM subaward corpus — 5,006 first-tier FFATA
+           subaward reports, Federal FY2016-FY2026, all under the DDG-51 prime
+           construction contracts.
+
+--------------------------------------------------------------------------------
+1. THE QUESTION
+--------------------------------------------------------------------------------
+Within the "in-build" (non-advance-procurement) subaward spend, the single
+largest ship-system bucket was "U00 unmapped" (~$360M). It looked like it might
+be dominated by statements of work to fabricate whole chunks of the ship —
+e.g. "DDG 137 SOW UNIT OUTSOURCING (GB B15/D52)", "CAPEX: SOW FOR STEELFAB",
+"CAPEX: SOW FOR MARMON". The questions: who are these vendors, what is the work,
+and do we hold the actual SOW documents?
+
+--------------------------------------------------------------------------------
+2. CORRECTED BREAKDOWN OF THE $360M "U00 in-build" BUCKET
+--------------------------------------------------------------------------------
+The $360M is NOT all whole-unit SOWs. Filtering to the actual SOW / unit /
+CAPEX language yields ~$147M, which splits into two very different things
+(plus regex noise); the rest is bare-code components:
+
+  ~$55M   Genuine grand-block / hull-unit outsourcing (other shipyards build
+          whole ship sections).  <-- the real "outsourced construction labor"
+  ~$60M   "CAPEX: SOW FOR [vendor]" — one-time 2021-22 capital SOWs to
+          component suppliers (tooling / capacity / qualification).
+  ~$213M  Bare work-item-coded components with no descriptive text (the
+          unmappable U00 tail) — ordinary parts, not SOWs.
+  --------
+  ~$360M  total "U00 in-build"
+
+The genuinely "whole chunk of the ship, outsourced during the build" money is
+therefore ~$55M, not $360M.
+
+--------------------------------------------------------------------------------
+3. GENUINE GRAND-BLOCK OUTSOURCING — 22 rows, $55.0M, 3 yards, 3 hulls
+--------------------------------------------------------------------------------
+All of it is HII-Ingalls, under prime PIID N0002418C2307 (FY18-22 MYP),
+concentrated on the LAST three FY18-22 HII hulls. Dated 2024-2025.
+
+  BY HULL
+    DDG 137   $49.2M   18 rows
+    DDG 139   $ 4.8M    2 rows
+    DDG 135   $ 0.9M    2 rows
+
+  BY VENDOR (who they are)
+    Gulf Copper & Manufacturing Corp   $31.6M  17 rows  UEI QKJUKKE5WPA8
+        - Texas (Port Arthur / Galveston) ship-repair & fabrication yard.
+        - Fabricates outfitted structural units (grand blocks) and barges them
+          to Ingalls, Pascagoula.
+    BAE Systems Jacksonville Ship Repair $17.7M 2 rows  UEI U23DM4ULNLS3
+        - BAE's Jacksonville, FL ship-repair yard.
+        - Grand block B15 for DDG 137, funded in two tranches ($8.27M + $9.45M).
+    Eastern Shipbuilding Group, Inc.    $ 5.7M   3 rows  UEI XJTAAHL58NB6
+        - Panama City, FL shipbuilder (builder of the USCG Offshore Patrol
+          Cutter). Builds C15 grand block + C15 pipe details.
+
+  WHAT IT IS
+    HII-Ingalls is overflowing whole hull-unit (grand-block) fabrication to
+    three other Gulf/FL-coast yards to surge the tail end of the FY18-22 block.
+    It is genuine outsourced construction LABOR (building the hull structure),
+    fully hull-identified (DDG 135/137/139) and block-identified (GB IDs below).
+    It is dated AHEAD OF DDG 137's own keel (projected start-fab 2026) — i.e.
+    other yards fabricate 137's grand blocks before Ingalls starts erecting the
+    hull. Classic capacity-surge move.
+
+--------------------------------------------------------------------------------
+4. THE GRAND-BLOCK INVENTORY (which sections went where)
+--------------------------------------------------------------------------------
+  DDG 137 (~a dozen distinct grand blocks — roughly half the hull, since a
+           Flight III destroyer is ~24 grand blocks):
+      Gulf Copper:       D52, D41/D42, D11/D21/D31, B43 & B13, A16 & A21
+      BAE Jacksonville:  GB B15
+      Eastern:           C15 (unit)
+  DDG 139:
+      Gulf Copper:       GB D52
+      Eastern:           C15 pipe details
+  DDG 135:
+      Gulf Copper:       (unit outsourcing, no block ID)
+      Eastern:           (unit outsourcing, no block ID)
+
+  NOTE: the D52 block was partly unwound — a -$7.19M deobligation on Gulf
+  Copper's D52 (2025-10-30), so Gulf Copper's NET D52 is ~$11M, not the
+  ~$18M gross (descope or re-award).
+
+--------------------------------------------------------------------------------
+5. "CAPEX: SOW FOR [vendor]" — component-supplier capital SOWs (~$60M)
+--------------------------------------------------------------------------------
+A DIFFERENT animal from the grand blocks — lump-sum, one-time 2021-2022 capital
+/ tooling / qualification SOWs to existing PART suppliers to stand up the supply
+base for the FY18-22 block. NOT outsourced construction. Top ones:
+    Marmon Aerospace & Defense   $11.5M      Metals USA (steel plate)  $4.9M
+    SteelFab, Inc.               $ 8.7M      Monroe Cable              $4.85M
+    Espey Mfg & Electronics      $ 7.5M      American Metal Bearing    $4.2M
+    Air & Liquid / Buffalo Pump  $ 4.0M      Ward Leonard (drives)     $3.3M
+    + FCX Systems, Gulf Fastener, Lister Chain, York/Calnetix, DRS Marlo, etc.
+(Several of these — SteelFab, Monroe Cable, Espey — are also vendors classified
+in the P4 archetype work; Espey is the same vendor as the "DDG 150" long-lead
+line.)
+
+--------------------------------------------------------------------------------
+6. DO WE HAVE THE SOW?  ->  NO
+--------------------------------------------------------------------------------
+The corpus carries ONLY the one-line FFATA fields:
+    - Subaward Description   e.g. "DDG 137 SOW UNIT OUTSOURCING (GB B15)"
+    - Description of Requirement (the PRIME's scope) e.g. "CONSTRUCTION OF
+      DDG 51 SHIPS FY18-22"
+There is NO Statement-of-Work document anywhere in the data. The SOW is a
+private HII<->subcontractor contractual document and is not part of public FFATA
+subaward reporting. Obtaining the actual scope would require the subcontract
+itself (not public) or a FOIA to NAVSEA / the prime. Open sources can only
+corroborate that the awards happened (see §7), not reproduce the SOW.
+
+--------------------------------------------------------------------------------
+7. OPEN-SOURCE CORROBORATION
+--------------------------------------------------------------------------------
+The program and the awards are publicly confirmed (the FFATA data lines up):
+  - Gulf Copper: publicly confirmed fabricating "select outfitted structural
+    units" at Port Arthur & Galveston, TX, for DDGs 135/137/139 under a 5-YEAR
+    STRATEGIC SOURCING AGREEMENT with HII, following a year-long pilot.
+      WorkBoat: https://www.workboat.com/gulf-copper-expands-work-with-huntington-ingalls-on-arleigh-burke-class-destroyers
+      Port Arthur News: https://panews.com/2025/11/11/gulf-copper-awarded-additional-work-in-support-of-hiis-production-of-u-s-navy-destroyers/
+  - Eastern Shipbuilding: confirmed building grand blocks for Ingalls' Flight
+    III DDGs; a block of DDG-135 was barged ~170 mi from the FL panhandle to
+    Pascagoula; DDG-137/139 in the model. Ship = "about two dozen steel puzzle
+    pieces."
+      Maritime Executive: https://maritime-executive.com/article/ingalls-subcontracts-out-destroyer-blocks-to-eastern-shipbuilding
+  - Broader Navy push: "U.S. Naval Shipyards Accelerating Outsourcing for New
+    Construction Programs."
+      USNI News: https://news.usni.org/2025/09/12/u-s-naval-shipyards-accelerating-outsourcing-for-new-construction-programs
+  - HII strategy detail: outsource the "SIMPLER MODULES," retain "complex hull
+    shapes with more sophisticated contents" (incl. the deckhouse) in-house.
+      (Maritime Executive, above.)
+  - Modular construction background:
+      GlobalSecurity: https://www.globalsecurity.org/military/systems/ship/ddg-51-build.htm
+      naval-technology: https://www.naval-technology.com/projects/burke/
+
+  CAVEAT — BAE Jacksonville: our FFATA data shows it building GB B15 for
+  DDG 137 ($17.7M), but open sources show BAE Jacksonville doing DDG
+  REPAIR/MODERNIZATION only, not new-construction block fab. That award rests
+  on our FFATA data alone for now (uncorroborated in public reporting).
+
+--------------------------------------------------------------------------------
+8. THE A/B/C/D GRAND-BLOCK ZONES — NOT PUBLICLY DECODABLE
+--------------------------------------------------------------------------------
+We CANNOT say what A16 / B15 / C15 / D52 map to physically. Reasons:
+  - Nothing in the corpus, the SWBS crosswalk, or the module-cost workbook
+    decodes them. The block IDs are HII-Ingalls' internal PRODUCT work-breakdown
+    (PWBS / erection) coding — orthogonal to our SWBS (functional-system)
+    taxonomy. The repo itself notes: "module / grand block / structural unit is
+    a physical/production (PWBS)" concept.
+  - No open source publishes a decoder (block assignments and terms are
+    described as "undisclosed").
+  What we can say only as PATTERN (not confirmed): letter + 2-digit (region/band
+  + unit position); paired IDs (D41/D42, A16/A21) look like adjacent units; the
+  D-series is by far the most outsourced. Decoding the letters would require
+  HII build-strategy / erection-sequence drawings (NAVSEA technical records or
+  a FOIA).
+
+--------------------------------------------------------------------------------
+9. CAVEAT — LIFECYCLE-STAGE LABELING OF THE GRAND BLOCKS
+--------------------------------------------------------------------------------
+The grand blocks expose a boundary problem in the "before keel = advance
+procurement" heuristic:
+  - Under the GROUP-earliest-keel rule (the workbook's Procurement Timing tab),
+    they correctly read as IN-BUILD (the FY18-22 block had been building since
+    DDG 129's Jan-2021 keel).
+  - Under each hull's OWN keel (the materialized Lifecycle Stage), the DDG
+    137/139 grand blocks read as "Long-lead" — because 137/139 haven't keel-laid
+    yet. That over-counts: grand-block fabrication is CONSTRUCTION, not advance
+    material. DDG 135's identical work reads correctly as "Construction" only
+    because 135 already keeled. Same activity, different label, purely from the
+    (ceremonial) keel-date timing at the prime yard.
+  Magnitude is small (~$49M of 137/139 grand blocks), so the AP/LLTM finding
+  stands directionally; but grand blocks belong in "early construction," not
+  advance procurement.
+
+================================================================================
+END
+================================================================================
