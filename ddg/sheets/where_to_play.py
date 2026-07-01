@@ -2,8 +2,10 @@
 
 Size, concentration and supplier continuity at ONE grain, so a reader can ask whether a program
 vertical is open, concentrated or incumbent-heavy in a given year. One row per (Axis, Program,
-Archetype, Federal FY) for the FY2022-FY2025 window, both published axes (Capability Domain D and
-Primary Output P).
+Archetype, Federal FY) over the structure-metrics pool window (lib.POOL_FYS - the trailing complete
+FYs; the in-progress partial year is excluded by design, since supplier-structure metrics on a
+partially-reported year read as churn), both published axes (Capability Domain D and Primary
+Output P).
 
 Every metric is a live SUMIFS / COUNTIFS over the Supplier-Year Activity model, reusing the SAME
 criteria (program key, federal FY, axis code) so the columns reconcile:
@@ -31,6 +33,7 @@ from __future__ import annotations
 from ddg.sheets.kit.flat import (
     make_flat_sheet, flat_header_letters,
 )
+from ddg.lib import POOL_FYS, POOL_LABEL
 from ddg.sheets.kit.tabs import TAB_WHERE_TO_PLAY
 from ddg.sheets.kit.taxonomy import DOMAINS, OUTPUTS
 from ddg.sheets.supplier_year_activity import (
@@ -53,7 +56,7 @@ from ddg.sheets.kit.structure_classes import (
 
 _GROUP = "summary"
 
-FYS = (2022, 2023, 2024, 2025)
+FYS = POOL_FYS   # structure metrics pool over the trailing COMPLETE FYs (see ddg.lib)
 # (display label, internal program key). DDG shows as DDG-51 (Domain Concentration convention),
 # but the spine keys it "DDG". DDG-51-only slice.
 PROGRAMS = [("DDG-51", "DDG")]
@@ -249,7 +252,9 @@ WHERE_TO_PLAY, where_to_play_cols = make_flat_sheet(
     csv_name="where_to_play", table_name="WhereToPlay",
     table=(HEADERS, _ROWS),
     banner="§1 - Annual program-archetype screen",
-    intro="Size, concentration and supplier continuity by program, archetype and fiscal year.",
+    intro=("Size, concentration and supplier continuity by program, archetype and fiscal year; "
+           f"{POOL_LABEL} - the in-progress partial year is excluded so continuity metrics do "
+           "not read reporting lag as churn."),
     widths=_WIDTHS,
     int_cols=["Federal FY", "Active Suppliers"],
     float_cols=["Net Subaward $M", "Parent HHI", "Parent Eff Firms"],

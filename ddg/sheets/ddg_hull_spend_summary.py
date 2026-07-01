@@ -1,6 +1,7 @@
 """ddg_hull_spend_summary - one row per hull: the subaward $ assigned to that hull."""
 from __future__ import annotations
 
+from ddg.lib import SAM_TX_WINDOW_LABEL, SAM_PARTIAL_NOTE
 from ddg.sheets.kit.flat import make_flat_sheet
 from ddg.sheets.kit.fiscal import (
     FY_HEADERS, TX_FED_FY, TX_REAL, pv_fy_formula, pv_lifetime_formula, first_last_or_na,
@@ -50,8 +51,8 @@ DDG_HULL_SPEND, hull_spend_cols = make_flat_sheet(
     csv_name="ddg_hull_spend_summary", table_name="DdgHullSpend",
     table=_spine(),
     banner="§1 - DDG-51 subaward $ assigned by hull",
-    intro=("Exact-hull (grade A/B) subawards per hull, FY2016-FY2025, constant FY2026$ - "
-           "not the full DDG universe (see DDG Hull Coverage)."),
+    intro=(f"Exact-hull (grade A/B) subawards per hull, {SAM_TX_WINDOW_LABEL}, constant FY2026$ "
+           f"({SAM_PARTIAL_NOTE}) - not the full DDG universe (see DDG Hull Coverage)."),
     widths=_WIDTHS,
     int_cols=["Published Subaward Records"],
     float_cols=["Assigned Subaward $M", *FY_HEADERS],

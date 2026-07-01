@@ -211,3 +211,32 @@ def assert_hull_milestones_monotonic() -> None:
             if v1 > v2:
                 bad.append(f"{hull}: {n1} {v1} > {n2} {v2}")
     assert not bad, "DDG Hull Master milestone dates out of order: " + "; ".join(bad[:20])
+
+
+def assert_grand_block_ids_in_leaf() -> None:
+    """Build fails if an IN-WINDOW curated grand-block Report ID is absent from the
+    (windowed) transaction leaf - the Module Cost tab's live FY2026$/tie-back SUMIFS
+    would silently resolve to 0 and the Checks reconciliation would fail downstream.
+    Curated actions dated inside the in-progress federal FY are expected to be absent
+    (the reader-facing window excludes the incomplete FY) and are skipped here; the
+    Module Cost tab carries them from the FSRS record and flags them."""
+    from ddg.lib import SAM_TX_FY_END
+
+    def _fed_fy(date: str) -> int:
+        y, m = int(date[:4]), int(date[5:7])
+        return y + 1 if m >= 10 else y
+
+    gh, grows = load_table("ddg_grand_block_subawards")
+    jg, jd = gh.index("Subaward Report ID"), gh.index("Subaward Date")
+    curated = {(r[jg] if jg < len(r) else "").strip()
+               for r in grows
+               if (r[jg] if jg < len(r) else "").strip()
+               and _fed_fy((r[jd] if jd < len(r) else "").strip()) <= SAM_TX_FY_END}
+
+    th, trows = load_table("ddg_subaward_transactions")
+    jt = th.index("Subaward Report ID")
+    leaf = {(r[jt] if jt < len(r) else "").strip() for r in trows}
+
+    missing = sorted(curated - leaf)
+    assert not missing, \
+        f"in-window grand-block Report IDs absent from transaction leaf: {missing}"

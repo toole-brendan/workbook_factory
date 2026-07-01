@@ -3,12 +3,13 @@ from __future__ import annotations
 
 from workbook_core.primitives import worksheet
 from workbook_core.styles import (
-    S_DEFAULT, S_BOLD, S_HEADER_LEFT, S_HEADER_CENTER,
+    S_DEFAULT, S_BOLD, S_NOTE, S_HEADER_LEFT, S_HEADER_CENTER,
     S_NUM, S_PCT, S_LINK_NUM,
 )
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
 
+from ddg.lib import BRIDGE_FYS, SAM_LAST_COMPLETE_FY, SAM_PARTIAL_NOTE
 from ddg.sheets.kit.layout import RowCursor
 from ddg.sheets.kit.styles import S_ITALIC
 from ddg.sheets.kit.tabs import TAB_MARKET_BRIDGE
@@ -19,7 +20,6 @@ from ddg.sheets.ddg_subaward_transactions import ddg_tx_cols
 
 _GROUP = "summary"
 _NCOLS = 6
-_BRIDGE_FY = (2022, 2023, 2024, 2025)
 
 _TX_REAL = ddg_tx_cols(TX_REAL)
 _TX_CONF = ddg_tx_cols("Hull Confidence")
@@ -49,15 +49,21 @@ def _render() -> WorksheetSpec:
     c.blank()
     c.write(["FY", "TAM $M", "Observed SAM $M", "Observed SAM / TAM", "Use", "Caveat"],
             styles=[S_HEADER_LEFT] + [S_HEADER_CENTER] * 3 + [S_HEADER_LEFT, S_HEADER_LEFT])
-    for fy in _BRIDGE_FY:
-        c.write([fy, f"={TAM.tam_cell(fy)}", _sam_fy_total(fy),
+    for fy in BRIDGE_FYS:
+        partial = fy > SAM_LAST_COMPLETE_FY
+        c.write([f"{fy}*" if partial else fy,
+                 f"={TAM.tam_cell(fy)}", _sam_fy_total(fy),
                  lambda r: f'=IFERROR(D{r}/C{r},"")',
                  "Bridge top-down opportunity to reported supplier evidence",
-                 "Reporting / reach bridge, not market penetration"],
+                 ("Partial reporting year - ratio biased low"
+                  if partial else "Reporting / reach bridge, not market penetration")],
                 styles=[S_DEFAULT, S_LINK_NUM, S_LINK_NUM, S_PCT, S_DEFAULT, S_DEFAULT])
     c.blank()
     c.write(["Observed SAM uses reported first-tier subawards as evidence of supplier structure "
              "and timing; it is not the full outsourced-market total."], styles=[S_ITALIC])
+    c.write([f"* {SAM_PARTIAL_NOTE}. TAM FY{SAM_LAST_COMPLETE_FY + 1} is enacted (complete as a "
+             "plan) while SAM is partial evidence, so that year's ratio is not comparable to "
+             "complete years."], styles=[S_NOTE])
     c.blank(2)
 
     total_raw = f"SUM({_TX_REAL})"

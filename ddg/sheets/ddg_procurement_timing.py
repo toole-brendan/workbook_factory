@@ -16,6 +16,7 @@ Promoted accessor (Checks): proc_timing_cols(header) -> "'DDG Procurement Timing
 """
 from __future__ import annotations
 
+from ddg.lib import SAM_TX_WINDOW_LABEL, SAM_PARTIAL_NOTE
 from ddg.sheets.kit.flat import make_flat_sheet
 from ddg.sheets.kit.fiscal import TX_REAL
 from ddg.sheets.kit.tabs import TAB_PROC_TIMING
@@ -52,9 +53,9 @@ DDG_PROC_TIMING, proc_timing_cols = make_flat_sheet(
     csv_name="ddg_procurement_timing", table_name="DdgProcurementTiming",
     banner="§1 - DDG-51 subaward $ by procurement-timing phase",
     intro="Observed subawards by when placed vs the PIID family's construction envelope; "
-          "FY2016-FY2025, constant FY2026$. 'Advance / LLTM' predates the block's earliest keel - "
-          "a floor on advance procurement (EOQ bought in-build reads as In-build), not a per-hull "
-          "allocation.",
+          f"{SAM_TX_WINDOW_LABEL}, constant FY2026$ ({SAM_PARTIAL_NOTE}). 'Advance / LLTM' "
+          "predates the block's earliest keel - a floor on advance procurement (EOQ bought "
+          "in-build reads as In-build), not a per-hull allocation.",
     widths=_WIDTHS,
     float_cols=["Subaward $M", "HII-Ingalls $M", "GD-BIW $M"], pct_cols=["% of observed"],
     int_cols=["Published Records"],

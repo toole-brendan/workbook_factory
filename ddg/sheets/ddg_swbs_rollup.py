@@ -1,6 +1,7 @@
 """ddg_swbs_rollup - DDG SWBS by Ship-System roll-up."""
 from __future__ import annotations
 
+from ddg.lib import SAM_TX_WINDOW_LABEL, SAM_PARTIAL_NOTE
 from ddg.sheets.kit.flat import make_flat_sheet
 from ddg.sheets.kit.fiscal import (
     FY_HEADERS, TX_FED_FY, TX_REAL, pv_fy_formula, pv_lifetime_formula,
@@ -33,7 +34,8 @@ DDG_SWBS_ROLLUP, swbs_rollup_cols = make_flat_sheet(
     tab=TAB_SWBS_ROLLUP, group="model",
     csv_name="ddg_swbs_by_subsystem", table_name="DdgSwbsBySubsystem",
     banner="§1 - DDG-51 subaward $ by ship-system (SWBS)",
-    intro="HII-Ingalls DDG-51 subawards by SWBS subsystem; FY2016-FY2025, constant FY2026$.",
+    intro=(f"HII-Ingalls DDG-51 subawards by SWBS subsystem; {SAM_TX_WINDOW_LABEL}, "
+           f"constant FY2026$ ({SAM_PARTIAL_NOTE})."),
     widths=_WIDTHS,
     int_cols=["Published Subaward Records"], float_cols=["Subaward $M", *FY_HEADERS],
     date_cols=["First Subaward", "Last Subaward"], formula_cols=_FORMULAS,

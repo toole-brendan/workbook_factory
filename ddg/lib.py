@@ -12,10 +12,28 @@ CREATOR = "workbook_factory ddg/build_workbook.py"
 APP_NAME = "workbook_factory"
 
 # Reader-facing SAM transaction window: enough lookback to capture early Flight III
-# award / AP-LLTM / construction activity while excluding incomplete FY2026+ data.
+# award / AP-LLTM / construction activity. The in-progress FY is INCLUDED but partial
+# (FSRS subaward reporting lags several months); per-FY exhibits flag it.
 SAM_TX_FY_START = 2013
-SAM_TX_FY_END = 2025
+SAM_TX_FY_END = 2026
+SAM_LAST_COMPLETE_FY = 2025           # last fully-reported federal FY
+SAM_REPORTED_THROUGH = "May 2026"     # latest subaward date in the pull (update per re-pull)
 SAM_TX_WINDOW_LABEL = f"FY{SAM_TX_FY_START}-FY{SAM_TX_FY_END}"
+SAM_PARTIAL_NOTE = (f"FY{SAM_TX_FY_END} is partial - subawards reported through "
+                    f"{SAM_REPORTED_THROUGH}; FSRS reporting lags several months")
+SAM_TX_WINDOW_LABEL_FULL = f"{SAM_TX_WINDOW_LABEL} ({SAM_PARTIAL_NOTE})"
+
+# Bridge axis: TAM budget years (start FY2022) ∩ SAM years. Per-FY, never pooled;
+# the two universes share an axis ONLY on the bridge exhibits.
+BRIDGE_FYS = tuple(range(2022, SAM_TX_FY_END + 1))
+
+# Pool window for supplier-STRUCTURE metrics (concentration / incumbency / where-to-play):
+# trailing N complete FYs. Single-year supplier shares are lumpy (one grand block or EOQ
+# buy swings a year), so structure metrics pool by design - but over a NAMED, derived
+# window that rolls forward when the next FY completes, not a frozen literal.
+POOL_N = 4
+POOL_FYS = tuple(range(SAM_LAST_COMPLETE_FY - POOL_N + 1, SAM_LAST_COMPLETE_FY + 1))
+POOL_LABEL = f"FY{POOL_FYS[0]}-FY{POOL_FYS[-1]} (trailing {POOL_N} complete FYs)"
 
 DATA_DIR = PROJECT_DIR / "data"
 WORKBOOK_INPUTS = DATA_DIR / "workbook_inputs"
@@ -55,6 +73,7 @@ CSV_ALIASES = {
     "ddg_swbs_by_subsystem": SAM_SWBS_DATA / "ddg_swbs_by_subsystem.csv",
     "ddg_piid_hull_map": SAM_HULL_DATA / "ddg_piid_hull_map.csv",
     "ddg_hull_master": SAM_HULL_DATA / "ddg_hull_master.csv",
+    "ddg_grand_block_subawards": SAM_HULL_DATA / "ddg_grand_block_subawards.csv",
     "ddg_hull_exceptions": SAM_HULL_DATA / "ddg_hull_exceptions.csv",
     "ddg_vendor_hull_exposure": SAM_HULL_DATA / "ddg_vendor_hull_exposure.csv",
     "ddg_vendor_hull_swbs": SAM_HULL_DATA / "ddg_vendor_hull_swbs.csv",

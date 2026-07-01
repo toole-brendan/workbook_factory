@@ -3,12 +3,13 @@ from __future__ import annotations
 
 from workbook_core.primitives import worksheet
 from workbook_core.styles import (
-    S_DEFAULT, S_BOLD, S_HEADER_LEFT, S_HEADER_CENTER,
+    S_DEFAULT, S_BOLD, S_NOTE, S_HEADER_LEFT, S_HEADER_CENTER,
     S_NUM, S_PCT, S_INT, S_LINK_NUM, S_LINK_PCT,
 )
 from workbook_core.tables import WorksheetSpec, SheetEntry
 from workbook_core.groups import group_color
 
+from ddg.lib import BRIDGE_FYS, SAM_LAST_COMPLETE_FY, SAM_PARTIAL_NOTE
 from ddg.sheets.kit.layout import RowCursor
 from ddg.sheets.kit.styles import S_ITALIC
 from ddg.sheets.kit.tabs import TAB_EXEC_SUMMARY
@@ -25,9 +26,13 @@ from ddg.sheets.ddg_hull_spend_summary import hull_spend_cols
 
 _GROUP = "summary"
 _FIRM_FY = _periods.FY
-_BRIDGE_FY = (2022, 2023, 2024, 2025)
 _OY = _periods.OY
 _NCOLS = 8
+
+
+def _bridge_label(fy: int) -> str:
+    """Bridge-axis FY header; the in-progress (partial-reporting) year is starred."""
+    return f"FY{fy}*" if fy > SAM_LAST_COMPLETE_FY else f"FY{fy}"
 
 _SY_PROG = supplier_year_cols("Program")
 _SY_FY = supplier_year_cols("Federal FY")
@@ -53,7 +58,7 @@ def _sam_fy_total(fy: int) -> str:
 def _wtp(metric: str, code: str) -> str:
     vals = where_to_play_cols(metric)
     match = (f'MATCH(1,INDEX(({_W_AXIS}="D")*({_W_PROGRAM}="DDG-51")'
-             f'*({_W_FY}=2025)*({_W_CODE}="{code}"),0),0)')
+             f'*({_W_FY}={SAM_LAST_COMPLETE_FY})*({_W_CODE}="{code}"),0),0)')
     return f'=IFERROR(INDEX({vals},{match}),"")'
 
 
@@ -94,27 +99,35 @@ def _render() -> WorksheetSpec:
 
     c.section("§3 - Observed SAM / reported supplier activity", _NCOLS)
     c.blank()
-    c.write(["Metric"] + [f"FY{fy}" for fy in _BRIDGE_FY] + ["Lifetime", "FY25 active UEIs"],
-            styles=[S_HEADER_LEFT] + [S_HEADER_CENTER] * len(_BRIDGE_FY) + [S_HEADER_LEFT, S_HEADER_LEFT])
-    c.write(["Reported subaward $M"] + [_sam_fy_total(fy) for fy in _BRIDGE_FY]
-            + [f"=SUM({ddg_pv_cols('Subaward $M')})", f'=COUNTIFS({_SY_PROG},"DDG",{_SY_FY},2025,{_SY_POS},">0")'],
-            styles=[S_DEFAULT] + [S_LINK_NUM] * len(_BRIDGE_FY) + [S_LINK_NUM, S_INT])
+    c.write(["Metric"] + [_bridge_label(fy) for fy in BRIDGE_FYS]
+            + ["Lifetime", f"FY{SAM_LAST_COMPLETE_FY % 100} active UEIs"],
+            styles=[S_HEADER_LEFT] + [S_HEADER_CENTER] * len(BRIDGE_FYS) + [S_HEADER_LEFT, S_HEADER_LEFT])
+    c.write(["Reported subaward $M"] + [_sam_fy_total(fy) for fy in BRIDGE_FYS]
+            + [f"=SUM({ddg_pv_cols('Subaward $M')})",
+               f'=COUNTIFS({_SY_PROG},"DDG",{_SY_FY},{SAM_LAST_COMPLETE_FY},{_SY_POS},">0")'],
+            styles=[S_DEFAULT] + [S_LINK_NUM] * len(BRIDGE_FYS) + [S_LINK_NUM, S_INT])
     c.write(["Observed SAM caveat", "Reported first-tier subaward evidence; not the full outsourced-market total."],
             styles=[S_BOLD, S_DEFAULT])
+    c.write([f"* {SAM_PARTIAL_NOTE}."], styles=[S_NOTE])
     c.blank(2)
 
     c.section("§4 - TAM-to-SAM bridge", _NCOLS)
     c.blank()
     c.write(["FY", "TAM $M", "Observed SAM $M", "Observed SAM / TAM"], styles=[S_HEADER_LEFT] * 4)
-    for fy in _BRIDGE_FY:
-        c.write([fy, f"={TAM.tam_cell(fy)}", _sam_fy_total(fy), lambda r: f'=IFERROR(D{r}/C{r},"")'],
+    for fy in BRIDGE_FYS:
+        partial = fy > SAM_LAST_COMPLETE_FY
+        c.write([f"{fy}*" if partial else fy,
+                 f"={TAM.tam_cell(fy)}", _sam_fy_total(fy), lambda r: f'=IFERROR(D{r}/C{r},"")'],
                 styles=[S_INT, S_LINK_NUM, S_LINK_NUM, S_PCT])
     c.write(["Bridge uses reported first-tier subawards only; exclusions and retained in-house scope remain outside observed SAM."], styles=[S_ITALIC])
+    c.write([f"* {SAM_PARTIAL_NOTE}; TAM for that year is enacted (complete as a plan), so the "
+             "ratio is biased low and not comparable to complete years."], styles=[S_NOTE])
     c.blank(2)
 
-    c.section("§5 - FY2025 where-to-play by capability domain", _NCOLS)
+    c.section(f"§5 - FY{SAM_LAST_COMPLETE_FY} where-to-play by capability domain", _NCOLS)
     c.blank()
-    c.write(["Domain", "FY25 $M", "Program Share", "Active UEIs", "Parent Top-1", "Parent HHI", "Incumbent $", "Class"],
+    c.write(["Domain", f"FY{SAM_LAST_COMPLETE_FY % 100} $M", "Program Share", "Active UEIs",
+             "Parent Top-1", "Parent HHI", "Incumbent $", "Class"],
             styles=[S_HEADER_LEFT] * 8)
     for code, name, _defn in DOMAINS:
         c.write([f"{code}  {name}", _wtp("Net Subaward $M", code), _wtp("Program Share", code),

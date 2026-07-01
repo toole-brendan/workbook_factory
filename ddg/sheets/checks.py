@@ -41,6 +41,10 @@ from ddg.sheets.ddg_hull_spend_summary import hull_spend_cols
 from ddg.sheets.ddg_swbs_rollup import swbs_rollup_cols
 from ddg.sheets.ddg_procurement_timing import proc_timing_cols
 from ddg.sheets.ddg_full_span_drilldown import full_span_cols
+from ddg.sheets.ddg_module_cost import (
+    gb_range, gb_window_total_cell, per_ship_bc_cell,
+    ddg137_total_cell, ddg137_block_total_cell,
+)
 
 _GROUP = "validation"
 _NCOLS = 3   # content columns (gutter mode): B = Check, C = Value, D = Status
@@ -166,6 +170,16 @@ def _make():
     _zero("Full-span drill-down stages partition each hull's total",
           f'=SUM({_FS_LONGLEAD})+SUM({_FS_FAB})+SUM({_FS_CONSTR})+SUM({_FS_OUTFIT})+SUM({_FS_POST})'
           f'+SUM({_FS_UNDATED})-SUM({_FS_TOTAL})')
+    _zero("Grand-block in-window evidence ties to transaction leaf",
+          f"={gb_window_total_cell()}-SUM({gb_range('Leaf $M')})")
+    _zero("DDG 137 grand-block rollup partitions its hull total",
+          f"={ddg137_block_total_cell()}-{ddg137_total_cell()}")
+    r_bc = c.write(
+        ["Module-cost per-ship BC anchor in band ($1,450-1,700M)",
+         f"={per_ship_bc_cell()}",
+         lambda rr: f'=IF(AND(C{rr}>=1450,C{rr}<=1700),"OK","FAIL")'],
+        styles=[S_DEFAULT, S_NUM, S_DEFAULT])
+    check_rows.append(r_bc)
     c.blank(2)
 
     # §5 Master check ---------------------------------------------------------------

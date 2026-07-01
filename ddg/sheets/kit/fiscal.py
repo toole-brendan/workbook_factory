@@ -1,8 +1,10 @@
 """_fiscal - the single definition of the SAM federal-fiscal-year display axis.
 
-The workbook now uses a reader-facing DDG observed-SAM transaction window of
-FY2016..FY2025.  FY2025 is the latest full year in-scope; FY2026+ rows remain in
-the archived CSV pull but are filtered out by _cuts.load_table before rendering.
+The reader-facing DDG observed-SAM transaction window is lib.SAM_TX_FY_START..
+SAM_TX_FY_END (everything here derives from those constants). The in-progress
+federal FY is included but PARTIAL (lib.SAM_PARTIAL_NOTE); lib.SAM_LAST_COMPLETE_FY
+is the last fully-reported year - per-FY exhibits flag the partial year and
+structure-metric pools (lib.POOL_FYS) exclude it.
 
 The economic transformation (calendar date -> federal FY -> constant FY2026$) still
 lives at the TRANSACTION grain: each fact sheet carries `Federal FY`, `Deflator Factor`,
@@ -18,7 +20,7 @@ from ddg.sheets.kit.flat import flat_header_letters
 FY_BASE = 2026                                  # constant-dollar base year
 FY_START = SAM_TX_FY_START                      # visible SAM transaction window start
 FY_END = SAM_TX_FY_END                          # visible SAM transaction window end
-FY_YEARS = list(range(FY_START, FY_END + 1))    # [2016 .. 2025]
+FY_YEARS = list(range(FY_START, FY_END + 1))    # the visible window, endpoints from lib
 
 # Deflators tab FY-key order used by the visible SAM split and transaction factor lookup.
 FY_BIN_KEYS = [f"FY{y}" for y in FY_YEARS]
@@ -58,9 +60,9 @@ def tx_fy_formulas(csv_name: str, *, date_header: str, amount_header: str,
     def factor(r):
         fy = f"${L[TX_FED_FY]}{r}"
         key = f'"FY"&{fy}'
-        # The runtime input loader filters visible transactions to FY2016-FY2025. If a future
-        # or pre-window row leaks through, MATCH intentionally returns #N/A instead of silently
-        # binning it.
+        # The runtime input loader filters visible transactions to the lib window. If an
+        # out-of-window row leaks through, MATCH intentionally returns #N/A instead of
+        # silently binning it.
         return f'=IF({fy}="","",INDEX({factors},MATCH({key},{fy_keys},0)))'
 
     def real(r):
@@ -81,7 +83,8 @@ def pv_fy_formula(real_range: str, uei_range: str, fedfy_range: str, header: str
 
 def pv_lifetime_formula(real_range: str, uei_range: str):
     """fn(r)->'=...' for the lifetime Subaward $M over the visible SAM transaction window, $M.
-    Equals the sum of the per-FY split because _cuts.load_table filters transactions to FY2016-FY2025."""
+    Equals the sum of the per-FY split because _cuts.load_table filters transactions to the
+    same lib window."""
     return lambda r: f"=SUMIFS({real_range},{uei_range},$B{r})/1000000"
 
 

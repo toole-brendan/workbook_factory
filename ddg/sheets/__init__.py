@@ -24,7 +24,7 @@ from . import supplier_master, supplier_year_activity, ddg_program_vendors
 from . import (archetype_application_audit, ddg_swbs_rollup, swbs_coverage,
                ddg_hull_spend_summary, ddg_hull_coverage, ddg_hull_swbs,
                ddg_vendor_hull, ddg_vendor_hull_swbs, ddg_hull_exceptions,
-               ddg_procurement_timing, ddg_full_span_drilldown,
+               ddg_procurement_timing, ddg_full_span_drilldown, ddg_module_cost,
                market_bridge, domain_concentration, where_to_play)
 from . import executive_summary
 from . import checks
@@ -61,6 +61,7 @@ SHEETS: list = [
     ddg_hull_exceptions.DDG_HULL_EXCEPTIONS,
     ddg_procurement_timing.DDG_PROC_TIMING,
     ddg_full_span_drilldown.DDG_FULL_SPAN,
+    ddg_module_cost.DDG_MODULE_COST,
 
     # Data / source evidence.
     prime_awards.PRIME_AWARDS,

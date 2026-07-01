@@ -37,12 +37,13 @@ def _fy_col_year(header: str) -> int | None:
 
 
 def _trim_fy_columns(headers: list[str], rows: list[list[str]]) -> tuple[list[str], list[list[str]]]:
-    """Drop wide-format FY $M columns outside the visible SAM window, read-time only.
+    """Drop wide-format FY $M columns outside the visible SAM window (lib.SAM_TX_FY_START..
+    SAM_TX_FY_END), read-time only.
 
     The source CSV keeps every FY column it was extracted with (including years past the
-    reader-facing window, e.g. FY26+); this narrows what a sheet builder sees to the same
-    FY2016-FY2025 window the transaction-grain accessors already enforce, so a column-per-FY
-    sheet doesn't need its own widths/headers retuned every time the window moves.
+    reader-facing window); this narrows what a sheet builder sees to the same window the
+    transaction-grain accessors already enforce, so a column-per-FY sheet doesn't need its
+    own widths/headers retuned every time the window moves.
     """
     keep = [i for i, h in enumerate(headers)
             if _fy_col_year(h) is None or _in_sam_window(_fy_col_year(h))]
@@ -99,9 +100,10 @@ def _window_tx_report_ids() -> frozenset[str]:
 def _filter_sam_window(name: str, headers: list[str], rows: list[list[str]]) -> list[list[str]]:
     """Runtime SAM transaction window, leaving archived source CSVs intact.
 
-    The visible workbook uses FY2016-FY2025 for DDG observed SAM.  Raw CSV files stay as
-    the full pull; this accessor trims transaction-derived spines so all downstream
-    formulas, guards and roll-ups share the same reader-facing window.
+    The visible workbook uses lib.SAM_TX_FY_START..SAM_TX_FY_END for DDG observed SAM
+    (the in-progress FY is included but partial - see lib.SAM_PARTIAL_NOTE).  Raw CSV
+    files stay as the full pull; this accessor trims transaction-derived spines so all
+    downstream formulas, guards and roll-ups share the same reader-facing window.
     """
     if not headers or not rows:
         return rows
